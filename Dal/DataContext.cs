@@ -5,7 +5,7 @@ namespace FlightSimulator.Dal
 {
     public class DataContext : DbContext
     {
-        public virtual DbSet<Flight> Fligts { get; set; }
+        public virtual DbSet<Flight> Flights { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FlightSimulator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Flights")]
     [ApiController]
     public class FlightsController : ControllerBase
     {
