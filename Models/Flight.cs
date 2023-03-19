@@ -1,5 +1,4 @@
-﻿using FlightSimulator.Models.Legs;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FlightSimulator.Models
 {
@@ -7,10 +6,10 @@ namespace FlightSimulator.Models
     {
         public int Id { get; set; }
         [Required]
-        public string? Code { get; set; }
+        public string Code { get; set; }
         public bool IsDeparture { get; set; }
         [Required]
-        public virtual Pilot? Pilot { get; set; }
-        public virtual ILeg? CurrentLeg { get; set; }
+        public virtual Pilot Pilot { get; set; }
+        public virtual Leg CurrentLeg { get; set; }
     }
 }
