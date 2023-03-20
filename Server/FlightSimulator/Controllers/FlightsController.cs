@@ -1,5 +1,5 @@
 ﻿using FlightSimulator.Dal;
-using FlightSimulator.Dal.Repositories;
+using FlightSimulator.Dal.Repositories.Flights;
 using FlightSimulator.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,31 +11,34 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        private readonly IFlightRepository flightRepos;
-        private readonly ILogger<FlightsController> logger;
+        private readonly IFlightRepository _flightRepos;
+        private readonly ILogger<FlightsController> _logger;
 
-        public FlightsController(IFlightRepository _flightRepos, ILogger<FlightsController> logger)
+        public FlightsController(IFlightRepository flightRepos, ILogger<FlightsController> logger)
         {
-            this.flightRepos= _flightRepos;
-            this.logger = logger;
+            _flightRepos = flightRepos;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStam(Flight stam)
+        public async Task<IActionResult> AddStam(Flight flight)
         {
             try
             {
+                await _flightRepos.AddFlight(flight);
+                _logger.LogError("Successssss");
                 return Ok();
 
             }
             catch (Exception e)
             {
 
-                this.logger.LogError(e, e.Message);
+                this._logger.LogError(e, e.Message);
                 return StatusCode(500);
                 throw;
             }
 
         }
+
     }
 }
