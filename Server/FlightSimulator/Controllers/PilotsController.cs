@@ -26,7 +26,7 @@ namespace FlightSimulator.Controllers
             {
                 await _pilotRepos.AddPilot(pilot);
                 _logger.LogError("Successssss adding pilot");
-                return Ok();
+                return Ok("Succes!");
 
             }
             catch (Exception e)
