@@ -1,6 +1,6 @@
 ﻿using FlightSimulator.Models;
 
-namespace FlightSimulator.Dal.Repositories
+namespace FlightSimulator.Dal.Repositories.Flights
 {
     public interface IFlightRepository
     {

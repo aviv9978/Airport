@@ -11,6 +11,6 @@ namespace FlightSimulator.Models
         public bool IsDeparture { get; set; }
         [Required]
         public virtual Pilot? Pilot { get; set; }
-        public virtual Leg? CurrentLeg { get; set; }
+        public virtual Leg? Leg { get; set; }
     }
 }
