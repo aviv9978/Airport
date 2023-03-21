@@ -1,5 +1,6 @@
 ﻿using FlightSimulator.Dal;
 using FlightSimulator.Dal.Repositories.Flights;
+using FlightSimulator.Dal.Repositories.Logger;
 using FlightSimulator.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,22 +12,27 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
+        private readonly ILoggerRepository _procLogger;
         private readonly IFlightRepository _flightRepos;
         private readonly ILogger<FlightsController> _logger;
 
-        public FlightsController(IFlightRepository flightRepos, ILogger<FlightsController> logger)
+        public FlightsController(IFlightRepository flightRepos, ILogger<FlightsController> logger, ILoggerRepository processLogger)
         {
+            _procLogger = processLogger;
             _flightRepos = flightRepos;
             _logger = logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStam(Flight flight)
+        public async Task<IActionResult> AddStam([FromBody] Flight flight)
         {
             try
             {
                 await _flightRepos.AddFlight(flight);
+                var newLog = new ProcessLog { Flight = flight, In = DateTime.Now, Message = "A plain has entered to leg", Out = null };
+                await _procLogger.AddLog(newLog);
                 _logger.LogError("Successssss");
+                _procLogger.UpdateOutLog(flight.Id);
                 return Ok();
 
             }
