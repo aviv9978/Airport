@@ -1,7 +1,7 @@
-﻿using FlightSimulator;
-using FlightSimulator.Configures;
+﻿using FlightSimulator.Configures;
 using FlightSimulator.Dal;
 using FlightSimulator.Dal.Repositories.Flights;
+using FlightSimulator.Dal.Repositories.Logger;
 using FlightSimulator.Dal.Repositories.Pilots;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -9,7 +9,8 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
-builder.Services.AddScoped<IFlightRepository, FlightRepository>(); 
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<ILoggerRepository, LoggerRepository>();
 builder.Services.AddScoped<IPilotRepository, PilotRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -29,23 +30,15 @@ builder.Services.AddCors(options =>
     });
 });
 
-var configuration = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json")
-           .Build();
 
-Log.Logger = new LoggerConfiguration()
-               .WriteTo.MSSqlServer(
-                   connectionString: builder.Configuration["ConnectionStrings:myAirport"],
-                   tableName: configuration.GetSection("Serilog:TableName").Value,
-                   appConfiguration: configuration,
-                   autoCreateSqlTable: true,
-                   columnOptionsSection: configuration.GetSection("Serilog:ColumnOptions"),
-                   schemaName: configuration.GetSection("Serilog:SchemaName").Value
-                   )
-               .CreateLogger();
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.WithThreadId()
+  .Enrich.FromLogContext()
+  .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
-builder.Host.UseSerilog();
 
 
 var app = builder.Build();

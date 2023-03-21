@@ -1,6 +1,5 @@
 ﻿using FlightSimulator.Models;
 
-
 namespace FlightSimulator.Dal.Repositories.Flights
 {
     public class FlightRepository : IFlightRepository
@@ -17,7 +16,7 @@ namespace FlightSimulator.Dal.Repositories.Flights
         {
             try
             {
-                await _dBContext.AddAsync(flight);
+                 _dBContext.Add(flight);
                 await _dBContext.SaveChangesAsync();
                 _logger.LogWarning("Added flight");
             }

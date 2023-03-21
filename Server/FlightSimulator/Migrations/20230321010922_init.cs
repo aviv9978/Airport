@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace FlightSimulator.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,10 +65,36 @@ namespace FlightSimulator.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ProcessLogger",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlightId = table.Column<int>(type: "int", nullable: true),
+                    In = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Out = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProcessLogger", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProcessLogger_Flights_FlightId",
+                        column: x => x.FlightId,
+                        principalTable: "Flights",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Flights_PilotId",
                 table: "Flights",
                 column: "PilotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProcessLogger_FlightId",
+                table: "ProcessLogger",
+                column: "FlightId");
         }
 
         /// <inheritdoc />
@@ -75,6 +102,9 @@ namespace FlightSimulator.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Legs");
+
+            migrationBuilder.DropTable(
+                name: "ProcessLogger");
 
             migrationBuilder.DropTable(
                 name: "Flights");

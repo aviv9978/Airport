@@ -1,6 +1,6 @@
 ﻿namespace FlightSimulator.Models
 {
-    public class LegsManager
+    public class ManageLog
     {
         public int MyProperty { get; set; }
     }

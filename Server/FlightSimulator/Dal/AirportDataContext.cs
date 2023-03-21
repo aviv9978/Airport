@@ -8,6 +8,7 @@ namespace FlightSimulator.Dal
         public virtual DbSet<Flight> Flights { get; set; }
         public virtual DbSet<Pilot> Pilots { get; set; }
         public virtual DbSet<Leg> Legs { get; set; }
+        public virtual DbSet<ProcessLog> ProcessLogger { get; set; }
 
         public AirportDataContext(DbContextOptions<AirportDataContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -16,6 +17,7 @@ namespace FlightSimulator.Dal
                 .HasOne(a => a.Leg)
                 .WithOne(b => b.Flight)
                  .HasForeignKey<Leg>(b => b.Id);
+
         }
 
     }
