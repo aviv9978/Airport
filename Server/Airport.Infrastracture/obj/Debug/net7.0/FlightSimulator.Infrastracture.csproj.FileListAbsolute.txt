@@ -1,0 +1,5 @@
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\FlightSimulator\Server\FlightSimulator.Infrastracture\obj\Debug\net7.0\FlightSimulator.Infrastracture.csproj.AssemblyReference.cache
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\FlightSimulator\Server\FlightSimulator.Infrastracture\obj\Debug\net7.0\FlightSimulator.Infrastracture.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\FlightSimulator\Server\FlightSimulator.Infrastracture\obj\Debug\net7.0\FlightSimulator.Infrastracture.AssemblyInfoInputs.cache
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\FlightSimulator\Server\FlightSimulator.Infrastracture\obj\Debug\net7.0\FlightSimulator.Infrastracture.AssemblyInfo.cs
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\FlightSimulator\Server\FlightSimulator.Infrastracture\obj\Debug\net7.0\FlightSimulator.Infrastracture.csproj.CoreCompileInputs.cache
