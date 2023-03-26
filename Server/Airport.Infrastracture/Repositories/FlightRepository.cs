@@ -14,11 +14,11 @@ namespace Airport.Infrastracture.Repositories
             _dBContext = dbContext;
             _logger = logger;
         }
-        public async Task AddFlight(Flight flight)
+        public async Task AddFlightAsync(Flight flight)
         {
             try
             {
-                _dBContext.AddAsync(flight);
+                await _dBContext.AddAsync(flight);
                 await _dBContext.SaveChangesAsync();
                 _logger.LogWarning("Added flight");
             }

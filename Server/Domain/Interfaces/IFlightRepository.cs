@@ -5,6 +5,6 @@ namespace Core.Interfaces
 {
     public interface IFlightRepository
     {
-        Task AddFlight(Flight flight);
+        Task AddFlightAsync(Flight flight);
     }
 }

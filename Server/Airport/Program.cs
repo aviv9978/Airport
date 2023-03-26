@@ -1,8 +1,6 @@
-﻿using FlightSimulator.Configures;
-using FlightSimulator.Dal;
-using FlightSimulator.Dal.Repositories.Flights;
-using FlightSimulator.Dal.Repositories.Logger;
-using FlightSimulator.Dal.Repositories.Pilots;
+﻿using Airport.Infrastracture;
+using FlightSimulator.Configures;
+using FlightSimulator.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -11,9 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AirportDataContext>(options =>
 options.UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
-builder.Services.AddScoped<IFlightRepository, FlightRepository>();
-builder.Services.AddScoped<ILoggerRepository, LoggerRepository>();
-builder.Services.AddScoped<IPilotRepository, PilotRepository>();
+builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
