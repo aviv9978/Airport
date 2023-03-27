@@ -10,6 +10,8 @@ namespace Core.Entities
         public LegNumber CurrentLeg { get; set; }
         [Required]
         public LegNumber NextPosibbleLegs { get; set; }
+        [Required]
+        public LegType LegType { get; set; }
         [NotMapped]
         public virtual Flight? Flight { get; set; }
     }

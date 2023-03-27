@@ -5,10 +5,7 @@ namespace Airport.Infrastracture
 {
     public class AirportDataContext : DbContext
     {
-        public AirportDataContext(DbContextOptions<AirportDataContext> options) : base(options) 
-        {
-            _legs = Legs.ToList();
-        }
+        public AirportDataContext(DbContextOptions<AirportDataContext> options) : base(options) { }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<Flight>()
@@ -17,7 +14,6 @@ namespace Airport.Infrastracture
         //         .HasForeignKey<Leg>(b => b.FlightId);
 
         //}
-        protected readonly List<Leg> _legs;
         public virtual DbSet<Flight> Flights { get; set; }
         public virtual DbSet<Pilot> Pilots { get; set; }
         public virtual DbSet<Leg> Legs { get; set; }

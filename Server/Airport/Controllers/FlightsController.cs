@@ -56,13 +56,21 @@ namespace FlightSimulator.Controllers
         [Route("AddLegs")]
         public async Task<IActionResult> AddLegs()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                if (i == 6)
-                    await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber)(i + 1), NextPosibbleLegs = (Core.Enums.LegNumber)(i + 2) | (Core.Enums.LegNumber)(i + 3) });
-                else
-                    await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber)(i + 1), NextPosibbleLegs = (Core.Enums.LegNumber)(i + 2) });
-            }
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.One), NextPosibbleLegs = Core.Enums.LegNumber.Two, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Two), NextPosibbleLegs = Core.Enums.LegNumber.Thr, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Thr), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
+
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fou), NextPosibbleLegs = Core.Enums.LegNumber.Fiv | Core.Enums.LegNumber.Nin, LegType = Core.Enums.LegType.Process });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fiv), NextPosibbleLegs = Core.Enums.LegNumber.Six | Core.Enums.LegNumber.Sev, LegType = Core.Enums.LegType.Process });
+
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Six), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Sev), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
+
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Eig), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Nin), NextPosibbleLegs = Core.Enums.LegNumber.Air, LegType = Core.Enums.LegType.Process });
+
+
+
             return Ok();
 
         }
