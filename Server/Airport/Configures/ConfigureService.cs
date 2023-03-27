@@ -2,10 +2,6 @@
 {
     public class ConfigureService
     {
-        public string GetSecretKey()
-        {
-            return "rrr";
-        }
 
         public string GetClient()
         {

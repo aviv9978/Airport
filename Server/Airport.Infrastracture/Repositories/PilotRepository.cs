@@ -14,7 +14,7 @@ namespace Airport.Infrastracture.Repositories
             _dBContext = dbContext;
             _logger = logger;
         }
-        public async Task AddPilot(Pilot pilot)
+        public async Task AddPilotAsync(Pilot pilot)
         {
             try
             {

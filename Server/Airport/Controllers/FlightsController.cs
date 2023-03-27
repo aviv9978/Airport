@@ -1,10 +1,9 @@
-﻿using FlightSimulator.Dal;
-using FlightSimulator.Dal.Repositories.Flights;
-using FlightSimulator.Dal.Repositories.Logger;
+﻿using Airport.Application.ILogicServices;
+using Core.Entities;
+using Core.Interfaces;
 using FlightSimulator.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FlightSimulator.Controllers
 {
@@ -12,27 +11,35 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        private readonly ILoggerRepository _procLogger;
+        private readonly ILegRepostiroy _leg;
+        private readonly IProcLogRepository _procLogger;
         private readonly IFlightRepository _flightRepos;
         private readonly ILogger<FlightsController> _logger;
+        private readonly ITerminalService _ter;
 
-        public FlightsController(IFlightRepository flightRepos, ILogger<FlightsController> logger, ILoggerRepository processLogger)
+        public FlightsController(ITerminalService ter, ILogger<FlightsController> logger,
+            ILegRepostiroy ileg, IProcLogRepository procLogger, IFlightRepository flightRepos)
         {
-            _procLogger = processLogger;
+            _leg = ileg;
+            _procLogger = procLogger;
             _flightRepos = flightRepos;
             _logger = logger;
+            _ter = ter;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddStam([FromBody] Flight flight)
+        [Route("AddFlight")]
+        public async Task<IActionResult> AddStam([FromBody] FlightDto flightDto)
         {
             try
             {
-                await _flightRepos.AddFlight(flight);
+
+                var flight = new Flight { Name = flightDto.Name, IsDeparture = true, };
+                await _flightRepos.AddFlightAsync(flight);
                 var newLog = new ProcessLog { Flight = flight, EnterTime = DateTime.Now, Message = "A plain has entered to leg", ExitTime = null };
-                await _procLogger.AddLog(newLog);
+                await _procLogger.AddProcLogAsync(newLog);
                 _logger.LogError("Successssss");
-               await _procLogger.UpdateOutLog(flight.Id);
+                await _procLogger.UpdateOutLog(flight.Id);
                 return Ok();
 
             }
@@ -45,6 +52,27 @@ namespace FlightSimulator.Controllers
             }
 
         }
+        [HttpPost]
+        [Route("AddLegs")]
+        public async Task<IActionResult> AddLegs()
+        {
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.One), NextPosibbleLegs = Core.Enums.LegNumber.Two, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Two), NextPosibbleLegs = Core.Enums.LegNumber.Thr, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Thr), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
 
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fou), NextPosibbleLegs = Core.Enums.LegNumber.Fiv | Core.Enums.LegNumber.Nin, LegType = Core.Enums.LegType.Process });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fiv), NextPosibbleLegs = Core.Enums.LegNumber.Six | Core.Enums.LegNumber.Sev, LegType = Core.Enums.LegType.Process });
+
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Six), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Sev), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
+
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Eig), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
+            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Nin), NextPosibbleLegs = Core.Enums.LegNumber.Air, LegType = Core.Enums.LegType.Process });
+
+
+
+            return Ok();
+
+        }
     }
 }

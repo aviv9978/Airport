@@ -5,11 +5,9 @@ namespace Core.Entities
     public class ProcessLog : BaseEntity
     {
         public virtual Flight? Flight { get; set; }
-        [Required]
+        public virtual Leg? Leg { get; set; }
         public DateTime? EnterTime { get; set; }
-        [Required]
         public DateTime? ExitTime { get; set; }
-        [Required]
         public string? Message { get; set; }
     }
 }

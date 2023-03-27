@@ -30,9 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Airport.Application\Airport.Application.csproj" />
+    <ProjectReference Include="..\Airport.Infrastracture\Airport.Infrastracture.csproj" />
     <ProjectReference Include="..\Domain\Core.csproj" />
-    <ProjectReference Include="..\FlightSimulator.Application\Airport.Application.csproj" />
-    <ProjectReference Include="..\FlightSimulator.Infrastracture\Airport.Infrastracture.csproj" />
   </ItemGroup>
 
 </Project>

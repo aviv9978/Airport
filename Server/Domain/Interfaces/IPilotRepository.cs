@@ -5,7 +5,7 @@ namespace Core.Interfaces
 {
     public interface IPilotRepository
     {
-        Task AddPilot(Pilot pilot);
+        Task AddPilotAsync(Pilot pilot);
 
     }
 }

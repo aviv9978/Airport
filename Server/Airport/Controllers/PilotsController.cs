@@ -1,6 +1,5 @@
-﻿using FlightSimulator.Dal.Repositories.Flights;
-using FlightSimulator.Dal.Repositories.Pilots;
-using FlightSimulator.Models;
+﻿using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +23,7 @@ namespace FlightSimulator.Controllers
         {
             try
             {
-                await _pilotRepos.AddPilot(pilot);
+                await _pilotRepos.AddPilotAsync(pilot);
                 _logger.LogInformation("Successssss adding pilot");
                 return Ok("Succes!");
 
