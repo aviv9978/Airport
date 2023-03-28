@@ -17,14 +17,12 @@ namespace Airport.Application.LogicServices
         public TerminalService(ILegRepostiroy legRepos)
         {
             _legRepos = legRepos;
-            if (_legsStatus == null)
-                _legsStatus = new bool[_legRepos.GetLegsCount()];
         }
 
-        private async Task<ICollection<Leg>> CommonStartAsync()
+        private async Task CommonStartAsync()
         {
-            _legsStatus = new bool[_legRepos.GetLegsCount()];
-            return await _legRepos.GetLegsAsync();
+            _legs = await _legRepos.GetLegsAsync();
+            _legsStatus = new bool[_legs.Count];
         }
 
         public async Task StartDepartureAsync(Flight flight)
@@ -38,7 +36,8 @@ namespace Airport.Application.LogicServices
         public async Task StartLandAsync(Flight flight)
         {
             if (_legs == null)
-                _legs = await CommonStartAsync();
+                await CommonStartAsync();
+
             int legLandCount = 0;
 
             if (_legsStatus[0] == true)
@@ -54,14 +53,63 @@ namespace Airport.Application.LogicServices
                 else
                 {
                     _legsStatus[i] = true;
-                    ProcessLog procLog = new ProcessLog() { EnterTime = DateTime.Now, Leg =  };
-                    flight.ProcessLogs.Add(new ProcessLog() { })
+                    //ProcessLog procLog = new ProcessLog() { EnterTime = DateTime.Now, Leg =  };
+                    //flight.ProcessLogs.Add(new ProcessLog() { })
 
                 }
             }
-            _legsStatus[0] = true;
-            throw new NotImplementedException();
+
+        }
+
+        private async Task LandMoveLeg(Flight flight)
+        {
+            var flightNextLegs = flight.Leg.NextPosibbleLegs;
+            if (flightNextLegs == Core.Enums.LegNumber.Eig)
+            {
+                Thread.Sleep(10000);
+                Console.WriteLine("Flight finished!");
+                flight = null;
+                return;
+            }
+            else
+            {
+                var nextLeg = _legs.FirstOrDefault(leg => leg.CurrentLeg.HasFlag(flightNextLegs));
+                if (nextLeg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Six))
+                {
+                    var legSix = _legs.FirstOrDefault(
+                        leg => leg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Six));
+                    var legSev = _legs.FirstOrDefault(
+                        leg => leg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Sev));
+                     
+                    while (true) //Just for now instead of an event
+                    {
+                        if(legSix != null && legSix.Flight != null)
+                        {
+                            flight.Leg = legSix;
+                            await LandMoveLeg(flight);
+                            return;
+                        }
+                        if (legSev != null && legSev.Flight != null)
+                        {
+                            flight.Leg = legSev;
+                            await LandMoveLeg(flight);
+                            return;
+                        }
+                    }
+
+                }
+                while (true)
+                {
+                    if (nextLeg != null && nextLeg.Flight != null)
+                    {
+                        flight.Leg = nextLeg;
+                        await LandMoveLeg(flight);
+                        return;
+                    }
+                }
+            }
+
         }
     }
 }
-}
+

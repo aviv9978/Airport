@@ -19,7 +19,7 @@ namespace Airport.Infrastracture.Repositories
             _dBContext = dbContext;
             _logger = logger;
         }
-        //public int GetLegsCount() => _dBContext.Legs.Count();
+        public int GetLegsCount() => _dBContext.Legs.Count();
         public async Task AddLegAsync(Leg leg)
         {
             try

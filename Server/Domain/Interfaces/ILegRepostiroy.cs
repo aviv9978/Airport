@@ -9,7 +9,7 @@ namespace Core.Interfaces
 {
     public interface ILegRepostiroy
     {
-      //  int GetLegsCount();
+        int GetLegsCount();
         Task AddLegAsync(Leg leg);
 
         Task<ICollection<Leg>> GetLegsAsync();
