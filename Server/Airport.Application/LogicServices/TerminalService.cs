@@ -12,103 +12,49 @@ namespace Airport.Application.LogicServices
     public class TerminalService : ITerminalService
     {
         private readonly ILegRepostiroy _legRepos;
-        private static bool[]? _legsStatus;
         private static ICollection<Leg> _legs;
+        private static int _legsCur = Enum.GetNames(typeof(Core.Enums.LegNumber)).Length;
         public TerminalService(ILegRepostiroy legRepos)
         {
             _legRepos = legRepos;
         }
 
-        private async Task CommonStartAsync()
-        {
-            _legs = await _legRepos.GetLegsAsync();
-            _legsStatus = new bool[_legs.Count];
-        }
 
         public async Task StartDepartureAsync(Flight flight)
         {
             if (flight == null)
                 throw new ArgumentNullException();
-
-
         }
 
         public async Task StartLandAsync(Flight flight)
         {
             if (_legs == null)
-                await CommonStartAsync();
+            _legs = await _legRepos.GetLegsAsync();
 
-            int legLandCount = 0;
-
-            if (_legsStatus[0] == true)
-                Thread.Sleep(5000);
-            foreach (var leg in _legs)
-                if (leg.LegType == Core.Enums.LegType.Land)
-                    legLandCount++;
-
-            for (int i = 0; i < _legs.Count;)
-            {
-                if (_legsStatus[i] == true)
-                    Thread.Sleep(10000);
-                else
-                {
-                    _legsStatus[i] = true;
-                    //ProcessLog procLog = new ProcessLog() { EnterTime = DateTime.Now, Leg =  };
-                    //flight.ProcessLogs.Add(new ProcessLog() { })
-
-                }
-            }
-
+            await LandMoveLeg(flight);
         }
-
         private async Task LandMoveLeg(Flight flight)
         {
-            var flightNextLegs = flight.Leg.NextPosibbleLegs;
-            if (flightNextLegs == Core.Enums.LegNumber.Eig)
+            if (flight.Leg.LegType == Core.Enums.LegType.Departure)
             {
                 Thread.Sleep(10000);
                 Console.WriteLine("Flight finished!");
-                flight = null;
+                flight.Leg.Flight = null;
                 return;
             }
-            else
+            var nextPosLegs = flight.Leg.NextPosibbleLegs;
+
+            var nextLegs = _legs.Where(leg => leg.CurrentLeg.HasFlag(nextPosLegs));
+            foreach (var leg in nextLegs)
             {
-                var nextLeg = _legs.FirstOrDefault(leg => leg.CurrentLeg.HasFlag(flightNextLegs));
-                if (nextLeg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Six))
+                if (leg != null && leg.Flight != null)
                 {
-                    var legSix = _legs.FirstOrDefault(
-                        leg => leg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Six));
-                    var legSev = _legs.FirstOrDefault(
-                        leg => leg.CurrentLeg.HasFlag(Core.Enums.LegNumber.Sev));
-                     
-                    while (true) //Just for now instead of an event
-                    {
-                        if(legSix != null && legSix.Flight != null)
-                        {
-                            flight.Leg = legSix;
-                            await LandMoveLeg(flight);
-                            return;
-                        }
-                        if (legSev != null && legSev.Flight != null)
-                        {
-                            flight.Leg = legSev;
-                            await LandMoveLeg(flight);
-                            return;
-                        }
-                    }
-
+                    flight.Leg = leg;
+                    await LandMoveLeg(flight);
+                    break;
                 }
-                while (true)
-                {
-                    if (nextLeg != null && nextLeg.Flight != null)
-                    {
-                        flight.Leg = nextLeg;
-                        await LandMoveLeg(flight);
-                        return;
-                    }
-                }
+                return;
             }
-
         }
     }
 }
