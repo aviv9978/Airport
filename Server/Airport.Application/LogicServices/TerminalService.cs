@@ -12,56 +12,50 @@ namespace Airport.Application.LogicServices
     public class TerminalService : ITerminalService
     {
         private readonly ILegRepostiroy _legRepos;
-        private static bool[]? _legsStatus;
         private static ICollection<Leg> _legs;
+        private static int _legsCur = Enum.GetNames(typeof(Core.Enums.LegNumber)).Length;
         public TerminalService(ILegRepostiroy legRepos)
         {
             _legRepos = legRepos;
-            if (_legsStatus == null)
-                _legsStatus = new bool[_legRepos.GetLegsCount()];
         }
 
-        private async Task<ICollection<Leg>> CommonStartAsync()
-        {
-            _legsStatus = new bool[_legRepos.GetLegsCount()];
-            return await _legRepos.GetLegsAsync();
-        }
 
         public async Task StartDepartureAsync(Flight flight)
         {
             if (flight == null)
                 throw new ArgumentNullException();
-
-
         }
 
         public async Task StartLandAsync(Flight flight)
         {
             if (_legs == null)
-                _legs = await CommonStartAsync();
-            int legLandCount = 0;
+            _legs = await _legRepos.GetLegsAsync();
 
-            if (_legsStatus[0] == true)
-                Thread.Sleep(5000);
-            foreach (var leg in _legs)
-                if (leg.LegType == Core.Enums.LegType.Land)
-                    legLandCount++;
-
-            for (int i = 0; i < _legs.Count;)
+            await LandMoveLeg(flight);
+        }
+        private async Task LandMoveLeg(Flight flight)
+        {
+            if (flight.Leg.LegType == Core.Enums.LegType.Departure)
             {
-                if (_legsStatus[i] == true)
-                    Thread.Sleep(10000);
-                else
-                {
-                    _legsStatus[i] = true;
-                    ProcessLog procLog = new ProcessLog() { EnterTime = DateTime.Now, Leg =  };
-                    flight.ProcessLogs.Add(new ProcessLog() { })
-
-                }
+                Thread.Sleep(10000);
+                Console.WriteLine("Flight finished!");
+                flight.Leg.Flight = null;
+                return;
             }
-            _legsStatus[0] = true;
-            throw new NotImplementedException();
+            var nextPosLegs = flight.Leg.NextPosibbleLegs;
+
+            var nextLegs = _legs.Where(leg => leg.CurrentLeg.HasFlag(nextPosLegs));
+            foreach (var leg in nextLegs)
+            {
+                if (leg != null && leg.Flight != null)
+                {
+                    flight.Leg = leg;
+                    await LandMoveLeg(flight);
+                    break;
+                }
+                return;
+            }
         }
     }
 }
-}
+
