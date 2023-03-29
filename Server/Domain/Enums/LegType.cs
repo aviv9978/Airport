@@ -8,8 +8,9 @@ namespace Core.Enums
 {
     public enum LegType
     {
-        Departure = 0b00000001,
-        Land = 0b00000010,
-        Process = 0b00000100,
+        StartForDeparture = 1,
+        StartForLand = 2,
+        Process = 4,
+        BeforeFly = 8
     }
 }

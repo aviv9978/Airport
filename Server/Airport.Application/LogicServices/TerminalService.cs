@@ -27,8 +27,8 @@ namespace Airport.Application.LogicServices
             await CommonStartAsync();
 
             if (isDeparture)
-                flightFirstLet = _legs.Where(leg => leg.LegType == Core.Enums.LegType.Departure);
-            else flightFirstLet = _legs.Where(leg => leg.LegType == Core.Enums.LegType.Land);
+                flightFirstLet = _legs.Where(leg => leg.LegType == Core.Enums.LegType.StartForDeparture);
+            else flightFirstLet = _legs.Where(leg => leg.LegType == Core.Enums.LegType.StartForLand);
 
             while (true) //instead of event for now
             {
@@ -49,29 +49,26 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            int procLogId = await AddProcLogAsync(flight, flight.Leg, $"Entering Leg {flight.Leg.CurrentLeg}");
+            int procLogId = await AddProcLogAsync(flight, flight.Leg, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
-                if (flight.Leg.CurrentLeg == Core.Enums.LegNumber.Air)
+                if (flight.Leg.LegType.HasFlag(Core.Enums.LegType.BeforeFly))
                 {
-                    Thread.Sleep(flight.Leg.PauseTime * 1000);
-                    Console.WriteLine("Flight finished!");
-                    flight.Leg.isTaken = false;
+                    await FinishingFlight(flight, procLogId);
                     return;
                 }
             }
 
-            else if (flight.Leg.LegType == Core.Enums.LegType.Departure)
+            else if (flight.Leg.LegType == Core.Enums.LegType.StartForDeparture)
             {
-                Thread.Sleep(flight.Leg.PauseTime * 1000);
-                Console.WriteLine("Flight finished!");
-                flight.Leg.isTaken = false;
+                await FinishingFlight(flight, procLogId);
                 return;
             }
+
             Thread.Sleep(flight.Leg.PauseTime * 1000);
             var nextPosLegs = flight.Leg.NextPosibbleLegs;
-            
-            var nextLegs = _legs.Where(leg => leg.CurrentLeg.HasFlag(nextPosLegs));
+
+            var nextLegs = _legs.Where(leg => nextPosLegs.HasFlag(leg.CurrentLeg));
             foreach (var leg in nextLegs)
             {
                 if (leg != null && leg.isTaken == false)
@@ -79,12 +76,20 @@ namespace Airport.Application.LogicServices
                     flight.Leg.isTaken = false;
                     flight.Leg = leg;
                     leg.isTaken = true;
-                    await NextLegAsync(flight, isDeparture);
                     await UpdateLogExit(procLogId);
+                    await NextLegAsync(flight, isDeparture);
                     break;
                 }
                 // else rise event to wait
             }
+        }
+
+        private async Task FinishingFlight(Flight flight, int procLogId)
+        {
+            Thread.Sleep(flight.Leg.PauseTime * 1000);
+            await UpdateLogExit(procLogId);
+            Console.WriteLine("Flight finished!");
+            flight.Leg.isTaken = false;
         }
 
         private async Task<int> AddProcLogAsync(Flight flight, Leg leg, string message)
@@ -102,7 +107,7 @@ namespace Airport.Application.LogicServices
 
         private async Task UpdateLogExit(int procLogId)
         {
-            await _procLogRepos.UpdateOutLog(procLogId);
+            await _procLogRepos.UpdateOutLogAsync(procLogId);
         }
         private async Task CommonStartAsync()
         {
