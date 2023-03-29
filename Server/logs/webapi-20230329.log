@@ -72,3 +72,1325 @@ ALTER TABLE [Legs] ADD [LegType] int NOT NULL DEFAULT 0;
 [2023-03-29 16:17:18.570 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20230327094210_update1', N'7.0.4');
+[2023-03-29 19:59:45.730 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 19:59:45.881 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 19:59:45.884 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 19:59:45.884 +03:00  INF]  Hosting environment: Development
+[2023-03-29 19:59:45.884 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 19:59:46.843 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 19:59:47.251 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 408.8548ms
+[2023-03-29 19:59:47.265 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 19:59:47.277 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 12.5771ms
+[2023-03-29 19:59:47.339 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 19:59:47.489 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 150.7824ms
+[2023-03-29 19:59:47.729 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 19:59:47.868 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 138.8952ms
+[2023-03-29 20:00:03.475 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddFlight application/json 116
+[2023-03-29 20:00:03.486 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:00:03.493 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddStam (Airport)'
+[2023-03-29 20:00:03.524 +03:00  INF]  Route matched with {action = "AddStam", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddStam(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:00:05.580 +03:00  INF]  Executed DbCommand (109ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:00:05.649 +03:00  WRN]  Added flight
+[2023-03-29 20:00:05.716 +03:00  INF]  Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:00:05.726 +03:00  INF]  Added log
+[2023-03-29 20:00:05.726 +03:00  ERR]  Successssss
+[2023-03-29 20:00:06.058 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-29 20:00:06.083 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-29 20:00:06.086 +03:00  INF]  updated log
+[2023-03-29 20:00:06.094 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-29 20:00:06.100 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddStam (Airport) in 2569.9325ms
+[2023-03-29 20:00:06.101 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddStam (Airport)'
+[2023-03-29 20:00:06.110 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddFlight application/json 116 - 200 0 - 2635.2938ms
+[2023-03-29 20:02:55.221 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:02:55.405 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:02:55.408 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:02:55.409 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:02:55.409 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:02:56.045 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:02:56.342 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 298.7371ms
+[2023-03-29 20:02:56.366 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:02:56.378 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 11.7105ms
+[2023-03-29 20:02:56.406 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:02:56.466 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 60.3209ms
+[2023-03-29 20:02:56.747 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:02:56.773 +03:00  ERR]  An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST api/Flights/AddFlight" for actions - FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport),FlightSimulator.Controllers.FlightsController.AddLandingFlight (Airport). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2023-03-29 20:02:56.826 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 500 - text/plain;+charset=utf-8 78.8657ms
+[2023-03-29 20:03:26.131 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:03:26.275 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:03:26.278 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:03:26.278 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:03:26.278 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:03:27.113 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:03:27.426 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 313.7590ms
+[2023-03-29 20:03:27.441 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:03:27.448 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 6.7327ms
+[2023-03-29 20:03:27.490 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:03:27.553 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 63.5502ms
+[2023-03-29 20:03:27.669 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:03:27.796 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 126.0197ms
+[2023-03-29 20:03:36.483 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:03:36.494 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:03:36.500 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:03:36.533 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:03:38.475 +03:00  INF]  Executed DbCommand (68ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:03:38.543 +03:00  WRN]  Added flight
+[2023-03-29 20:03:38.784 +03:00  ERR]  Failed executing DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:03:38.821 +03:00  ERR]  An exception occurred while iterating over the results of a query for context type 'Airport.Infrastracture.AirportDataContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PauseTime'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:32501b54-15e7-4931-bc6e-7a63f3dcadbc
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PauseTime'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:32501b54-15e7-4931-bc6e-7a63f3dcadbc
+Error Number:207,State:1,Class:16
+[2023-03-29 20:03:38.889 +03:00  ERR]  Invalid column name 'PauseTime'.
+[2023-03-29 20:03:39.039 +03:00  ERR]  Invalid column name 'PauseTime'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PauseTime'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.LegRepository.GetLegsAsync() in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\LegRepository.cs:line 43
+   at Airport.Application.LogicServices.TerminalService.CommonStartAsync() in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 94
+   at Airport.Application.LogicServices.TerminalService.StartFlightAsync(Flight flight, Boolean isDeparturing) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 26
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 39
+ClientConnectionId:32501b54-15e7-4931-bc6e-7a63f3dcadbc
+Error Number:207,State:1,Class:16
+[2023-03-29 20:03:39.061 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:03:39.072 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 2532.8756ms
+[2023-03-29 20:03:39.074 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:03:39.085 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 2602.6622ms
+[2023-03-29 20:04:13.796 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:04:13.800 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:04:13.801 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:04:13.801 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:04:13.901 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:04:13.903 +03:00  WRN]  Added flight
+[2023-03-29 20:04:24.647 +03:00  ERR]  Failed executing DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:04:24.650 +03:00  ERR]  An exception occurred while iterating over the results of a query for context type 'Airport.Infrastracture.AirportDataContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PauseTime'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:32501b54-15e7-4931-bc6e-7a63f3dcadbc
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'PauseTime'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:32501b54-15e7-4931-bc6e-7a63f3dcadbc
+Error Number:207,State:1,Class:16
+[2023-03-29 20:05:35.847 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:05:35.995 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:05:35.998 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:05:35.998 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:05:35.998 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:05:36.977 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:05:37.302 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 326.1649ms
+[2023-03-29 20:05:37.314 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:05:37.327 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 12.5278ms
+[2023-03-29 20:05:37.374 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:05:37.442 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 67.3004ms
+[2023-03-29 20:05:37.574 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:05:37.708 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 133.6322ms
+[2023-03-29 20:05:40.994 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:05:41.006 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:05:41.012 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:41.048 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:05:42.802 +03:00  ERR]  An error occurred using the connection to database 'MyAirport' on server 'LAPTOP-UAILNETP'.
+[2023-03-29 20:05:42.845 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:91368154-0e11-44a8-916e-c610b27fb92c
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:91368154-0e11-44a8-916e-c610b27fb92c
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:05:42.909 +03:00  WRN]  Exepction
+[2023-03-29 20:05:42.983 +03:00  ERR]  An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:91368154-0e11-44a8-916e-c610b27fb92c
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.FlightRepository.AddFlightAsync(Flight flight) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\FlightRepository.cs:line 22
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 38
+[2023-03-29 20:05:42.999 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:05:43.008 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 1955.0034ms
+[2023-03-29 20:05:43.010 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:43.023 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 2028.7043ms
+[2023-03-29 20:05:48.935 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:05:48.938 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:05:48.939 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:48.939 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:05:49.035 +03:00  ERR]  An error occurred using the connection to database 'MyAirport' on server 'LAPTOP-UAILNETP'.
+[2023-03-29 20:05:49.039 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:6f14b6dd-1bc6-494a-84fd-f47ace6605cd
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:6f14b6dd-1bc6-494a-84fd-f47ace6605cd
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:05:49.078 +03:00  WRN]  Exepction
+[2023-03-29 20:05:49.164 +03:00  ERR]  An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:6f14b6dd-1bc6-494a-84fd-f47ace6605cd
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.FlightRepository.AddFlightAsync(Flight flight) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\FlightRepository.cs:line 22
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 38
+[2023-03-29 20:05:49.166 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:05:49.167 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 227.7816ms
+[2023-03-29 20:05:49.167 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:49.168 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 232.5172ms
+[2023-03-29 20:05:59.203 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:05:59.204 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:05:59.204 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:59.205 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:05:59.250 +03:00  ERR]  An error occurred using the connection to database 'MyAirport' on server 'LAPTOP-UAILNETP'.
+[2023-03-29 20:05:59.255 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:05:59.293 +03:00  WRN]  Exepction
+[2023-03-29 20:05:59.371 +03:00  ERR]  An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.FlightRepository.AddFlightAsync(Flight flight) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\FlightRepository.cs:line 22
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 38
+[2023-03-29 20:05:59.373 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:05:59.374 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 168.9557ms
+[2023-03-29 20:05:59.374 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:05:59.374 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 171.1673ms
+[2023-03-29 20:06:12.439 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:06:12.439 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:06:12.439 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:06:12.440 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:06:12.444 +03:00  ERR]  An error occurred using the connection to database 'MyAirport' on server 'LAPTOP-UAILNETP'.
+[2023-03-29 20:06:12.449 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.InternalOpenAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.InternalOpenAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:06:12.508 +03:00  WRN]  Exepction
+[2023-03-29 20:06:12.562 +03:00  ERR]  An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "MyAirport" requested by the login. The login failed.
+Login failed for user 'LAPTOP-UAILNETP\Aviv'.
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at Microsoft.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry, SqlConnectionOverrides overrides)
+   at Microsoft.Data.SqlClient.SqlConnection.InternalOpenAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:f32357f2-b7e5-40ad-acf1-300bd5fed076
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.FlightRepository.AddFlightAsync(Flight flight) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\FlightRepository.cs:line 22
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 38
+[2023-03-29 20:06:12.564 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:06:12.564 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 124.6302ms
+[2023-03-29 20:06:12.564 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:06:12.564 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 125.6288ms
+[2023-03-29 20:06:41.663 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:06:41.822 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:06:41.825 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:06:41.825 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:06:41.825 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:06:42.627 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:06:55.418 +03:00  INF]  Executed DbCommand (142ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [MyAirport];
+[2023-03-29 20:06:55.580 +03:00  INF]  Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [MyAirport] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+[2023-03-29 20:06:55.604 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-29 20:06:55.688 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+[2023-03-29 20:06:55.689 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-29 20:06:55.707 +03:00  INF]  Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+[2023-03-29 20:06:55.712 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+[2023-03-29 20:06:55.728 +03:00  INF]  Applying migration '20230326084156_init'.
+[2023-03-29 20:06:55.776 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Legs] (
+    [Id] int NOT NULL IDENTITY,
+    [CurrentLeg] int NOT NULL,
+    [NextPosibbleLegs] int NOT NULL,
+    CONSTRAINT [PK_Legs] PRIMARY KEY ([Id])
+);
+[2023-03-29 20:06:55.779 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Pilots] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Pilots] PRIMARY KEY ([Id])
+);
+[2023-03-29 20:06:55.781 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Flights] (
+    [Id] int NOT NULL IDENTITY,
+    [Code] nvarchar(max) NULL,
+    [Name] nvarchar(max) NULL,
+    [IsDeparture] bit NOT NULL,
+    [PilotId] int NULL,
+    CONSTRAINT [PK_Flights] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Flights_Pilots_PilotId] FOREIGN KEY ([PilotId]) REFERENCES [Pilots] ([Id])
+);
+[2023-03-29 20:06:55.784 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [ProcessLogger] (
+    [Id] int NOT NULL IDENTITY,
+    [FlightId] int NULL,
+    [LegId] int NULL,
+    [EnterTime] datetime2 NULL,
+    [ExitTime] datetime2 NULL,
+    [Message] nvarchar(max) NULL,
+    CONSTRAINT [PK_ProcessLogger] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Flights_FlightId] FOREIGN KEY ([FlightId]) REFERENCES [Flights] ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Legs_LegId] FOREIGN KEY ([LegId]) REFERENCES [Legs] ([Id])
+);
+[2023-03-29 20:06:55.785 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Flights_PilotId] ON [Flights] ([PilotId]);
+[2023-03-29 20:06:55.786 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_FlightId] ON [ProcessLogger] ([FlightId]);
+[2023-03-29 20:06:55.787 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_LegId] ON [ProcessLogger] ([LegId]);
+[2023-03-29 20:06:55.789 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230326084156_init', N'7.0.4');
+[2023-03-29 20:06:55.796 +03:00  INF]  Applying migration '20230327094210_update1'.
+[2023-03-29 20:06:55.806 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Legs] ADD [LegType] int NOT NULL DEFAULT 0;
+[2023-03-29 20:06:55.807 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230327094210_update1', N'7.0.4');
+[2023-03-29 20:06:55.807 +03:00  INF]  Applying migration '20230329170519_AddingPauseTime'.
+[2023-03-29 20:06:55.838 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Legs] ADD [PauseTime] int NOT NULL DEFAULT 0;
+[2023-03-29 20:06:55.869 +03:00  INF]  Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CurrentLeg', N'LegType', N'NextPosibbleLegs', N'PauseTime') AND [object_id] = OBJECT_ID(N'[Legs]'))
+    SET IDENTITY_INSERT [Legs] ON;
+INSERT INTO [Legs] ([Id], [CurrentLeg], [LegType], [NextPosibbleLegs], [PauseTime])
+VALUES (1, 1, 2, 2, 3),
+(2, 2, 4, 4, 4),
+(3, 4, 4, 8, 5),
+(4, 8, 4, 544, 4),
+(5, 32, 4, 64, 3),
+(6, 64, 1, 128, 4),
+(7, 64, 1, 128, 4),
+(8, 128, 4, 8, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CurrentLeg', N'LegType', N'NextPosibbleLegs', N'PauseTime') AND [object_id] = OBJECT_ID(N'[Legs]'))
+    SET IDENTITY_INSERT [Legs] OFF;
+[2023-03-29 20:06:55.870 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230329170519_AddingPauseTime', N'7.0.4');
+[2023-03-29 20:07:01.062 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:07:01.218 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:07:01.221 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:07:01.222 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:07:01.222 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:07:01.905 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:07:02.206 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 303.2118ms
+[2023-03-29 20:07:02.217 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:07:02.226 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 9.7526ms
+[2023-03-29 20:07:02.267 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:07:02.339 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 71.5015ms
+[2023-03-29 20:07:02.456 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:07:02.585 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 129.4529ms
+[2023-03-29 20:07:07.592 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:07:07.602 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:07:07.607 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:07:07.636 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:07:19.995 +03:00  INF]  Executed DbCommand (71ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:07:21.021 +03:00  WRN]  Added flight
+[2023-03-29 20:07:30.239 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:07:31.141 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:08:26.486 +03:00  INF]  Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:08:27.095 +03:00  INF]  Added log
+[2023-03-29 20:21:08.705 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:21:08.788 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:21:08.790 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:21:08.790 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:21:08.790 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:21:09.050 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:21:09.301 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 252.9804ms
+[2023-03-29 20:21:09.411 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:21:09.411 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:21:09.417 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 5.5144ms
+[2023-03-29 20:21:09.430 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 18.7776ms
+[2023-03-29 20:21:09.546 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:21:09.679 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 133.5243ms
+[2023-03-29 20:21:13.854 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:21:13.862 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:21:13.867 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:21:13.891 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:21:15.235 +03:00  INF]  Executed DbCommand (56ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:21:15.295 +03:00  WRN]  Added flight
+[2023-03-29 20:21:15.486 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:21:15.511 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:21:15.590 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:21:15.598 +03:00  INF]  Added log
+[2023-03-29 20:21:19.616 +03:00  ERR]  Successssss
+[2023-03-29 20:21:19.622 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-29 20:21:19.626 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 5730.566ms
+[2023-03-29 20:21:19.627 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:21:19.634 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 200 0 - 5780.4073ms
+[2023-03-29 20:23:31.760 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:23:31.927 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:23:31.929 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:23:31.930 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:23:31.930 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:23:32.825 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:23:33.142 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 318.8140ms
+[2023-03-29 20:23:33.276 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:23:33.276 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:23:33.298 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 21.1427ms
+[2023-03-29 20:23:33.345 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 69.1442ms
+[2023-03-29 20:23:33.455 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:23:33.607 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 151.0786ms
+[2023-03-29 20:23:37.189 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:23:37.206 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:23:37.215 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:23:37.267 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:23:54.558 +03:00  INF]  Executed DbCommand (72ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:23:55.457 +03:00  WRN]  Added flight
+[2023-03-29 20:24:03.528 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:24:05.008 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:24:43.418 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:24:44.077 +03:00  INF]  Added log
+[2023-03-29 20:25:21.686 +03:00  ERR]  Successssss
+[2023-03-29 20:27:05.540 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:27:05.731 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:27:05.734 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:27:05.734 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:27:05.734 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:27:06.218 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:27:06.510 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 295.1472ms
+[2023-03-29 20:27:06.529 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:27:06.541 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 11.0704ms
+[2023-03-29 20:27:06.585 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:27:06.648 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 63.3809ms
+[2023-03-29 20:27:06.759 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:27:06.894 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 135.3935ms
+[2023-03-29 20:27:10.104 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:27:10.113 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:27:10.120 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:27:10.151 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:27:12.053 +03:00  INF]  Executed DbCommand (69ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:27:12.122 +03:00  WRN]  Added flight
+[2023-03-29 20:27:12.372 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:27:12.405 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:27:12.474 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:27:12.482 +03:00  INF]  Added log
+[2023-03-29 20:27:16.489 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:27:16.490 +03:00  INF]  Added log
+[2023-03-29 20:27:21.502 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:27:21.502 +03:00  INF]  Added log
+[2023-03-29 20:27:33.569 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-29 20:27:35.739 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-29 20:27:36.432 +03:00  INF]  updated log
+[2023-03-29 20:27:46.658 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-29 20:27:47.912 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-29 20:27:48.336 +03:00  INF]  updated log
+[2023-03-29 20:27:56.844 +03:00  ERR]  Successssss
+[2023-03-29 20:27:58.501 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-29 20:27:58.507 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 48351.0113ms
+[2023-03-29 20:27:58.509 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:27:58.517 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 200 0 - 48413.5701ms
+[2023-03-29 20:36:10.150 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:36:10.395 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:36:10.400 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:36:10.401 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:36:10.401 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:36:11.003 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:36:11.296 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 294.9078ms
+[2023-03-29 20:36:11.314 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:36:11.320 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 6.4067ms
+[2023-03-29 20:36:11.362 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:36:11.434 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 71.8297ms
+[2023-03-29 20:36:11.538 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:36:11.673 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 134.5449ms
+[2023-03-29 20:36:18.432 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:36:18.443 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:36:18.450 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:36:18.481 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:36:20.367 +03:00  INF]  Executed DbCommand (69ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:36:20.442 +03:00  WRN]  Added flight
+[2023-03-29 20:36:20.681 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:36:20.711 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:36:20.788 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:36:20.796 +03:00  INF]  Added log
+[2023-03-29 20:36:26.305 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:36:26.306 +03:00  INF]  Added log
+[2023-03-29 20:37:10.126 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:37:10.825 +03:00  INF]  Added log
+[2023-03-29 20:39:04.071 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-29 20:39:05.548 +03:00  INF]  Executed DbCommand (57ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-29 20:39:05.884 +03:00  INF]  updated log
+[2023-03-29 20:39:07.018 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-29 20:39:07.024 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-29 20:39:07.024 +03:00  INF]  updated log
+[2023-03-29 20:39:07.025 +03:00  ERR]  Successssss
+[2023-03-29 20:39:07.034 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-29 20:39:07.042 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 168554.7695ms
+[2023-03-29 20:39:07.044 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:39:07.056 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 200 0 - 168624.3828ms
+[2023-03-29 20:39:48.680 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:39:48.687 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:39:48.687 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:39:48.688 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:39:48.779 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:39:48.780 +03:00  WRN]  Added flight
+[2023-03-29 20:39:48.824 +03:00  ERR]  Failed executing DbCommand (12ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Legs] ([Id], [CurrentLeg], [LegType], [NextPosibbleLegs], [PauseTime])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p5, @p6, @p7, @p8, @p9);
+[2023-03-29 20:39:48.872 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:39:48.921 +03:00  WRN]  Exepction
+[2023-03-29 20:39:49.151 +03:00  ERR]  An error occurred while saving the entity changes. See the inner exception for details.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.ProcLogRepository.AddProcLogAsync(ProcessLog log) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\ProcLogRepository.cs:line 23
+   at Airport.Application.LogicServices.TerminalService.AddProcLogAsync(Flight flight, Leg leg, String message) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 98
+   at Airport.Application.LogicServices.TerminalService.NextLegAsync(Flight flight, Boolean isDeparture) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 51
+   at Airport.Application.LogicServices.TerminalService.StartFlightAsync(Flight flight, Boolean isDeparture) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 41
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 39
+[2023-03-29 20:39:49.167 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:39:49.172 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 483.4652ms
+[2023-03-29 20:39:49.172 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:39:49.172 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 496.0932ms
+[2023-03-29 20:40:11.684 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:40:11.724 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:40:11.724 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:40:11.725 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:40:11.751 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:40:11.751 +03:00  WRN]  Added flight
+[2023-03-29 20:40:11.758 +03:00  ERR]  Failed executing DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = DateTime2), @p6='?' (DbType = DateTime2), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Legs] ([Id], [CurrentLeg], [LegType], [NextPosibbleLegs], [PauseTime])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p5, @p6, @p7, @p8, @p9);
+[2023-03-29 20:40:11.766 +03:00  ERR]  An exception occurred in the database while saving changes for context type 'Airport.Infrastracture.AirportDataContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+[2023-03-29 20:40:11.809 +03:00  WRN]  Exepction
+[2023-03-29 20:40:12.045 +03:00  ERR]  An error occurred while saving the entity changes. See the inner exception for details.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert explicit value for identity column in table 'Legs' when IDENTITY_INSERT is set to OFF.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__208_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:9f52a186-adb6-4144-8ef8-48f2f1125869
+Error Number:544,State:1,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Airport.Infrastracture.Repositories.ProcLogRepository.AddProcLogAsync(ProcessLog log) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\Repositories\ProcLogRepository.cs:line 23
+   at Airport.Application.LogicServices.TerminalService.AddProcLogAsync(Flight flight, Leg leg, String message) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 98
+   at Airport.Application.LogicServices.TerminalService.NextLegAsync(Flight flight, Boolean isDeparture) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 51
+   at Airport.Application.LogicServices.TerminalService.StartFlightAsync(Flight flight, Boolean isDeparture) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Application\LogicServices\TerminalService.cs:line 41
+   at FlightSimulator.Controllers.FlightsController.AddDepartureFlight(FlightDto flightDto) in C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport\Controllers\FlightsController.cs:line 39
+[2023-03-29 20:40:12.047 +03:00  INF]  Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+[2023-03-29 20:40:12.048 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 323.2302ms
+[2023-03-29 20:40:12.048 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:40:12.048 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117 - 500 - application/problem+json;+charset=utf-8 365.2617ms
+[2023-03-29 20:40:27.134 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:40:27.135 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:40:27.135 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:40:27.135 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:40:27.139 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:40:27.142 +03:00  WRN]  Added flight
+[2023-03-29 20:42:41.433 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:42:41.622 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:42:41.625 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:42:41.625 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:42:41.626 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:42:42.485 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:42:42.813 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 331.4820ms
+[2023-03-29 20:42:42.835 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:42:42.848 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 12.3843ms
+[2023-03-29 20:42:42.887 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:42:42.957 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 69.6729ms
+[2023-03-29 20:42:43.083 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:42:43.212 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 129.6751ms
+[2023-03-29 20:42:48.163 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:42:48.173 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:42:48.180 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:42:48.213 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:42:50.139 +03:00  INF]  Executed DbCommand (66ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:42:50.203 +03:00  WRN]  Added flight
+[2023-03-29 20:42:54.016 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:42:54.048 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:42:54.135 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:42:54.145 +03:00  INF]  Added log
+[2023-03-29 20:44:08.012 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:44:08.013 +03:00  INF]  Added log
+[2023-03-29 20:44:50.863 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:44:50.864 +03:00  INF]  Added log
+[2023-03-29 20:47:00.192 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-29 20:47:00.375 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-29 20:47:00.377 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-29 20:47:00.378 +03:00  INF]  Hosting environment: Development
+[2023-03-29 20:47:00.378 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-29 20:47:00.791 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-29 20:47:01.106 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 317.4203ms
+[2023-03-29 20:47:01.121 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-29 20:47:01.127 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 6.5921ms
+[2023-03-29 20:47:01.184 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-29 20:47:01.245 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 61.3332ms
+[2023-03-29 20:47:01.368 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-29 20:47:01.490 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 121.4583ms
+[2023-03-29 20:47:04.757 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 117
+[2023-03-29 20:47:04.767 +03:00  INF]  CORS policy execution successful.
+[2023-03-29 20:47:04.772 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-29 20:47:04.801 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-29 20:47:06.682 +03:00  INF]  Executed DbCommand (66ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-29 20:47:06.747 +03:00  WRN]  Added flight
+[2023-03-29 20:47:06.981 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-29 20:47:07.010 +03:00  INF]  Got all legs from db!
+[2023-03-29 20:47:07.087 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:47:07.096 +03:00  INF]  Added log
+[2023-03-29 20:47:58.182 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:47:58.183 +03:00  INF]  Added log
+[2023-03-29 20:48:16.380 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-29 20:48:16.381 +03:00  INF]  Added log

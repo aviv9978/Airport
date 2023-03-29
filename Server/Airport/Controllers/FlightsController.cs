@@ -28,18 +28,40 @@ namespace FlightSimulator.Controllers
         }
 
         [HttpPost]
-        [Route("AddFlight")]
-        public async Task<IActionResult> AddStam([FromBody] FlightDto flightDto)
+        [Route("AddDepartureFlight")]
+        public async Task<IActionResult> AddDepartureFlight([FromBody] FlightDto flightDto)
         {
             try
             {
 
                 var flight = new Flight { Name = flightDto.Name, IsDeparture = true, };
                 await _flightRepos.AddFlightAsync(flight);
-                var newLog = new ProcessLog { Flight = flight, EnterTime = DateTime.Now, Message = "A plain has entered to leg", ExitTime = null };
-                await _procLogger.AddProcLogAsync(newLog);
+                await _ter.StartFlightAsync(flight, true);
                 _logger.LogError("Successssss");
-                await _procLogger.UpdateOutLog(flight.Id);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+
+                this._logger.LogError(e, e.Message);
+                return StatusCode(500);
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        [Route("AddLandingFlight")]
+        public async Task<IActionResult> AddLandingFlight([FromBody] FlightDto flightDto)
+        {
+            try
+            {
+
+                var flight = new Flight { Name = flightDto.Name, IsDeparture = true, };
+                await _flightRepos.AddFlightAsync(flight);
+                await _ter.StartFlightAsync(flight, false);
+                _logger.LogError("Successssss");
                 return Ok();
 
             }
@@ -56,21 +78,6 @@ namespace FlightSimulator.Controllers
         [Route("AddLegs")]
         public async Task<IActionResult> AddLegs()
         {
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.One), NextPosibbleLegs = Core.Enums.LegNumber.Two, LegType = Core.Enums.LegType.Land });
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Two), NextPosibbleLegs = Core.Enums.LegNumber.Thr, LegType = Core.Enums.LegType.Land });
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Thr), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
-
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fou), NextPosibbleLegs = Core.Enums.LegNumber.Fiv | Core.Enums.LegNumber.Nin, LegType = Core.Enums.LegType.Process });
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Fiv), NextPosibbleLegs = Core.Enums.LegNumber.Six | Core.Enums.LegNumber.Sev, LegType = Core.Enums.LegType.Process });
-
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Six), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Sev), NextPosibbleLegs = Core.Enums.LegNumber.Eig, LegType = Core.Enums.LegType.Departure });
-
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Eig), NextPosibbleLegs = Core.Enums.LegNumber.Fou, LegType = Core.Enums.LegType.Land });
-            await _leg.AddLegAsync(new Leg { CurrentLeg = (Core.Enums.LegNumber.Nin), NextPosibbleLegs = Core.Enums.LegNumber.Air, LegType = Core.Enums.LegType.Process });
-
-
-
             return Ok();
 
         }

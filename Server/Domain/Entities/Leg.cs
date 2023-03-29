@@ -15,6 +15,6 @@ namespace Core.Entities
         [Required]
         public int PauseTime { get; set; }
         [NotMapped]
-        public virtual Flight? Flight { get; set; }
+        public bool isTaken { get; set; }
     }
 }
