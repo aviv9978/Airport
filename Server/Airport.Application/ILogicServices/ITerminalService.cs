@@ -9,7 +9,6 @@ namespace Airport.Application.ILogicServices
 {
     public interface ITerminalService
     {
-        Task StartDepartureAsync(Flight flight);
-        Task StartLandAsync(Flight flight);
+        Task StartFlightAsync(Flight flight, bool isDeparture);
     }
 }
