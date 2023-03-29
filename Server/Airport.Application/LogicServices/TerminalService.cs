@@ -12,11 +12,12 @@ namespace Airport.Application.LogicServices
     public class TerminalService : ITerminalService
     {
         private readonly ILegRepostiroy _legRepos;
+        private readonly IProcLogRepository _procLogRepos;
         private static ICollection<Leg> _legs;
-        private static int _legsCur = Enum.GetNames(typeof(Core.Enums.LegNumber)).Length;
-        public TerminalService(ILegRepostiroy legRepos)
+        public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog)
         {
             _legRepos = legRepos;
+            _procLogRepos = procLog;
         }
 
 
@@ -29,12 +30,13 @@ namespace Airport.Application.LogicServices
         public async Task StartLandAsync(Flight flight)
         {
             if (_legs == null)
-            _legs = await _legRepos.GetLegsAsync();
+                _legs = await _legRepos.GetLegsAsync();
 
             await LandMoveLeg(flight);
         }
         private async Task LandMoveLeg(Flight flight)
         {
+            int procLogId = await AddProcLogAsync(flight, flight.Leg, $"Entering Leg {flight.Leg}");
             if (flight.Leg.LegType == Core.Enums.LegType.Departure)
             {
                 Thread.Sleep(10000);
@@ -42,6 +44,7 @@ namespace Airport.Application.LogicServices
                 flight.Leg.Flight = null;
                 return;
             }
+            Thread.Sleep(flight.Leg.PauseTime * 1000);
             var nextPosLegs = flight.Leg.NextPosibbleLegs;
 
             var nextLegs = _legs.Where(leg => leg.CurrentLeg.HasFlag(nextPosLegs));
@@ -50,11 +53,30 @@ namespace Airport.Application.LogicServices
                 if (leg != null && leg.Flight != null)
                 {
                     flight.Leg = leg;
+                    await UpdateLogExit(procLogId);
                     await LandMoveLeg(flight);
                     break;
                 }
-                return;
+                // else rise event to wait
             }
+        }
+
+        private async Task<int> AddProcLogAsync(Flight flight, Leg leg, string message)
+        {
+            var procLog = new ProcessLog()
+            {
+                Leg = leg,
+                Message = message,
+                Flight = flight,
+                EnterTime = DateTime.Now
+            };
+            await _procLogRepos.AddProcLogAsync(procLog);
+            return procLog.Id;
+        }
+
+        private async Task UpdateLogExit(int procLogId)
+        {
+            await _procLogRepos.UpdateOutLog(procLogId);
         }
     }
 }

@@ -1,0 +1,74 @@
+[2023-03-29 16:17:18.036 +03:00  INF]  Executed DbCommand (190ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [MyAirport];
+[2023-03-29 16:17:18.310 +03:00  INF]  Executed DbCommand (117ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [MyAirport] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+[2023-03-29 16:17:18.334 +03:00  INF]  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-29 16:17:18.416 +03:00  INF]  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+[2023-03-29 16:17:18.419 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-29 16:17:18.441 +03:00  INF]  Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+[2023-03-29 16:17:18.448 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+[2023-03-29 16:17:18.468 +03:00  INF]  Applying migration '20230326084156_init'.
+[2023-03-29 16:17:18.527 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Legs] (
+    [Id] int NOT NULL IDENTITY,
+    [CurrentLeg] int NOT NULL,
+    [NextPosibbleLegs] int NOT NULL,
+    CONSTRAINT [PK_Legs] PRIMARY KEY ([Id])
+);
+[2023-03-29 16:17:18.530 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Pilots] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Pilots] PRIMARY KEY ([Id])
+);
+[2023-03-29 16:17:18.534 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Flights] (
+    [Id] int NOT NULL IDENTITY,
+    [Code] nvarchar(max) NULL,
+    [Name] nvarchar(max) NULL,
+    [IsDeparture] bit NOT NULL,
+    [PilotId] int NULL,
+    CONSTRAINT [PK_Flights] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Flights_Pilots_PilotId] FOREIGN KEY ([PilotId]) REFERENCES [Pilots] ([Id])
+);
+[2023-03-29 16:17:18.537 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [ProcessLogger] (
+    [Id] int NOT NULL IDENTITY,
+    [FlightId] int NULL,
+    [LegId] int NULL,
+    [EnterTime] datetime2 NULL,
+    [ExitTime] datetime2 NULL,
+    [Message] nvarchar(max) NULL,
+    CONSTRAINT [PK_ProcessLogger] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Flights_FlightId] FOREIGN KEY ([FlightId]) REFERENCES [Flights] ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Legs_LegId] FOREIGN KEY ([LegId]) REFERENCES [Legs] ([Id])
+);
+[2023-03-29 16:17:18.539 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Flights_PilotId] ON [Flights] ([PilotId]);
+[2023-03-29 16:17:18.541 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_FlightId] ON [ProcessLogger] ([FlightId]);
+[2023-03-29 16:17:18.542 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_LegId] ON [ProcessLogger] ([LegId]);
+[2023-03-29 16:17:18.544 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230326084156_init', N'7.0.4');
+[2023-03-29 16:17:18.554 +03:00  INF]  Applying migration '20230327094210_update1'.
+[2023-03-29 16:17:18.568 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Legs] ADD [LegType] int NOT NULL DEFAULT 0;
+[2023-03-29 16:17:18.570 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230327094210_update1', N'7.0.4');

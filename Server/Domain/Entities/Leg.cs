@@ -12,6 +12,8 @@ namespace Core.Entities
         public LegNumber NextPosibbleLegs { get; set; }
         [Required]
         public LegType LegType { get; set; }
+        [Required]
+        public int PauseTime { get; set; }
         [NotMapped]
         public virtual Flight? Flight { get; set; }
     }
