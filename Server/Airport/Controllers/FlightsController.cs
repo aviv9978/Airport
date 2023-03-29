@@ -11,17 +11,14 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        private readonly ILegRepostiroy _leg;
-        private readonly IProcLogRepository _procLogger;
+
         private readonly IFlightRepository _flightRepos;
         private readonly ILogger<FlightsController> _logger;
         private readonly ITerminalService _ter;
 
         public FlightsController(ITerminalService ter, ILogger<FlightsController> logger,
-            ILegRepostiroy ileg, IProcLogRepository procLogger, IFlightRepository flightRepos)
+              IFlightRepository flightRepos)
         {
-            _leg = ileg;
-            _procLogger = procLogger;
             _flightRepos = flightRepos;
             _logger = logger;
             _ter = ter;

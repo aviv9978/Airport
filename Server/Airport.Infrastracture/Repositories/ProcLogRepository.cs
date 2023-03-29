@@ -19,7 +19,7 @@ namespace Airport.Infrastracture.Repositories
         {
             try
             {
-                _dBContext.AddAsync(log);
+               await _dBContext.AddAsync(log);
                 await _dBContext.SaveChangesAsync();
                 _logger.LogInformation("Added log");
             }
@@ -30,7 +30,7 @@ namespace Airport.Infrastracture.Repositories
             }
         }
 
-        public async Task UpdateOutLog(int procLogId)
+        public async Task UpdateOutLogAsync(int procLogId)
         {
             try
             {
