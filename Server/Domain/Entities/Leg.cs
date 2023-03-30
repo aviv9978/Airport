@@ -16,5 +16,6 @@ namespace Core.Entities
         public int PauseTime { get; set; }
         [NotMapped]
         public bool isTaken { get; set; }
+
     }
 }

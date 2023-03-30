@@ -14,14 +14,14 @@ namespace FlightSimulator.Controllers
 
         private readonly IFlightRepository _flightRepos;
         private readonly ILogger<FlightsController> _logger;
-        private readonly ITerminalService _ter;
+        private readonly ITerminalService _terminalService;
 
-        public FlightsController(ITerminalService ter, ILogger<FlightsController> logger,
+        public FlightsController(ITerminalService terminal, ILogger<FlightsController> logger,
               IFlightRepository flightRepos)
         {
             _flightRepos = flightRepos;
             _logger = logger;
-            _ter = ter;
+            _terminalService = terminal;
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace FlightSimulator.Controllers
 
                 var flight = new Flight { Name = flightDto.Name, IsDeparture = true, };
                 await _flightRepos.AddFlightAsync(flight);
-                await _ter.StartFlightAsync(flight, true);
+                await _terminalService.StartFlightAsync(flight, true);
                 _logger.LogError("Successssss");
                 return Ok();
 
@@ -57,7 +57,7 @@ namespace FlightSimulator.Controllers
 
                 var flight = new Flight { Name = flightDto.Name, IsDeparture = true, };
                 await _flightRepos.AddFlightAsync(flight);
-                await _ter.StartFlightAsync(flight, false);
+                await _terminalService.StartFlightAsync(flight, false);
                 _logger.LogError("Successssss");
                 return Ok();
 

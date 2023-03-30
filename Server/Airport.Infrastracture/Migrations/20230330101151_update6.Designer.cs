@@ -4,6 +4,7 @@ using Airport.Infrastracture;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Infrastracture.Migrations
 {
     [DbContext(typeof(AirportDataContext))]
-    partial class AirportDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230330101151_update6")]
+    partial class update6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +176,7 @@ namespace Airport.Infrastracture.Migrations
                     b.Property<int?>("FlightId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LegId")
+                    b.Property<int?>("LegId")
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
@@ -182,6 +185,8 @@ namespace Airport.Infrastracture.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FlightId");
+
+                    b.HasIndex("LegId");
 
                     b.ToTable("ProcessLogger");
                 });
@@ -198,15 +203,16 @@ namespace Airport.Infrastracture.Migrations
             modelBuilder.Entity("Core.Entities.ProcessLog", b =>
                 {
                     b.HasOne("Core.Entities.Flight", "Flight")
-                        .WithMany("ProcessLog")
+                        .WithMany()
                         .HasForeignKey("FlightId");
 
-                    b.Navigation("Flight");
-                });
+                    b.HasOne("Core.Entities.Leg", "Leg")
+                        .WithMany()
+                        .HasForeignKey("LegId");
 
-            modelBuilder.Entity("Core.Entities.Flight", b =>
-                {
-                    b.Navigation("ProcessLog");
+                    b.Navigation("Flight");
+
+                    b.Navigation("Leg");
                 });
 #pragma warning restore 612, 618
         }

@@ -19,7 +19,7 @@ namespace Airport.Infrastracture.Repositories
         {
             try
             {
-               await _dBContext.AddAsync(log);
+                await _dBContext.AddAsync(log);
                 await _dBContext.SaveChangesAsync();
                 _logger.LogInformation("Added log");
             }

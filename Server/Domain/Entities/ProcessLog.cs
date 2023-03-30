@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
     public class ProcessLog : BaseEntity
     {
         public virtual Flight? Flight { get; set; }
-        public virtual Leg? Leg { get; set; }
+        public int LegId { get; set; }
         public DateTime? EnterTime { get; set; }
         public DateTime? ExitTime { get; set; }
         public string? Message { get; set; }
