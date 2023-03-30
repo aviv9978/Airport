@@ -14,11 +14,13 @@ namespace Airport.Application.LogicServices
     {
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
+        private readonly IFlightRepository _reps;
         private static ICollection<Leg> _legs;
-        public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog)
+        public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog, IFlightRepository rep)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
+            _reps = rep;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
@@ -49,7 +51,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            int procLogId = await AddProcLogAsync(flight, flight.Leg, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
+            int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
                 if (flight.Leg.LegType.HasFlag(Core.Enums.LegType.BeforeFly))
@@ -69,18 +71,24 @@ namespace Airport.Application.LogicServices
             var nextPosLegs = flight.Leg.NextPosibbleLegs;
 
             var nextLegs = _legs.Where(leg => nextPosLegs.HasFlag(leg.CurrentLeg));
-            foreach (var leg in nextLegs)
+            bool exit = false;
+            while (true)
             {
-                if (leg != null && leg.isTaken == false)
+                foreach (var leg in nextLegs)
                 {
-                    flight.Leg.isTaken = false;
-                    flight.Leg = leg;
-                    leg.isTaken = true;
-                    await UpdateLogExit(procLogId);
-                    await NextLegAsync(flight, isDeparture);
-                    break;
+                    if (leg != null && leg.isTaken == false)
+                    {
+                        flight.Leg.isTaken = false;
+                        flight.Leg = leg;
+                        leg.isTaken = true;
+                        await UpdateLogExit(procLogId);
+                        await NextLegAsync(flight, isDeparture);
+                        exit = true;
+                        break;
+                    }
+                    // else rise event to wait
                 }
-                // else rise event to wait
+                if (exit) break;
             }
         }
 
@@ -92,13 +100,13 @@ namespace Airport.Application.LogicServices
             flight.Leg.isTaken = false;
         }
 
-        private async Task<int> AddProcLogAsync(Flight flight, Leg leg, string message)
+        private async Task<int> AddProcLogAsync(Flight flight, string message)
         {
             var procLog = new ProcessLog()
             {
-                Leg = leg,
                 Message = message,
                 Flight = flight,
+                LegId = flight.Leg.Id,
                 EnterTime = DateTime.Now
             };
             await _procLogRepos.AddProcLogAsync(procLog);

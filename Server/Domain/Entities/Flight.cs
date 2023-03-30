@@ -11,6 +11,6 @@ namespace Core.Entities
         public virtual Pilot? Pilot { get; set; }
         [NotMapped]
         public virtual Leg? Leg { get; set; }
-        public virtual ICollection<ProcessLog> ProcessLogs { get; set; } = new List<ProcessLog>();
+        public virtual ICollection<ProcessLog> ProcessLog { get; set; }
     }
 }
