@@ -9613,3 +9613,1987 @@ WHERE [Id] = @p5;
 [2023-03-30 15:08:21.117 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddLandingFlight (Airport) in 24100.8034ms
 [2023-03-30 15:08:21.117 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddLandingFlight (Airport)'
 [2023-03-30 15:08:21.118 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddLandingFlight application/json 117 - 200 0 - 24149.4349ms
+[2023-03-30 20:01:23.814 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-30 20:01:24.265 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-30 20:01:24.268 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-30 20:01:24.268 +03:00  INF]  Hosting environment: Development
+[2023-03-30 20:01:24.268 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-30 20:01:26.315 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-30 20:01:26.435 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:26.482 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:26.541 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:27.160 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 850.9566ms
+[2023-03-30 20:01:27.172 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-30 20:01:27.187 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 15.6545ms
+[2023-03-30 20:01:27.246 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-30 20:01:27.361 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 115.4433ms
+[2023-03-30 20:01:27.475 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-30 20:01:27.631 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 155.7317ms
+[2023-03-30 20:01:29.653 +03:00  INF]  Executed DbCommand (96ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:29.712 +03:00  WRN]  Added flight
+[2023-03-30 20:01:29.948 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-30 20:01:29.974 +03:00  INF]  Got all legs from db!
+[2023-03-30 20:01:30.037 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:30.044 +03:00  INF]  Added log
+[2023-03-30 20:01:30.412 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:30.416 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:30.417 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:30.482 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:30.485 +03:00  WRN]  Added flight
+[2023-03-30 20:01:30.489 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:30.489 +03:00  INF]  Added log
+[2023-03-30 20:01:34.159 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:34.174 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:34.177 +03:00  INF]  updated log
+[2023-03-30 20:01:34.181 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:34.181 +03:00  INF]  Added log
+[2023-03-30 20:01:35.418 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:35.419 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:35.420 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:35.455 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:35.455 +03:00  WRN]  Added flight
+[2023-03-30 20:01:35.459 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:35.459 +03:00  INF]  Added log
+[2023-03-30 20:01:39.195 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:39.203 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:39.204 +03:00  INF]  updated log
+[2023-03-30 20:01:39.207 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:39.207 +03:00  INF]  Added log
+[2023-03-30 20:01:39.212 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:39.214 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:39.215 +03:00  INF]  updated log
+[2023-03-30 20:01:39.216 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:39.217 +03:00  INF]  Added log
+[2023-03-30 20:01:40.514 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:40.514 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:40.515 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:40.523 +03:00  INF]  Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:40.524 +03:00  WRN]  Added flight
+[2023-03-30 20:01:40.527 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:40.527 +03:00  INF]  Added log
+[2023-03-30 20:01:41.234 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:41.237 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:41.238 +03:00  INF]  updated log
+[2023-03-30 20:01:41.242 +03:00  ERR]  Successssss
+[2023-03-30 20:01:41.249 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:01:41.254 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14708.2528ms
+[2023-03-30 20:01:41.255 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:41.264 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14829.1221ms
+[2023-03-30 20:01:53.156 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:53.157 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:53.189 +03:00  INF]  Executed DbCommand (29ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:53.195 +03:00  INF]  Executed DbCommand (27ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:53.195 +03:00  INF]  updated log
+[2023-03-30 20:01:53.195 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:53.195 +03:00  INF]  updated log
+[2023-03-30 20:01:53.195 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:53.195 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:53.199 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:53.199 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:53.202 +03:00  INF]  Added log
+[2023-03-30 20:01:53.202 +03:00  INF]  Added log
+[2023-03-30 20:01:54.158 +03:00  INF]  Executed DbCommand (955ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:54.165 +03:00  WRN]  Added flight
+[2023-03-30 20:01:54.168 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:54.169 +03:00  INF]  Added log
+[2023-03-30 20:01:54.894 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:54.894 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:54.895 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:54.904 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:54.906 +03:00  WRN]  Added flight
+[2023-03-30 20:01:55.212 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:55.214 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:55.214 +03:00  INF]  updated log
+[2023-03-30 20:01:55.214 +03:00  ERR]  Successssss
+[2023-03-30 20:01:55.215 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:01:55.215 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 24798.3562ms
+[2023-03-30 20:01:55.215 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:55.216 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 24803.6639ms
+[2023-03-30 20:01:58.737 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:58.737 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:01:58.743 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:58.743 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:01:58.745 +03:00  INF]  updated log
+[2023-03-30 20:01:58.745 +03:00  INF]  updated log
+[2023-03-30 20:01:58.747 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:58.747 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:58.754 +03:00  INF]  Added log
+[2023-03-30 20:01:58.754 +03:00  INF]  Added log
+[2023-03-30 20:01:58.766 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:01:58.766 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:01:58.767 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:01:58.775 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:01:58.776 +03:00  WRN]  Added flight
+[2023-03-30 20:01:58.783 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:01:58.786 +03:00  INF]  Added log
+[2023-03-30 20:02:00.778 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:02:00.780 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:02:00.781 +03:00  INF]  updated log
+[2023-03-30 20:02:00.781 +03:00  ERR]  Successssss
+[2023-03-30 20:02:00.781 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:02:00.781 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 20266.4735ms
+[2023-03-30 20:02:00.781 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:02:00.781 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 20267.4422ms
+[2023-03-30 20:02:41.795 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-03-30 20:02:41.948 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-03-30 20:02:41.951 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-03-30 20:02:41.952 +03:00  INF]  Hosting environment: Development
+[2023-03-30 20:02:41.952 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-03-30 20:02:43.496 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-03-30 20:02:43.847 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 355.9069ms
+[2023-03-30 20:02:43.931 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-03-30 20:02:43.944 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 12.9693ms
+[2023-03-30 20:02:43.947 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-03-30 20:02:44.011 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 63.8525ms
+[2023-03-30 20:02:44.100 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-03-30 20:02:44.242 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 141.7001ms
+[2023-03-30 20:02:46.398 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:02:46.408 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:02:46.436 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:02:48.268 +03:00  INF]  Executed DbCommand (66ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:02:48.343 +03:00  WRN]  Added flight
+[2023-03-30 20:02:48.572 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-03-30 20:02:48.599 +03:00  INF]  Got all legs from db!
+[2023-03-30 20:02:48.675 +03:00  INF]  Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:48.683 +03:00  INF]  Added log
+[2023-03-30 20:02:50.944 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:02:50.947 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:02:50.947 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:02:51.021 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:02:51.022 +03:00  WRN]  Added flight
+[2023-03-30 20:02:51.025 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:51.025 +03:00  INF]  Added log
+[2023-03-30 20:02:52.798 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:02:52.813 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:02:52.815 +03:00  INF]  updated log
+[2023-03-30 20:02:52.819 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:52.819 +03:00  INF]  Added log
+[2023-03-30 20:02:55.949 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:02:55.950 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:02:55.951 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:02:55.972 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:02:55.973 +03:00  WRN]  Added flight
+[2023-03-30 20:02:55.975 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:55.977 +03:00  INF]  Added log
+[2023-03-30 20:02:57.830 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:02:57.841 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:02:57.841 +03:00  INF]  updated log
+[2023-03-30 20:02:57.844 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:57.847 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:02:57.847 +03:00  INF]  Added log
+[2023-03-30 20:02:57.849 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:02:57.850 +03:00  INF]  updated log
+[2023-03-30 20:02:57.852 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:02:57.852 +03:00  INF]  Added log
+[2023-03-30 20:02:59.856 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:02:59.860 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:02:59.861 +03:00  INF]  updated log
+[2023-03-30 20:02:59.865 +03:00  ERR]  Successssss
+[2023-03-30 20:02:59.874 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:02:59.879 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 13438.6864ms
+[2023-03-30 20:02:59.880 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:02:59.889 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 13491.2303ms
+[2023-03-30 20:03:00.934 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:00.934 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:00.934 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:00.939 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:00.941 +03:00  WRN]  Added flight
+[2023-03-30 20:03:00.943 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:00.944 +03:00  INF]  Added log
+[2023-03-30 20:03:02.870 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:02.870 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:02.874 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:02.874 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:02.875 +03:00  INF]  updated log
+[2023-03-30 20:03:02.875 +03:00  INF]  updated log
+[2023-03-30 20:03:02.877 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:02.877 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:02.878 +03:00  INF]  Added log
+[2023-03-30 20:03:02.878 +03:00  INF]  Added log
+[2023-03-30 20:03:04.892 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:04.895 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:04.895 +03:00  INF]  updated log
+[2023-03-30 20:03:04.896 +03:00  ERR]  Successssss
+[2023-03-30 20:03:04.896 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:04.897 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 13949.0317ms
+[2023-03-30 20:03:04.897 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:04.898 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 13953.8072ms
+[2023-03-30 20:03:05.936 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:05.937 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:05.937 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:05.942 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:05.943 +03:00  WRN]  Added flight
+[2023-03-30 20:03:05.945 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:05.946 +03:00  INF]  Added log
+[2023-03-30 20:03:07.884 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:07.885 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:07.894 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:07.894 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:07.895 +03:00  INF]  updated log
+[2023-03-30 20:03:07.895 +03:00  INF]  updated log
+[2023-03-30 20:03:07.897 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:07.898 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:07.900 +03:00  INF]  Added log
+[2023-03-30 20:03:07.900 +03:00  INF]  Added log
+[2023-03-30 20:03:09.903 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:09.906 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:09.907 +03:00  INF]  updated log
+[2023-03-30 20:03:09.907 +03:00  ERR]  Successssss
+[2023-03-30 20:03:09.907 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:09.907 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 13956.8007ms
+[2023-03-30 20:03:09.908 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:09.908 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 13958.5256ms
+[2023-03-30 20:03:10.933 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:10.933 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:10.933 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:10.938 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:10.939 +03:00  WRN]  Added flight
+[2023-03-30 20:03:10.942 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:10.943 +03:00  INF]  Added log
+[2023-03-30 20:03:12.916 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:12.916 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:12.919 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:12.919 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:12.919 +03:00  INF]  updated log
+[2023-03-30 20:03:12.920 +03:00  INF]  updated log
+[2023-03-30 20:03:12.921 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:12.922 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:12.923 +03:00  INF]  Added log
+[2023-03-30 20:03:12.923 +03:00  INF]  Added log
+[2023-03-30 20:03:14.940 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:14.943 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:14.944 +03:00  INF]  updated log
+[2023-03-30 20:03:14.944 +03:00  ERR]  Successssss
+[2023-03-30 20:03:14.944 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:14.944 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14010.0234ms
+[2023-03-30 20:03:14.944 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:14.945 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14010.8357ms
+[2023-03-30 20:03:15.935 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:15.936 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:15.936 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:15.941 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:15.942 +03:00  WRN]  Added flight
+[2023-03-30 20:03:15.944 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:15.945 +03:00  INF]  Added log
+[2023-03-30 20:03:17.937 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:17.937 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:17.942 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:17.942 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:17.942 +03:00  INF]  updated log
+[2023-03-30 20:03:17.942 +03:00  INF]  updated log
+[2023-03-30 20:03:17.944 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:17.944 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:17.945 +03:00  INF]  Added log
+[2023-03-30 20:03:17.946 +03:00  INF]  Added log
+[2023-03-30 20:03:19.957 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:19.960 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:19.960 +03:00  INF]  updated log
+[2023-03-30 20:03:19.961 +03:00  ERR]  Successssss
+[2023-03-30 20:03:19.961 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:19.961 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14024.1553ms
+[2023-03-30 20:03:19.961 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:19.961 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14025.0684ms
+[2023-03-30 20:03:20.932 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:20.932 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:20.932 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:20.938 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:20.939 +03:00  WRN]  Added flight
+[2023-03-30 20:03:20.941 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:20.942 +03:00  INF]  Added log
+[2023-03-30 20:03:22.960 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:22.960 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:22.964 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:22.964 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:22.964 +03:00  INF]  updated log
+[2023-03-30 20:03:22.964 +03:00  INF]  updated log
+[2023-03-30 20:03:22.966 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:22.966 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:22.968 +03:00  INF]  Added log
+[2023-03-30 20:03:22.968 +03:00  INF]  Added log
+[2023-03-30 20:03:24.986 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:24.989 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:24.989 +03:00  INF]  updated log
+[2023-03-30 20:03:24.989 +03:00  ERR]  Successssss
+[2023-03-30 20:03:24.990 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:24.990 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14056.3027ms
+[2023-03-30 20:03:24.990 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:24.991 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14057.2192ms
+[2023-03-30 20:03:25.933 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:25.933 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:25.934 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:25.937 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:25.938 +03:00  WRN]  Added flight
+[2023-03-30 20:03:25.941 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:25.943 +03:00  INF]  Added log
+[2023-03-30 20:03:27.982 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:27.982 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:27.986 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:27.986 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:27.987 +03:00  INF]  updated log
+[2023-03-30 20:03:27.987 +03:00  INF]  updated log
+[2023-03-30 20:03:27.988 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:27.989 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:27.991 +03:00  INF]  Added log
+[2023-03-30 20:03:27.992 +03:00  INF]  Added log
+[2023-03-30 20:03:30.008 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:30.011 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:30.011 +03:00  INF]  updated log
+[2023-03-30 20:03:30.011 +03:00  ERR]  Successssss
+[2023-03-30 20:03:30.012 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:30.012 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14075.6073ms
+[2023-03-30 20:03:30.012 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:30.012 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14076.6788ms
+[2023-03-30 20:03:30.937 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:30.937 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:30.938 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:30.942 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:30.943 +03:00  WRN]  Added flight
+[2023-03-30 20:03:30.946 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:30.946 +03:00  INF]  Added log
+[2023-03-30 20:03:33.013 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:33.013 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:33.016 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:33.016 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:33.016 +03:00  INF]  updated log
+[2023-03-30 20:03:33.016 +03:00  INF]  updated log
+[2023-03-30 20:03:33.018 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:33.018 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:33.021 +03:00  INF]  Added log
+[2023-03-30 20:03:33.020 +03:00  INF]  Added log
+[2023-03-30 20:03:35.025 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:35.028 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:35.029 +03:00  INF]  updated log
+[2023-03-30 20:03:35.029 +03:00  ERR]  Successssss
+[2023-03-30 20:03:35.029 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:35.029 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14096.5331ms
+[2023-03-30 20:03:35.029 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:35.030 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14097.4863ms
+[2023-03-30 20:03:35.940 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:35.940 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:35.940 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:35.945 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:35.946 +03:00  WRN]  Added flight
+[2023-03-30 20:03:35.948 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:35.949 +03:00  INF]  Added log
+[2023-03-30 20:03:38.034 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:38.034 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:38.037 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:38.037 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:38.038 +03:00  INF]  updated log
+[2023-03-30 20:03:38.038 +03:00  INF]  updated log
+[2023-03-30 20:03:38.039 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:38.040 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:38.041 +03:00  INF]  Added log
+[2023-03-30 20:03:38.042 +03:00  INF]  Added log
+[2023-03-30 20:03:40.048 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:40.052 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:40.052 +03:00  INF]  updated log
+[2023-03-30 20:03:40.052 +03:00  ERR]  Successssss
+[2023-03-30 20:03:40.052 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:40.052 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14118.627ms
+[2023-03-30 20:03:40.052 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:40.053 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14119.5950ms
+[2023-03-30 20:03:40.937 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:40.937 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:40.937 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:40.942 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:40.943 +03:00  WRN]  Added flight
+[2023-03-30 20:03:40.945 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:40.946 +03:00  INF]  Added log
+[2023-03-30 20:03:43.054 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:43.054 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:43.057 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:43.058 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:43.058 +03:00  INF]  updated log
+[2023-03-30 20:03:43.058 +03:00  INF]  updated log
+[2023-03-30 20:03:43.060 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:43.060 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:43.062 +03:00  INF]  Added log
+[2023-03-30 20:03:43.063 +03:00  INF]  Added log
+[2023-03-30 20:03:45.077 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:45.080 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:45.080 +03:00  INF]  updated log
+[2023-03-30 20:03:45.081 +03:00  ERR]  Successssss
+[2023-03-30 20:03:45.081 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:45.081 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14143.3303ms
+[2023-03-30 20:03:45.081 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:45.081 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14144.1828ms
+[2023-03-30 20:03:45.932 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:45.933 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:45.933 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:45.936 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:45.938 +03:00  WRN]  Added flight
+[2023-03-30 20:03:45.941 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:45.942 +03:00  INF]  Added log
+[2023-03-30 20:03:48.084 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:48.084 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:48.098 +03:00  INF]  Executed DbCommand (13ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:48.098 +03:00  INF]  Executed DbCommand (13ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:48.098 +03:00  INF]  updated log
+[2023-03-30 20:03:48.098 +03:00  INF]  updated log
+[2023-03-30 20:03:48.102 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:48.102 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:48.102 +03:00  INF]  Added log
+[2023-03-30 20:03:48.102 +03:00  INF]  Added log
+[2023-03-30 20:03:50.111 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:50.124 +03:00  INF]  Executed DbCommand (12ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:50.124 +03:00  INF]  updated log
+[2023-03-30 20:03:50.124 +03:00  ERR]  Successssss
+[2023-03-30 20:03:50.124 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:50.124 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14184.0261ms
+[2023-03-30 20:03:50.125 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:50.125 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14185.1402ms
+[2023-03-30 20:03:50.938 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:50.938 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:50.938 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:50.944 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:50.945 +03:00  WRN]  Added flight
+[2023-03-30 20:03:50.948 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:50.948 +03:00  INF]  Added log
+[2023-03-30 20:03:53.122 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:53.122 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:53.127 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:53.127 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:53.127 +03:00  INF]  updated log
+[2023-03-30 20:03:53.127 +03:00  INF]  updated log
+[2023-03-30 20:03:53.131 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:53.131 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:53.132 +03:00  INF]  Added log
+[2023-03-30 20:03:53.132 +03:00  INF]  Added log
+[2023-03-30 20:03:55.148 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:55.159 +03:00  INF]  Executed DbCommand (11ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:55.159 +03:00  INF]  updated log
+[2023-03-30 20:03:55.160 +03:00  ERR]  Successssss
+[2023-03-30 20:03:55.160 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:03:55.160 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14223.107ms
+[2023-03-30 20:03:55.160 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:55.161 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14223.8947ms
+[2023-03-30 20:03:55.942 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:03:55.942 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:03:55.942 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:03:55.948 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:03:55.949 +03:00  WRN]  Added flight
+[2023-03-30 20:03:55.951 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:55.952 +03:00  INF]  Added log
+[2023-03-30 20:03:58.152 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:58.153 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:03:58.163 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:58.163 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:03:58.163 +03:00  INF]  updated log
+[2023-03-30 20:03:58.163 +03:00  INF]  updated log
+[2023-03-30 20:03:58.165 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:58.165 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:03:58.166 +03:00  INF]  Added log
+[2023-03-30 20:03:58.167 +03:00  INF]  Added log
+[2023-03-30 20:04:00.180 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:00.190 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:00.190 +03:00  INF]  updated log
+[2023-03-30 20:04:00.191 +03:00  ERR]  Successssss
+[2023-03-30 20:04:00.191 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:00.191 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14257.9545ms
+[2023-03-30 20:04:00.191 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:00.191 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14258.6763ms
+[2023-03-30 20:04:00.938 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:00.938 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:00.938 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:00.951 +03:00  INF]  Executed DbCommand (11ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:00.952 +03:00  WRN]  Added flight
+[2023-03-30 20:04:00.954 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:00.954 +03:00  INF]  Added log
+[2023-03-30 20:04:03.184 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:03.185 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:03.194 +03:00  INF]  Executed DbCommand (9ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:03.194 +03:00  INF]  Executed DbCommand (9ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:03.194 +03:00  INF]  updated log
+[2023-03-30 20:04:03.194 +03:00  INF]  updated log
+[2023-03-30 20:04:03.196 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:03.196 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:03.198 +03:00  INF]  Added log
+[2023-03-30 20:04:03.198 +03:00  INF]  Added log
+[2023-03-30 20:04:05.205 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:05.215 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:05.216 +03:00  INF]  updated log
+[2023-03-30 20:04:05.216 +03:00  ERR]  Successssss
+[2023-03-30 20:04:05.216 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:05.216 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14277.931ms
+[2023-03-30 20:04:05.216 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:05.217 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14278.9634ms
+[2023-03-30 20:04:05.937 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:05.937 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:05.937 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:05.949 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:05.949 +03:00  WRN]  Added flight
+[2023-03-30 20:04:05.951 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:05.952 +03:00  INF]  Added log
+[2023-03-30 20:04:08.218 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:08.218 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:08.229 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:08.229 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:08.229 +03:00  INF]  updated log
+[2023-03-30 20:04:08.229 +03:00  INF]  updated log
+[2023-03-30 20:04:08.231 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:08.231 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:08.232 +03:00  INF]  Added log
+[2023-03-30 20:04:08.233 +03:00  INF]  Added log
+[2023-03-30 20:04:10.247 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:10.249 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:10.249 +03:00  INF]  updated log
+[2023-03-30 20:04:10.250 +03:00  ERR]  Successssss
+[2023-03-30 20:04:10.250 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:10.250 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14307.5009ms
+[2023-03-30 20:04:10.250 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:10.250 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14308.3046ms
+[2023-03-30 20:04:10.947 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:10.947 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:10.947 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:10.959 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:10.959 +03:00  WRN]  Added flight
+[2023-03-30 20:04:10.961 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:10.961 +03:00  INF]  Added log
+[2023-03-30 20:04:13.256 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:13.256 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:13.258 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:13.260 +03:00  INF]  updated log
+[2023-03-30 20:04:13.260 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:13.261 +03:00  INF]  updated log
+[2023-03-30 20:04:13.265 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:13.269 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:13.270 +03:00  INF]  Added log
+[2023-03-30 20:04:13.271 +03:00  INF]  Added log
+[2023-03-30 20:04:15.286 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:15.296 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:15.296 +03:00  INF]  updated log
+[2023-03-30 20:04:15.296 +03:00  ERR]  Successssss
+[2023-03-30 20:04:15.297 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:15.297 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14358.7672ms
+[2023-03-30 20:04:15.297 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:15.297 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14359.6400ms
+[2023-03-30 20:04:15.939 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:15.939 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:15.939 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:15.951 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:15.951 +03:00  WRN]  Added flight
+[2023-03-30 20:04:15.953 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:15.954 +03:00  INF]  Added log
+[2023-03-30 20:04:18.290 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:18.291 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:18.301 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:18.301 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:18.301 +03:00  INF]  updated log
+[2023-03-30 20:04:18.301 +03:00  INF]  updated log
+[2023-03-30 20:04:18.303 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:18.303 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:18.305 +03:00  INF]  Added log
+[2023-03-30 20:04:18.305 +03:00  INF]  Added log
+[2023-03-30 20:04:20.314 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:20.325 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:20.326 +03:00  INF]  updated log
+[2023-03-30 20:04:20.326 +03:00  ERR]  Successssss
+[2023-03-30 20:04:20.326 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:20.326 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14388.6039ms
+[2023-03-30 20:04:20.326 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:20.326 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14389.5311ms
+[2023-03-30 20:04:20.934 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:20.935 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:20.935 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:20.947 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:20.947 +03:00  WRN]  Added flight
+[2023-03-30 20:04:20.949 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:20.949 +03:00  INF]  Added log
+[2023-03-30 20:04:23.320 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:23.320 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:23.331 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:23.331 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:23.331 +03:00  INF]  updated log
+[2023-03-30 20:04:23.332 +03:00  INF]  updated log
+[2023-03-30 20:04:23.333 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:23.333 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:23.335 +03:00  INF]  Added log
+[2023-03-30 20:04:23.335 +03:00  INF]  Added log
+[2023-03-30 20:04:25.344 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:25.346 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:25.346 +03:00  INF]  updated log
+[2023-03-30 20:04:25.347 +03:00  ERR]  Successssss
+[2023-03-30 20:04:25.347 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:25.347 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14399.7093ms
+[2023-03-30 20:04:25.347 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:25.347 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14400.4658ms
+[2023-03-30 20:04:25.936 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:25.936 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:25.936 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:25.949 +03:00  INF]  Executed DbCommand (12ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:25.950 +03:00  WRN]  Added flight
+[2023-03-30 20:04:25.952 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:25.952 +03:00  INF]  Added log
+[2023-03-30 20:04:28.350 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:28.350 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:28.362 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:28.362 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:28.362 +03:00  INF]  updated log
+[2023-03-30 20:04:28.362 +03:00  INF]  updated log
+[2023-03-30 20:04:28.364 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:28.364 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:28.365 +03:00  INF]  Added log
+[2023-03-30 20:04:28.365 +03:00  INF]  Added log
+[2023-03-30 20:04:30.369 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:30.380 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:30.380 +03:00  INF]  updated log
+[2023-03-30 20:04:30.380 +03:00  ERR]  Successssss
+[2023-03-30 20:04:30.380 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:30.380 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14441.2644ms
+[2023-03-30 20:04:30.381 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:30.381 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 200 0 - 14442.0276ms
+[2023-03-30 20:04:30.943 +03:00  INF]  Request starting HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 -
+[2023-03-30 20:04:30.943 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:30.943 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(FlightSimulator.Models.FlightDto) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-03-30 20:04:30.956 +03:00  INF]  Executed DbCommand (11ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [Name], [PilotId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+[2023-03-30 20:04:30.956 +03:00  WRN]  Added flight
+[2023-03-30 20:04:30.958 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:30.959 +03:00  INF]  Added log
+[2023-03-30 20:04:33.383 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:33.383 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:33.386 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:33.386 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:33.387 +03:00  INF]  updated log
+[2023-03-30 20:04:33.387 +03:00  INF]  updated log
+[2023-03-30 20:04:33.388 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:33.389 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:33.390 +03:00  INF]  Added log
+[2023-03-30 20:04:33.391 +03:00  INF]  Added log
+[2023-03-30 20:04:35.395 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:35.407 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:35.408 +03:00  INF]  updated log
+[2023-03-30 20:04:35.408 +03:00  ERR]  Successssss
+[2023-03-30 20:04:35.408 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:35.408 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14473.6503ms
+[2023-03-30 20:04:35.408 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:35.409 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 0 - - 14474.2459ms
+[2023-03-30 20:04:38.399 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:38.400 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:38.410 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:38.410 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:38.410 +03:00  INF]  updated log
+[2023-03-30 20:04:38.410 +03:00  INF]  updated log
+[2023-03-30 20:04:38.412 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:38.412 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:38.415 +03:00  INF]  Added log
+[2023-03-30 20:04:38.415 +03:00  INF]  Added log
+[2023-03-30 20:04:40.434 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:40.444 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:40.444 +03:00  INF]  updated log
+[2023-03-30 20:04:40.445 +03:00  ERR]  Successssss
+[2023-03-30 20:04:40.445 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:40.445 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14508.4097ms
+[2023-03-30 20:04:40.445 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:40.445 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 0 - - 14508.9807ms
+[2023-03-30 20:04:43.424 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:43.434 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:43.434 +03:00  INF]  updated log
+[2023-03-30 20:04:43.436 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegId], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-03-30 20:04:43.437 +03:00  INF]  Added log
+[2023-03-30 20:04:45.455 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegId], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-03-30 20:04:45.465 +03:00  INF]  Executed DbCommand (10ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegId] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-03-30 20:04:45.465 +03:00  INF]  updated log
+[2023-03-30 20:04:45.465 +03:00  ERR]  Successssss
+[2023-03-30 20:04:45.465 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-03-30 20:04:45.465 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 14522.2312ms
+[2023-03-30 20:04:45.465 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-03-30 20:04:45.465 +03:00  INF]  Request finished HTTP/1.1 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json;+charset=utf-8 - - 0 - - 14522.7865ms
+[2023-03-30 20:38:42.041 +03:00  INF]  Executed DbCommand (227ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [MyAirport];
+[2023-03-30 20:38:42.300 +03:00  INF]  Executed DbCommand (113ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [MyAirport] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+[2023-03-30 20:38:42.323 +03:00  INF]  Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-30 20:38:42.404 +03:00  INF]  Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+[2023-03-30 20:38:42.406 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-03-30 20:38:42.423 +03:00  INF]  Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+[2023-03-30 20:38:42.428 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+[2023-03-30 20:38:42.444 +03:00  INF]  Applying migration '20230326084156_init'.
+[2023-03-30 20:38:42.492 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Legs] (
+    [Id] int NOT NULL IDENTITY,
+    [CurrentLeg] int NOT NULL,
+    [NextPosibbleLegs] int NOT NULL,
+    CONSTRAINT [PK_Legs] PRIMARY KEY ([Id])
+);
+[2023-03-30 20:38:42.495 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Pilots] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Pilots] PRIMARY KEY ([Id])
+);
+[2023-03-30 20:38:42.498 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Flights] (
+    [Id] int NOT NULL IDENTITY,
+    [Code] nvarchar(max) NULL,
+    [Name] nvarchar(max) NULL,
+    [IsDeparture] bit NOT NULL,
+    [PilotId] int NULL,
+    CONSTRAINT [PK_Flights] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Flights_Pilots_PilotId] FOREIGN KEY ([PilotId]) REFERENCES [Pilots] ([Id])
+);
+[2023-03-30 20:38:42.501 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [ProcessLogger] (
+    [Id] int NOT NULL IDENTITY,
+    [FlightId] int NULL,
+    [LegId] int NULL,
+    [EnterTime] datetime2 NULL,
+    [ExitTime] datetime2 NULL,
+    [Message] nvarchar(max) NULL,
+    CONSTRAINT [PK_ProcessLogger] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Flights_FlightId] FOREIGN KEY ([FlightId]) REFERENCES [Flights] ([Id]),
+    CONSTRAINT [FK_ProcessLogger_Legs_LegId] FOREIGN KEY ([LegId]) REFERENCES [Legs] ([Id])
+);
+[2023-03-30 20:38:42.502 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Flights_PilotId] ON [Flights] ([PilotId]);
+[2023-03-30 20:38:42.503 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_FlightId] ON [ProcessLogger] ([FlightId]);
+[2023-03-30 20:38:42.505 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProcessLogger_LegId] ON [ProcessLogger] ([LegId]);
+[2023-03-30 20:38:42.507 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230326084156_init', N'7.0.4');
+[2023-03-30 20:38:42.513 +03:00  INF]  Applying migration '20230327094210_update1'.
+[2023-03-30 20:38:42.525 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Legs] ADD [LegType] int NOT NULL DEFAULT 0;
+[2023-03-30 20:38:42.526 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230327094210_update1', N'7.0.4');
+[2023-03-30 20:38:42.526 +03:00  INF]  Applying migration '20230329170519_AddingPauseTime'.
+[2023-03-30 20:38:42.557 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Legs] ADD [PauseTime] int NOT NULL DEFAULT 0;
+[2023-03-30 20:38:42.590 +03:00  INF]  Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CurrentLeg', N'LegType', N'NextPosibbleLegs', N'PauseTime') AND [object_id] = OBJECT_ID(N'[Legs]'))
+    SET IDENTITY_INSERT [Legs] ON;
+INSERT INTO [Legs] ([Id], [CurrentLeg], [LegType], [NextPosibbleLegs], [PauseTime])
+VALUES (1, 1, 2, 2, 3),
+(2, 2, 4, 4, 4),
+(3, 4, 4, 8, 5),
+(4, 8, 4, 544, 4),
+(5, 32, 4, 64, 3),
+(6, 64, 1, 128, 4),
+(7, 64, 1, 128, 4),
+(8, 128, 4, 8, 5);
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CurrentLeg', N'LegType', N'NextPosibbleLegs', N'PauseTime') AND [object_id] = OBJECT_ID(N'[Legs]'))
+    SET IDENTITY_INSERT [Legs] OFF;
+[2023-03-30 20:38:42.591 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230329170519_AddingPauseTime', N'7.0.4');
+[2023-03-30 20:38:42.592 +03:00  INF]  Applying migration '20230329221853_dot'.
+[2023-03-30 20:38:42.610 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [LegType] = 12, [NextPosibbleLegs] = 272, [PauseTime] = 2
+WHERE [Id] = 4;
+SELECT @@ROWCOUNT;
+[2023-03-30 20:38:42.611 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 16, [NextPosibbleLegs] = 96
+WHERE [Id] = 5;
+SELECT @@ROWCOUNT;
+[2023-03-30 20:38:42.613 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 32
+WHERE [Id] = 6;
+SELECT @@ROWCOUNT;
+[2023-03-30 20:38:42.613 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230329221853_dot', N'7.0.4');
+[2023-03-30 20:38:42.614 +03:00  INF]  Applying migration '20230330100608_AddingProcLogsToLeg'.
+[2023-03-30 20:38:42.622 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230330100608_AddingProcLogsToLeg', N'7.0.4');
+[2023-03-30 20:38:42.622 +03:00  INF]  Applying migration '20230330101151_update6'.
+[2023-03-30 20:38:42.629 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230330101151_update6', N'7.0.4');
+[2023-03-30 20:38:42.631 +03:00  INF]  Applying migration '20230330113644_ChangingProcLogLeg'.
+[2023-03-30 20:38:42.642 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [ProcessLogger] DROP CONSTRAINT [FK_ProcessLogger_Legs_LegId];
+[2023-03-30 20:38:42.644 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP INDEX [IX_ProcessLogger_LegId] ON [ProcessLogger];
+[2023-03-30 20:38:42.679 +03:00  INF]  Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[ProcessLogger]') AND [c].[name] = N'LegId');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [ProcessLogger] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [ProcessLogger] DROP COLUMN [LegId];
+[2023-03-30 20:38:42.680 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [ProcessLogger] ADD [Leg] int NOT NULL DEFAULT 0;
+[2023-03-30 20:38:42.681 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230330113644_ChangingProcLogLeg', N'7.0.4');
+[2023-03-30 20:38:42.682 +03:00  INF]  Applying migration '20230330114802_ProcLogLegID'.
+[2023-03-30 20:38:42.866 +03:00  INF]  Executed DbCommand (177ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+EXEC sp_rename N'[ProcessLogger].[Leg]', N'LegId', N'COLUMN';
+[2023-03-30 20:38:42.867 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230330114802_ProcLogLegID', N'7.0.4');
+[2023-03-30 20:38:42.868 +03:00  INF]  Applying migration '20230330173832_updateName'.
+[2023-03-30 20:38:42.875 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230330173832_updateName', N'7.0.4');

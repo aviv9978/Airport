@@ -1,6 +1,9 @@
 ﻿using Airport.Application.ILogicServices;
 using Core.Entities;
-using Core.Interfaces;
+using Core.Hubs;
+using Core.Interfaces.Hub;
+using Core.Interfaces.Repositories;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +15,18 @@ namespace Airport.Application.LogicServices
 {
     public class TerminalService : ITerminalService
     {
+        private readonly IFlightHub _flightHub;
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _reps;
         private static ICollection<Leg> _legs;
-        public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog, IFlightRepository rep)
+        public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
+            IFlightRepository rep, IFlightHub flightHub)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
             _reps = rep;
+            _flightHub = flightHub;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
@@ -36,12 +42,11 @@ namespace Airport.Application.LogicServices
             {
                 foreach (var leg in flightFirstLet)
                 {
-                    if (leg.isTaken == false)
+                    if (leg.IsOccupied == false)
                     {
                         flight.Leg = leg;
-                        leg.isTaken = true;
-                        await NextLegAsync(flight, isDeparture);
-                        //leg.isTaken = false;
+                        leg.IsOccupied = true;
+                        await NextLegAsync(flight, isDeparture);                       
                         return;
                     }
                 }
@@ -51,6 +56,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
+            _flightHub.SendEnteringUpdate(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
@@ -76,11 +82,11 @@ namespace Airport.Application.LogicServices
             {
                 foreach (var leg in nextLegs)
                 {
-                    if (leg != null && leg.isTaken == false)
+                    if (leg != null && leg.IsOccupied == false)
                     {
-                        flight.Leg.isTaken = false;
+                        flight.Leg.IsOccupied = false;
                         flight.Leg = leg;
-                        leg.isTaken = true;
+                        leg.IsOccupied = true;
                         await UpdateLogExit(procLogId);
                         await NextLegAsync(flight, isDeparture);
                         exit = true;
@@ -97,7 +103,7 @@ namespace Airport.Application.LogicServices
             Thread.Sleep(flight.Leg.PauseTime * 1000);
             await UpdateLogExit(procLogId);
             Console.WriteLine("Flight finished!");
-            flight.Leg.isTaken = false;
+            flight.Leg.IsOccupied = false;
         }
 
         private async Task<int> AddProcLogAsync(Flight flight, string message)

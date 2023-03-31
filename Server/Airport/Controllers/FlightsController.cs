@@ -1,6 +1,6 @@
 ﻿using Airport.Application.ILogicServices;
 using Core.Entities;
-using Core.Interfaces;
+using Core.Interfaces.Repositories;
 using FlightSimulator.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
