@@ -1,7 +1,6 @@
-﻿
-using Core.Entities;
+﻿using Core.Entities;
 
-namespace Core.Interfaces
+namespace Core.Interfaces.Repositories
 {
     public interface IFlightRepository
     {
