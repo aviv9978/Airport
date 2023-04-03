@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Terminal;
 using Core.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 

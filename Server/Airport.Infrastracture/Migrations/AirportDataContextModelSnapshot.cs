@@ -22,7 +22,7 @@ namespace Airport.Infrastracture.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Entities.Flight", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,26 +30,126 @@ namespace Airport.Infrastracture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeparture")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Company");
+                });
+
+            modelBuilder.Entity("Core.Entities.ForFlight.Pilot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pilots");
+                });
+
+            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PassangerCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Plain");
+                });
+
+            modelBuilder.Entity("Core.Entities.ProcessLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("EnterTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExitTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LegId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("ProcessLogger");
+                });
+
+            modelBuilder.Entity("Core.Entities.Terminal.Flight", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid?>("Code")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeparture")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("PilotId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlainId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PilotId");
 
+                    b.HasIndex("PlainId");
+
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("Core.Entities.Leg", b =>
+            modelBuilder.Entity("Core.Entities.Terminal.Leg", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -140,71 +240,40 @@ namespace Airport.Infrastracture.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Core.Entities.Pilot", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pilots");
-                });
-
-            modelBuilder.Entity("Core.Entities.ProcessLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("EnterTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ExitTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FlightId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LegId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FlightId");
-
-                    b.ToTable("ProcessLogger");
-                });
-
-            modelBuilder.Entity("Core.Entities.Flight", b =>
-                {
-                    b.HasOne("Core.Entities.Pilot", "Pilot")
+                    b.HasOne("Core.Entities.ForFlight.Company", "Company")
                         .WithMany()
-                        .HasForeignKey("PilotId");
+                        .HasForeignKey("CompanyId");
 
-                    b.Navigation("Pilot");
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Core.Entities.ProcessLog", b =>
                 {
-                    b.HasOne("Core.Entities.Flight", "Flight")
+                    b.HasOne("Core.Entities.Terminal.Flight", "Flight")
                         .WithMany("ProcessLog")
                         .HasForeignKey("FlightId");
 
                     b.Navigation("Flight");
                 });
 
-            modelBuilder.Entity("Core.Entities.Flight", b =>
+            modelBuilder.Entity("Core.Entities.Terminal.Flight", b =>
+                {
+                    b.HasOne("Core.Entities.ForFlight.Pilot", "Pilot")
+                        .WithMany()
+                        .HasForeignKey("PilotId");
+
+                    b.HasOne("Core.Entities.ForFlight.Plain", "Plain")
+                        .WithMany()
+                        .HasForeignKey("PlainId");
+
+                    b.Navigation("Pilot");
+
+                    b.Navigation("Plain");
+                });
+
+            modelBuilder.Entity("Core.Entities.Terminal.Flight", b =>
                 {
                     b.Navigation("ProcessLog");
                 });

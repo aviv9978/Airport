@@ -1,7 +1,7 @@
 ﻿using Airport.Application.ILogicServices;
 using Core.Entities;
+using Core.Entities.Terminal;
 using Core.Hubs;
-using Core.Interfaces.Hub;
 using Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -56,7 +56,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            _flightHub.SendEnteringUpdate(flight, flight.Leg.Id);
+            _flightHub?.SendEnteringUpdate(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YCp08Fy7q8tpUGuyYUZ+6l14D8mBjFRK56q3SKi4uANT8GESMp5+Edm0XH7R0LryWwKoTTnYGgZerD1+WHLhKA==",
+  "dgSpecHash": "/WbSDudxlav9NzLbrx9t860XIv6VpyZ9d44JCGDXBX2SBSlsySiW5YaMdZnv6TU+v/egxVjY3JNyHmwFLZosKA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aviv\\OneDrive\\שולחן העבודה\\GitHubProjects\\AirportProject\\Server\\Airport.Infrastracture\\Airport.Infrastracture.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Aviv\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
@@ -13,7 +14,7 @@
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.aspnetcore.signalr.core\\1.1.0\\microsoft.aspnetcore.signalr.core.1.1.0.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.aspnetcore.signalr.protocols.json\\1.1.0\\microsoft.aspnetcore.signalr.protocols.json.1.1.0.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
     "C:\\Users\\Aviv\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.4\\microsoft.entityframeworkcore.7.0.4.nupkg.sha512",

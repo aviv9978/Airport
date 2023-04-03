@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using Core.Interfaces.Hub;
+﻿using Core.Entities.Terminal;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;

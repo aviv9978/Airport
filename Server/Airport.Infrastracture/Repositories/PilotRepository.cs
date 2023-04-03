@@ -1,5 +1,6 @@
-﻿using Core.Entities;
+﻿using Core.Entities.ForFlight;
 using Core.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Airport.Infrastracture.Repositories
@@ -27,6 +28,12 @@ namespace Airport.Infrastracture.Repositories
                 _logger.LogWarning("Exepction");
                 throw;
             }
+        }
+
+        public async Task<ICollection<Pilot>> GetAllPilotsAsync()
+        {
+            var pilots = await _dBContext.Pilots.ToListAsync();
+            return pilots;
         }
     }
 }
