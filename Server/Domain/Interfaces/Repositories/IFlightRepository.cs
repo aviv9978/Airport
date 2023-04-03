@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Terminal;
 
 namespace Core.Interfaces.Repositories
 {

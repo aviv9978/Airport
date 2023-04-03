@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Core.Entities.ForFlight;
+using Core.Entities.Terminal;
 using Microsoft.EntityFrameworkCore;
 
 namespace Airport.Infrastracture

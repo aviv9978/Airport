@@ -4,7 +4,6 @@ using FlightSimulator.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Core.Hubs;
 using Serilog;
-using Core.Interfaces.Hub;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -29,7 +28,7 @@ builder.Services.AddCors(options =>
                .WithOrigins(configureService.GetClient(), configureService.GetServer());
     });
 });
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
