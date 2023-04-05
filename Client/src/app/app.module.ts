@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PublicModule } from './public/public.module';
 import { PrivateModule } from './private/private.module';
 import { SharedModule } from './shared/shared.module';
+import { SignalRService } from './shared/services/signalR.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +19,18 @@ import { SharedModule } from './shared/shared.module';
     PublicModule,
     PrivateModule,
     SharedModule,
-    RouterModule
+    RouterModule,
   ],
-  providers: [],
+  // providers: [
+  //   SignalRService,
+  //   {
+  //     provide: APP_INITIALIZER,
+  //     useFactory: (signalrService: SignalRService) => () =>
+  //       signalrService.initiateSignalrConnection(),
+  //     deps: [SignalRService],
+  //     multi: true,
+  //   },
+  // ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -4,6 +4,7 @@ using Airport.Infrastracture;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Infrastracture.Migrations
 {
     [DbContext(typeof(AirportDataContext))]
-    partial class AirportDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230405162547_UpdatePlain")]
+    partial class UpdatePlain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,7 @@ namespace Airport.Infrastracture.Migrations
                     b.ToTable("Pilots");
                 });
 
-            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Plane", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +90,7 @@ namespace Airport.Infrastracture.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Plain");
+                    b.ToTable("Plane");
                 });
 
             modelBuilder.Entity("Core.Entities.ProcessLog", b =>
@@ -240,7 +243,7 @@ namespace Airport.Infrastracture.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Plane", b =>
                 {
                     b.HasOne("Core.Entities.ForFlight.Company", "Company")
                         .WithMany()
@@ -264,7 +267,7 @@ namespace Airport.Infrastracture.Migrations
                         .WithMany()
                         .HasForeignKey("PilotId");
 
-                    b.HasOne("Core.Entities.ForFlight.Plain", "Plain")
+                    b.HasOne("Core.Entities.ForFlight.Plane", "Plain")
                         .WithMany()
                         .HasForeignKey("PlainId");
 

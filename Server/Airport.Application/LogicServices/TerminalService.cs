@@ -15,18 +15,18 @@ namespace Airport.Application.LogicServices
 {
     public class TerminalService : ITerminalService
     {
-        private readonly IFlightHub _flightHub;
+        private readonly ITerminalHub _terminalHub;
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _flightRepos;
         private static ICollection<Leg> _legs;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
-            IFlightRepository rep, IFlightHub flightHub)
+            IFlightRepository rep, ITerminalHub flightHub)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
             _flightRepos = rep;
-            _flightHub = flightHub;
+            _terminalHub = flightHub;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
@@ -57,7 +57,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            _flightHub?.SendEnteringUpdate(flight, flight.Leg.Id);
+            _terminalHub?.SendEnteringUpdate(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
@@ -113,10 +113,11 @@ namespace Airport.Application.LogicServices
             {
                 Message = message,
                 Flight = flight,
-                LegId = flight.Leg.Id,
+                LegNum = ((int)flight.Leg.CurrentLeg),
                 EnterTime = DateTime.Now
             };
             await _procLogRepos.AddProcLogAsync(procLog);
+            _terminalHub.SendLog(procLog);
             return procLog.Id;
         }
 

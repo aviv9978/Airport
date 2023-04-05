@@ -56,6 +56,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHub<FlightHub>("/flightHub");
+app.MapHub<TerminalHub>("/terminalHub");
 
 app.Run();
