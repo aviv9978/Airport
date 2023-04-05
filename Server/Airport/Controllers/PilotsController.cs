@@ -29,18 +29,12 @@ namespace FlightSimulator.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
                     var _pilot = _mapper.Map<Pilot>(pilotInDTO);
                     await _pilotRepos.AddPilotAsync(_pilot);
                     _logger.LogInformation("Successssss adding pilot");
                     var newPilot = _mapper.Map<PilotOutDTO>(_pilot);
 
-
-                    return Ok(newPilot);
-                }
-                else return new JsonResult("Something went wrong") { StatusCode = 500 };
-
+                    return Ok(newPilot);               
 
             }
             catch (Exception e)
@@ -56,8 +50,8 @@ namespace FlightSimulator.Controllers
         public async Task<IActionResult> GetAllPilots()
         {
             var allPilots = await _pilotRepos.GetAllPilotsAsync();
-
             var _pilots = _mapper.Map<IEnumerable<PilotOutDTO>>(allPilots);
+
             return Ok(_pilots);
         }
     }

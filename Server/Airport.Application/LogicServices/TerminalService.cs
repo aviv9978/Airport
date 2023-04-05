@@ -18,19 +18,20 @@ namespace Airport.Application.LogicServices
         private readonly IFlightHub _flightHub;
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
-        private readonly IFlightRepository _reps;
+        private readonly IFlightRepository _flightRepos;
         private static ICollection<Leg> _legs;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
             IFlightRepository rep, IFlightHub flightHub)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
-            _reps = rep;
+            _flightRepos = rep;
             _flightHub = flightHub;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
         {
+            await _flightRepos.AddFlightAsync(flight);
             IEnumerable<Leg> flightFirstLet;
             await CommonStartAsync();
 
