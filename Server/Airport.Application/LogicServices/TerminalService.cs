@@ -1,4 +1,6 @@
 ﻿using Airport.Application.ILogicServices;
+using AutoMapper;
+using Core.DTOs.Outgoing;
 using Core.Entities;
 using Core.Entities.Terminal;
 using Core.Hubs;
@@ -19,14 +21,18 @@ namespace Airport.Application.LogicServices
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _flightRepos;
-        private static ICollection<Leg> _legs;
+        private static ICollection<Leg> _legs; 
+        private readonly IMapper _mapper;
+
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
-            IFlightRepository rep, ITerminalHub flightHub)
+            IFlightRepository rep, ITerminalHub flightHub,
+            IMapper mapper)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
             _flightRepos = rep;
             _terminalHub = flightHub;
+            _mapper = mapper;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
@@ -57,7 +63,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            _terminalHub?.SendEnteringUpdate(flight, flight.Leg.Id);
+           await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
@@ -117,7 +123,8 @@ namespace Airport.Application.LogicServices
                 EnterTime = DateTime.Now
             };
             await _procLogRepos.AddProcLogAsync(procLog);
-            _terminalHub.SendLog(procLog);
+            var procLogOutDTO = _mapper.Map<ProcessLogOutDTO>(procLog);
+            await _terminalHub.SendLogAsync(procLogOutDTO);
             return procLog.Id;
         }
 

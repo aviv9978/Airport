@@ -2,7 +2,6 @@
 using AutoMapper;
 using Core.DTOs.Incoming;
 using Core.Entities.Terminal;
-using Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightSimulator.Controllers
@@ -44,7 +43,6 @@ namespace FlightSimulator.Controllers
 
             catch (Exception e)
             {
-
                 this._logger.LogError(e, e.Message);
                 return StatusCode(500);
             }

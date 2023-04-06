@@ -4,6 +4,7 @@ using FlightSimulator.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Core.Hubs;
 using Serilog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -11,13 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AirportDataContext>(options =>
 options.UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
 builder.Services.AddApplicationServices();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
+                        .ReferenceHandler = ReferenceHandler.Preserve);
+
 builder.Services.AddSwaggerGen();
 
 //To enable client to communicate with server
 var configureService = new ConfigureService();
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("EnableCORS", builder =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.ForFlight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,9 @@ namespace Core.DTOs.Outgoing
 {
     public class FlightOutDTO
     {
-
+        public Guid? Code { get; set; }
+        public bool IsDeparture { get; set; }
+        public virtual Plain? Plain { get; set; }
+        public virtual Pilot? Pilot { get; set; }
     }
 }

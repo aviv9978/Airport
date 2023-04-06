@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
-import { HubConnectionBuilder } from '@microsoft/signalr';
-import { BehaviorSubject } from 'rxjs';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { Log } from '../models/Log';
 
 @Injectable({
@@ -9,35 +7,36 @@ import { Log } from '../models/Log';
 })
 export class SignalRService {
   hubUrl = 'https://localhost:7297/terminalHub';
-  hubConnection?: signalR.HubConnection;
+  hubConnectionBuilder?: HubConnection;
 
   public hubLogs?: Log[];
 
   constructor() {}
 
   public startConnection() {
-    try {
-      this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(this.hubUrl, {})
-        .build();
-
-      this.hubConnection.start().then(() => {
+    this.hubConnectionBuilder = new HubConnectionBuilder()
+      .withUrl(this.hubUrl)
+      .build();
+    this.hubConnectionBuilder
+      .start()
+      .then(() =>
         console.log(
-          `SignalR connection success! connectionId: ${this.hubConnection?.connectionId}`
-        );
-      });
-    } catch (error) {
-      console.log(`SignalR connection error: ${error}`);
-    }
-    this.hubConnection?.onclose((error) => {
+          `SignalR connection success! connectionId: ${this.hubConnectionBuilder?.connectionId}`
+        )
+      )
+      .catch((error) =>
+        console.log(`Error while connect with server: ${error}`)
+      );
+    
+    this.hubConnectionBuilder?.onclose((error) => {
       console.error(`Connection closed: ${error}`);
     });
   }
 
   public addLogsDataListener = () => {
-    this.hubConnection?.on('GetLogs', (log) => {
-      this.hubLogs = log;
+    this.hubConnectionBuilder?.on('logUpdate', (log) => {
       console.log(log);
+      this.hubLogs = log;
     });
   };
 }

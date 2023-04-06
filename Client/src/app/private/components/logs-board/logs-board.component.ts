@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Log } from 'src/app/shared/models/Log';
-import { HttpClient } from '@angular/common/http';
 import { SignalRService } from 'src/app/shared/services/signalR.service';
 
 @Component({
@@ -10,12 +10,21 @@ import { SignalRService } from 'src/app/shared/services/signalR.service';
 })
 export class LogsBoardComponent implements OnInit {
   logs: Log[] = [];
+  private hubConnectionBuilder!: HubConnection;
+  constructor(public signalrService: SignalRService) {}
 
-  constructor(
-    public signalrService: SignalRService,
-    private http: HttpClient
-  ) {}
   ngOnInit(): void {
+    // this.hubConnectionBuilder = new HubConnectionBuilder()
+    //   .withUrl('https://localhost:7297/terminalHub')
+    //   .configureLogging(LogLevel.Information)
+    //   .build();
+    // this.hubConnectionBuilder
+    //   .start()
+    //   .then(() => console.log('Connection started.......!'))
+    //   .catch((err) => console.log('Error while connect with server'));
+    // this.hubConnectionBuilder.on('logUpdate', (flight: any) => {
+    //   console.log(flight);
+    // });
     this.signalrService.startConnection();
     this.signalrService.addLogsDataListener();
   }

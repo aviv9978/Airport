@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs.Outgoing;
+using Core.Entities;
 using Core.Entities.Terminal;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Core.Hubs
 {
     public interface ITerminalHub
     {
-        Task SendEnteringUpdate(Flight flight, int legId);
-        Task SendLog(ProcessLog procLog);
+        Task SendEnteringUpdateAsync(Flight flight, int legId);
+        Task SendLogAsync(ProcessLogOutDTO procLogOutDTO);
     }
 }

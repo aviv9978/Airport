@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs.Outgoing;
+using Core.Entities;
 using Core.Entities.Terminal;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -18,8 +19,8 @@ namespace Core.Hubs
             _terminalHubContext = flightHub;
         }
        
-        public async Task SendEnteringUpdate(Flight flight, int legId) => await _terminalHubContext.Clients.All.SendAsync("Update", $"{flight} + {legId}");
+        public async Task SendEnteringUpdateAsync(Flight flight, int legId) => await _terminalHubContext.Clients.All.SendAsync("Update", $"{flight} + {legId}");
 
-        public async Task SendLog(ProcessLog processLog) => await _terminalHubContext.Clients.All.SendAsync("GetLogs", processLog);
+        public async Task SendLogAsync(ProcessLogOutDTO processLogOutDTO) => await _terminalHubContext.Clients.All.SendAsync("logUpdate", processLogOutDTO);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.DTOs.Incoming
 {
-    public class PlaneInDTO
+    public class PlainInDTO
     {
         public virtual Company? Company { get; set; }
         public string? Model { get; set; }
