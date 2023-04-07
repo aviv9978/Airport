@@ -17,7 +17,7 @@ namespace FlightSimulator.Extensions
             services.AddScoped<IPilotRepository, PilotRepository>(); 
             services.AddScoped<ILegRepostiroy, LegRepository>();
             services.AddScoped<ITerminalService, TerminalService>();
-            services.AddSingleton<IFlightHub, FlightHub>();
+            services.AddSingleton<ITerminalHub, TerminalHub>();
             services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext => {
                 var error = ActionContext.ModelState.Where(e => e.Value.Errors.Count > 0).SelectMany(e => e.Value.Errors).Select(e => e.ErrorMessage).ToArray();
                 var errorresponce = new APIValidationErrorResponce

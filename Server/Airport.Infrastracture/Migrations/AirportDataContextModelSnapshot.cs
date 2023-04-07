@@ -107,7 +107,7 @@ namespace Airport.Infrastracture.Migrations
                     b.Property<int?>("FlightId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LegId")
+                    b.Property<int>("LegNum")
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
