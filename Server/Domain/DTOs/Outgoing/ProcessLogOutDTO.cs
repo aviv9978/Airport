@@ -9,6 +9,7 @@ namespace Core.DTOs.Outgoing
 {
     public class ProcessLogOutDTO
     {
+        public int Id { get; set; }
         public virtual FlightOutDTO? Flight { get; set; }
         public int LegNum { get; set; }
         public DateTime? EnterTime { get; set; }

@@ -1,1 +1,6 @@
-<div> {{signalrService.hubLogs}}</div>ssss
+<div *ngFor="let log of signalrService.hubLogs">
+  aaa
+  {{ log.message }}
+  {{ log.exitTime }}
+</div>
+ssss

@@ -11,7 +11,9 @@ namespace Core.Profiles
             CreateMap<ProcessLog, ProcessLogOutDTO>()
                 .ForMember(dest => dest.Flight,
                     opt => opt.MapFrom(src => src.Flight))
-                    .ForMember(dest => dest.Message,
+                 .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom(src => src.Id))
+                 .ForMember(dest => dest.Message,
                     opt => opt.MapFrom(src => src.Message))
                     .ForMember(dest => dest.EnterTime,
                     opt => opt.MapFrom(src => src.EnterTime))

@@ -21,7 +21,7 @@ namespace Airport.Application.LogicServices
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _flightRepos;
-        private static ICollection<Leg> _legs; 
+        private static ICollection<Leg> _legs;
         private readonly IMapper _mapper;
 
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
@@ -53,7 +53,7 @@ namespace Airport.Application.LogicServices
                     {
                         flight.Leg = leg;
                         leg.IsOccupied = true;
-                        await NextLegAsync(flight, isDeparture);                       
+                        await NextLegAsync(flight, isDeparture);
                         return;
                     }
                 }
@@ -63,7 +63,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-           await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
+            await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
             if (isDeparture)
             {
@@ -94,7 +94,7 @@ namespace Airport.Application.LogicServices
                         flight.Leg.IsOccupied = false;
                         flight.Leg = leg;
                         leg.IsOccupied = true;
-                        await UpdateLogExit(procLogId);
+                        await UpdateLogExit(procLogId, DateTime.Now);
                         await NextLegAsync(flight, isDeparture);
                         exit = true;
                         break;
@@ -108,7 +108,7 @@ namespace Airport.Application.LogicServices
         private async Task FinishingFlight(Flight flight, int procLogId)
         {
             Thread.Sleep(flight.Leg.PauseTime * 1000);
-            await UpdateLogExit(procLogId);
+            await UpdateLogExit(procLogId, DateTime.Now);
             Console.WriteLine("Flight finished!");
             flight.Leg.IsOccupied = false;
         }
@@ -128,9 +128,10 @@ namespace Airport.Application.LogicServices
             return procLog.Id;
         }
 
-        private async Task UpdateLogExit(int procLogId)
+        private async Task UpdateLogExit(int procLogId, DateTime exitTime)
         {
-            await _procLogRepos.UpdateOutLogAsync(procLogId);
+            await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
+            await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
         }
         private async Task CommonStartAsync()
         {

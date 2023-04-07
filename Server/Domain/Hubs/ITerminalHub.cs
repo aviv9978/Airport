@@ -13,5 +13,6 @@ namespace Core.Hubs
     {
         Task SendEnteringUpdateAsync(Flight flight, int legId);
         Task SendLogAsync(ProcessLogOutDTO procLogOutDTO);
+        Task SendLogOutUpdateAsync(int procLogID, DateTime exitTime);
     }
 }

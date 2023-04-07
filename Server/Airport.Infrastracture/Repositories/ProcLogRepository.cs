@@ -30,13 +30,13 @@ namespace Airport.Infrastracture.Repositories
             }
         }
 
-        public async Task UpdateOutLogAsync(int procLogId)
+        public async Task UpdateOutLogAsync(int procLogId, DateTime exitTime)
         {
             try
             {
                 var reqProcLog = await _dBContext.ProcessLogger
                     .FirstOrDefaultAsync(log => log.Id == procLogId);
-                reqProcLog.ExitTime = DateTime.Now;
+                reqProcLog.ExitTime = exitTime;
                 _dBContext.Update(reqProcLog);
                 await _dBContext.SaveChangesAsync();
                 _logger.LogInformation("updated log");

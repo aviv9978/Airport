@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { Log } from '../models/Log';
+import { ProcessLog } from '../models/ProcessLog';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class SignalRService {
   hubUrl = 'https://localhost:7297/terminalHub';
   hubConnectionBuilder?: HubConnection;
 
-  public hubLogs?: Log[];
+  public hubLogs: ProcessLog[] = [];
 
   constructor() {}
 
@@ -27,16 +27,30 @@ export class SignalRService {
       .catch((error) =>
         console.log(`Error while connect with server: ${error}`)
       );
-    
+
     this.hubConnectionBuilder?.onclose((error) => {
       console.error(`Connection closed: ${error}`);
     });
   }
 
   public addLogsDataListener = () => {
-    this.hubConnectionBuilder?.on('logUpdate', (log) => {
+    this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
-      this.hubLogs = log;
+      this.hubLogs?.push(log);
+    });
+    this.updateLogExitDataListener();
+  };
+
+  private updateLogExitDataListener = () => {
+    this.hubConnectionBuilder?.on('logExitUpdate', (data) => {
+      let obj = JSON.parse(data);
+
+      for (let i = this.hubLogs.length - 1; i >= 0; i--) {
+        if (this.hubLogs[i].id === obj.procLogID) {
+          this.hubLogs[i].exitTime = obj.exitTime;
+          break;
+        }
+      }
     });
   };
 }
