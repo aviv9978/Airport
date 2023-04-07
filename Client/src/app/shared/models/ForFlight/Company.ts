@@ -1,4 +1,4 @@
 export interface Company {
-  Name: string;
-  Country: string;
+  name: string;
+  country: string;
 }
