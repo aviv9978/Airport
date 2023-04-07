@@ -36,6 +36,7 @@ export class SignalRService {
   public addLogsDataListener = () => {
     this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
+      console.log(this.hubLogs);
       this.hubLogs?.push(log);
     });
     this.updateLogExitDataListener();

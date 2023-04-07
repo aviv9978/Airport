@@ -1,6 +1,6 @@
 export interface Pilot {
-  FirstName: string;
-  Lastname: string;
-  Age: number;
-  Rank?: any;
+  firstName: string;
+  lastname: string;
+  age: number;
+  rank?: any;
 }
