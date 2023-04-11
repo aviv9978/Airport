@@ -22,9 +22,9 @@ namespace Airport.Infrastracture.Repositories
                 await _dBContext.SaveChangesAsync();
                 _logger.LogWarning("Added flight");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                _logger.LogWarning("Exepction");
+                _logger.LogWarning($"Exepction {e.Message}");
                 throw;
             }
         }

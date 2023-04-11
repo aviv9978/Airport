@@ -16,6 +16,6 @@ namespace Core.DTOs.Incoming
         [Required]
         public virtual Pilot? Pilot { get; set; }
         [Required]
-        public virtual Plain? Plain { get; set; }
+        public virtual Plane? Plane { get; set; }
     }
 }

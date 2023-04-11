@@ -2811,3 +2811,175 @@ WHERE [Id] = @p5;
 [2023-04-07 18:30:02.016 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 331 - 200 0 - 11046.3037ms
 [2023-04-07 18:41:28.213 +03:00  INF]  Executed endpoint '/terminalHub'
 [2023-04-07 18:41:28.213 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=g2Mf2ucdT8aQJnEXtWAJxQ - - - 200 - - 740591.4220ms
+[2023-04-07 20:09:07.729 +03:00  INF]  Now listening on: https://localhost:7297
+[2023-04-07 20:09:07.854 +03:00  INF]  Now listening on: http://localhost:5128
+[2023-04-07 20:09:07.860 +03:00  INF]  Application started. Press Ctrl+C to shut down.
+[2023-04-07 20:09:07.861 +03:00  INF]  Hosting environment: Development
+[2023-04-07 20:09:07.861 +03:00  INF]  Content root path: C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport
+[2023-04-07 20:09:08.421 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-04-07 20:09:08.613 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 196.1973ms
+[2023-04-07 20:09:08.800 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-04-07 20:09:08.810 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 7.6823ms
+[2023-04-07 20:09:09.237 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-04-07 20:09:09.409 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 171.6668ms
+[2023-04-07 20:09:27.740 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/index.html - -
+[2023-04-07 20:09:28.552 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/index.html - - - 200 - text/html;charset=utf-8 812.9580ms
+[2023-04-07 20:09:28.570 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - -
+[2023-04-07 20:09:28.570 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/_vs/browserLink - -
+[2023-04-07 20:09:28.571 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_framework/aspnetcore-browser-refresh.js - - - 200 11984 application/javascript;+charset=utf-8 1.1606ms
+[2023-04-07 20:09:28.622 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 52.5331ms
+[2023-04-07 20:09:28.919 +03:00  INF]  Request starting HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - -
+[2023-04-07 20:09:28.925 +03:00  INF]  Request finished HTTP/2 GET https://localhost:7297/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 6.4001ms
+[2023-04-07 20:09:57.015 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - -
+[2023-04-07 20:09:57.019 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:09:57.020 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - - - 204 - - 5.1348ms
+[2023-04-07 20:09:57.022 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0
+[2023-04-07 20:09:57.023 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:09:57.026 +03:00  INF]  Executing endpoint '/terminalHub/negotiate'
+[2023-04-07 20:09:57.035 +03:00  INF]  Executed endpoint '/terminalHub/negotiate'
+[2023-04-07 20:09:57.035 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 13.0325ms
+[2023-04-07 20:09:57.043 +03:00  INF]  Request starting HTTP/2 CONNECT https://localhost:7297/terminalHub?id=wzA7A_giCsa3M_ScvJuXcQ - -
+[2023-04-07 20:09:57.044 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:09:57.044 +03:00  INF]  Executing endpoint '/terminalHub'
+[2023-04-07 20:10:02.661 +03:00  INF]  Executed endpoint '/terminalHub'
+[2023-04-07 20:10:02.662 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=wzA7A_giCsa3M_ScvJuXcQ - - - 200 - - 5619.0182ms
+[2023-04-07 20:10:02.824 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - -
+[2023-04-07 20:10:02.824 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:02.824 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - - - 204 - - 0.6966ms
+[2023-04-07 20:10:02.826 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0
+[2023-04-07 20:10:02.826 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:02.826 +03:00  INF]  Executing endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:02.827 +03:00  INF]  Executed endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:02.827 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 0.8174ms
+[2023-04-07 20:10:02.836 +03:00  INF]  Request starting HTTP/2 CONNECT https://localhost:7297/terminalHub?id=O4CTXX8ATl7v_WW2CEAJkQ - -
+[2023-04-07 20:10:02.836 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:02.836 +03:00  INF]  Executing endpoint '/terminalHub'
+[2023-04-07 20:10:08.762 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 331
+[2023-04-07 20:10:08.763 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:08.763 +03:00  INF]  Executing endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-04-07 20:10:08.779 +03:00  INF]  Route matched with {action = "AddDepartureFlight", controller = "Flights"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddDepartureFlight(Core.DTOs.Incoming.FlightInDTO) on controller FlightSimulator.Controllers.FlightsController (Airport).
+[2023-04-07 20:10:10.363 +03:00  INF]  Executed DbCommand (47ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Company] ([Country], [Name])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+INSERT INTO [Pilots] ([Age], [FirstName], [LastName], [Rank])
+OUTPUT INSERTED.[Id]
+VALUES (@p2, @p3, @p4, @p5);
+[2023-04-07 20:10:10.402 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p6='?' (DbType = Int32), @p7='?' (Size = 4000), @p8='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Plain] ([CompanyId], [Model], [PassangerCount])
+OUTPUT INSERTED.[Id]
+VALUES (@p6, @p7, @p8);
+[2023-04-07 20:10:10.408 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[@p9='?' (DbType = Guid), @p10='?' (DbType = Boolean), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Flights] ([Code], [IsDeparture], [PilotId], [PlainId])
+OUTPUT INSERTED.[Id]
+VALUES (@p9, @p10, @p11, @p12);
+[2023-04-07 20:10:10.437 +03:00  WRN]  Added flight
+[2023-04-07 20:10:10.596 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [l].[Id], [l].[CurrentLeg], [l].[LegType], [l].[NextPosibbleLegs], [l].[PauseTime]
+FROM [Legs] AS [l]
+[2023-04-07 20:10:10.617 +03:00  INF]  Got all legs from db!
+[2023-04-07 20:10:10.675 +03:00  INF]  Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegNum], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-04-07 20:10:10.678 +03:00  INF]  Added log
+[2023-04-07 20:10:14.786 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegNum], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-04-07 20:10:14.797 +03:00  INF]  Executed DbCommand (3ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegNum] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-04-07 20:10:14.800 +03:00  INF]  updated log
+[2023-04-07 20:10:14.836 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegNum], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-04-07 20:10:14.836 +03:00  INF]  Added log
+[2023-04-07 20:10:19.848 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegNum], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-04-07 20:10:19.850 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegNum] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-04-07 20:10:19.850 +03:00  INF]  updated log
+[2023-04-07 20:10:19.852 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProcessLogger] ([EnterTime], [ExitTime], [FlightId], [LegNum], [Message])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+[2023-04-07 20:10:19.853 +03:00  INF]  Added log
+[2023-04-07 20:10:21.857 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@__procLogId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [p].[Id], [p].[EnterTime], [p].[ExitTime], [p].[FlightId], [p].[LegNum], [p].[Message]
+FROM [ProcessLogger] AS [p]
+WHERE [p].[Id] = @__procLogId_0
+[2023-04-07 20:10:21.859 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [ProcessLogger] SET [EnterTime] = @p0, [ExitTime] = @p1, [FlightId] = @p2, [LegNum] = @p3, [Message] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+[2023-04-07 20:10:21.859 +03:00  INF]  updated log
+[2023-04-07 20:10:21.861 +03:00  ERR]  Successssss
+[2023-04-07 20:10:21.867 +03:00  INF]  Executing StatusCodeResult, setting HTTP status code 200
+[2023-04-07 20:10:21.872 +03:00  INF]  Executed action FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport) in 13088.7603ms
+[2023-04-07 20:10:21.872 +03:00  INF]  Executed endpoint 'FlightSimulator.Controllers.FlightsController.AddDepartureFlight (Airport)'
+[2023-04-07 20:10:21.879 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/api/Flights/AddDepartureFlight application/json 331 - 200 0 - 13116.5668ms
+[2023-04-07 20:10:47.819 +03:00  INF]  Executed endpoint '/terminalHub'
+[2023-04-07 20:10:47.819 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=O4CTXX8ATl7v_WW2CEAJkQ - - - 200 - - 44983.7942ms
+[2023-04-07 20:10:48.024 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - -
+[2023-04-07 20:10:48.024 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.025 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - - - 204 - - 0.8593ms
+[2023-04-07 20:10:48.026 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0
+[2023-04-07 20:10:48.027 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.027 +03:00  INF]  Executing endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:48.027 +03:00  INF]  Executed endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:48.027 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 0.5610ms
+[2023-04-07 20:10:48.059 +03:00  INF]  Request starting HTTP/2 CONNECT https://localhost:7297/terminalHub?id=0nURI05uTGUvevvwTp9OaQ - -
+[2023-04-07 20:10:48.059 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.060 +03:00  INF]  Executing endpoint '/terminalHub'
+[2023-04-07 20:10:48.648 +03:00  INF]  Executed endpoint '/terminalHub'
+[2023-04-07 20:10:48.648 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=0nURI05uTGUvevvwTp9OaQ - - - 200 - - 588.7301ms
+[2023-04-07 20:10:48.828 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - -
+[2023-04-07 20:10:48.828 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.828 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - - - 204 - - 0.4572ms
+[2023-04-07 20:10:48.830 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0
+[2023-04-07 20:10:48.830 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.830 +03:00  INF]  Executing endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:48.831 +03:00  INF]  Executed endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:48.831 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 0.7145ms
+[2023-04-07 20:10:48.877 +03:00  INF]  Request starting HTTP/2 CONNECT https://localhost:7297/terminalHub?id=aZL45hXPHr5ASGCq2dlCNA - -
+[2023-04-07 20:10:48.877 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:48.877 +03:00  INF]  Executing endpoint '/terminalHub'
+[2023-04-07 20:10:52.627 +03:00  INF]  Executed endpoint '/terminalHub'
+[2023-04-07 20:10:52.627 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=aZL45hXPHr5ASGCq2dlCNA - - - 200 - - 3750.3283ms
+[2023-04-07 20:10:52.765 +03:00  INF]  Request starting HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - -
+[2023-04-07 20:10:52.765 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:52.765 +03:00  INF]  Request finished HTTP/2 OPTIONS https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - - - 204 - - 0.4373ms
+[2023-04-07 20:10:52.767 +03:00  INF]  Request starting HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0
+[2023-04-07 20:10:52.767 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:52.767 +03:00  INF]  Executing endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:52.767 +03:00  INF]  Executed endpoint '/terminalHub/negotiate'
+[2023-04-07 20:10:52.767 +03:00  INF]  Request finished HTTP/2 POST https://localhost:7297/terminalHub/negotiate?negotiateVersion=1 - 0 - 200 316 application/json 0.4800ms
+[2023-04-07 20:10:52.789 +03:00  INF]  Request starting HTTP/2 CONNECT https://localhost:7297/terminalHub?id=XcD8S-cD4VWv47KHeqdoPg - -
+[2023-04-07 20:10:52.789 +03:00  INF]  CORS policy execution successful.
+[2023-04-07 20:10:52.789 +03:00  INF]  Executing endpoint '/terminalHub'
+[2023-04-07 20:21:09.061 +03:00  INF]  Executed endpoint '/terminalHub'
+[2023-04-07 20:21:09.061 +03:00  INF]  Request finished HTTP/2 CONNECT https://localhost:7297/terminalHub?id=XcD8S-cD4VWv47KHeqdoPg - - - 200 - - 616271.9221ms

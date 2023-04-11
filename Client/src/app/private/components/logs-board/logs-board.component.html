@@ -1,41 +1,37 @@
-<div *ngFor="let log of signalrService.hubLogs">
-  aaa
-  {{ log.message }}
-  {{ log.exitTime }}
-</div>
-ssss
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Flight Code</th>
-      <th scope="col">Comapny Name</th>
-      <th scope="col">Company Country</th>
+      <th (click)="procLogSort('id')" scope="col">#</th>
+      <th (click)="flightSort('code')" scope="col">Flight Code</th>
+      <th (click)="companySort('name')" scope="col">Comapny Name</th>
+      <th (click)="companySort('country')" scope="col">Company Country</th>
       <th scope="col">Plane Model</th>
-      <th scope="col">Passangers Amount</th>
-      <th scope="col">Pilot Full Name</th>
+      <th (click)="planeSort('passangerCount')" scope="col">
+        Passangers Amount
+      </th>
+      <th (click)="pilotSort('firstName')" scope="col">Pilot Full Name</th>
       <th scope="col">Pilot Rank</th>
       <th scope="col">Leg Number</th>
-      <th scope="col">Entering Time</th>
-      <th scope="col">Exit Time</th>
+      <th (click)="procLogSort('enterTime')" scope="col">Entering Time</th>
+      <th (click)="procLogSort('exitTime')" scope="col">Exit Time</th>
       <th scope="col">Message</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let log of signalrService.hubLogs">
+    <tr *ngFor="let log of procLogs">
       <th scope="row">{{ log.id }}</th>
       <td>{{ log?.flight?.code }}</td>
-      <td>{{ log?.flight?.plain?.company?.name }}</td>
-      <td>{{ log?.flight?.plain?.company?.country }}</td>
-      <td>{{ log?.flight?.plain?.model }}</td>
-      <td>{{ log?.flight?.plain?.passCounter }}</td>
+      <td>{{ log?.flight?.plane?.company?.name }}</td>
+      <td>{{ log?.flight?.plane?.company?.country }}</td>
+      <td>{{ log?.flight?.plane?.model }}</td>
+      <td>{{ log?.flight?.plane?.passangerCount }}</td>
       <td>
         {{ log?.flight?.pilot?.firstName }} {{ log?.flight?.pilot?.lastname }}
       </td>
       <td>{{ log?.flight?.pilot?.rank }}</td>
       <td>{{ log?.legNum }}</td>
-      <td>{{ log?.enterTime }}</td>
-      <td>{{ log?.exitTime }}</td>
+      <td>{{ log?.enterTime | dateFormatPipe }}</td>
+      <td>{{ log?.exitTime | dateFormatPipe }}</td>
       <td>{{ log?.message }}</td>
     </tr>
   </tbody>

@@ -1,8 +1,8 @@
-import { Plane as Plain } from './ForFlight/Plane';
-import { Pilot } from './ForFlight/pilot';
+import { Pilot } from './forFlight/Pilot';
+import { Plane } from './forFlight/Plane';
 
 export interface Flight {
   code: number;
   pilot: Pilot;
-  plain: Plain;
+  plane: Plane;
 }

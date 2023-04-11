@@ -8,7 +8,7 @@ namespace Core.Entities.Terminal
     {
         public Guid? Code { get; set; }
         public bool IsDeparture { get; set; }
-        public virtual Plain? Plain { get; set; }
+        public virtual Plane? Plane { get; set; }
         public virtual Pilot? Pilot { get; set; }
         [NotMapped]
         public virtual Leg? Leg { get; set; }
