@@ -12,16 +12,16 @@ namespace Airport.Profiles
             CreateMap<FlightInDTO, Flight>()
                 .ForMember(dest => dest.Pilot,
                 opt => opt.MapFrom(src => src.Pilot))
-                .ForMember(dest => dest.Plain,
-                opt => opt.MapFrom(src => src.Plain))
+                .ForMember(dest => dest.Plane,
+                opt => opt.MapFrom(src => src.Plane))
                 .ForMember(dest => dest.Code,
                 opt => opt.MapFrom(src => src.Code));
 
             CreateMap<Flight, FlightOutDTO>()
                .ForMember(dest => dest.Pilot,
                opt => opt.MapFrom(src => src.Pilot))
-               .ForMember(dest => dest.Plain,
-               opt => opt.MapFrom(src => src.Plain))
+               .ForMember(dest => dest.Plane,
+               opt => opt.MapFrom(src => src.Plane))
                .ForMember(dest => dest.Code,
                opt => opt.MapFrom(src => src.Code))
                .ForMember(dest => dest.IsDeparture,

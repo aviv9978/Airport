@@ -21,7 +21,6 @@ namespace Core.Profiles
                     opt => opt.MapFrom(src => src.ExitTime))
                     .ForMember(dest => dest.LegNum,
                     opt => opt.MapFrom(src => src.LegNum));
-
         }
     }
 }

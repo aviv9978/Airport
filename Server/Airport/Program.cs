@@ -35,7 +35,6 @@ builder.Services.AddCors(options =>
                .WithOrigins(configureService.GetClient(), configureService.GetServer());
     });
 });
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
@@ -45,6 +44,7 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();

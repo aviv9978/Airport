@@ -43,7 +43,7 @@ namespace FlightSimulator.Controllers
 
             catch (Exception e)
             {
-                this._logger.LogError(e, e.Message);
+                _logger.LogError(e, e.Message);
                 return StatusCode(500);
             }
         }

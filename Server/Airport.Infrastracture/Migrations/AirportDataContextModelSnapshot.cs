@@ -66,7 +66,7 @@ namespace Airport.Infrastracture.Migrations
                     b.ToTable("Pilots");
                 });
 
-            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Plane", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ namespace Airport.Infrastracture.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Plain");
+                    b.ToTable("Plane");
                 });
 
             modelBuilder.Entity("Core.Entities.ProcessLog", b =>
@@ -137,14 +137,14 @@ namespace Airport.Infrastracture.Migrations
                     b.Property<int?>("PilotId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PlainId")
+                    b.Property<int?>("PlaneId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PilotId");
 
-                    b.HasIndex("PlainId");
+                    b.HasIndex("PlaneId");
 
                     b.ToTable("Flights");
                 });
@@ -240,7 +240,7 @@ namespace Airport.Infrastracture.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Core.Entities.ForFlight.Plain", b =>
+            modelBuilder.Entity("Core.Entities.ForFlight.Plane", b =>
                 {
                     b.HasOne("Core.Entities.ForFlight.Company", "Company")
                         .WithMany()
@@ -264,13 +264,13 @@ namespace Airport.Infrastracture.Migrations
                         .WithMany()
                         .HasForeignKey("PilotId");
 
-                    b.HasOne("Core.Entities.ForFlight.Plain", "Plain")
+                    b.HasOne("Core.Entities.ForFlight.Plane", "Plane")
                         .WithMany()
-                        .HasForeignKey("PlainId");
+                        .HasForeignKey("PlaneId");
 
                     b.Navigation("Pilot");
 
-                    b.Navigation("Plain");
+                    b.Navigation("Plane");
                 });
 
             modelBuilder.Entity("Core.Entities.Terminal.Flight", b =>

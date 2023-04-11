@@ -7,7 +7,6 @@ import { LogsBoardComponent } from './components/logs-board/logs-board.component
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot([{ path: 'logs-board', component: LogsBoardComponent }]),
   ],
 })
 export class PrivateRoutingModule {}

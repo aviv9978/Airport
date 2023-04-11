@@ -1,7 +1,7 @@
-import { Company } from './Company';
+import { Company } from "./Company";
 
 export interface Plane {
   company: Company;
   model: string;
-  passCounter: number;
+  passangerCount: number;
 }

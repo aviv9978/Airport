@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Leg 1</th>
+      <th scope="col">Leg 2</th>
+      <th scope="col">Leg 3</th>
+      <th scope="col">Leg 4</th>
+      <th scope="col">Leg 5</th>
+      <th scope="col">Leg 6</th>
+      <th scope="col">Leg 7</th>
+      <th scope="col">Leg 8</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let leg of legsStatus">
+      <th scope="row">{{ leg.isOccupied }}</th>
+      <td>{{ leg.legNumber }}</td>
+      aaa
+    </tr>
+  </tbody>
+</table>
+<button type="button" (click)="clicktho()">CLICK</button>

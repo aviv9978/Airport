@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LogsBoardComponent } from './components/logs-board/logs-board.component';
 import { ButtonComponent } from './components/button/button.component';
 import { PrivateRoutingModule } from './private-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,9 @@ import { PrivateRoutingModule } from './private-routing.module';
   ],
   imports: [
     CommonModule,
-    PrivateRoutingModule
-  ]
+    PrivateRoutingModule,
+    SharedModule
+  ],
+  exports: [LogsBoardComponent]
 })
 export class PrivateModule { }
