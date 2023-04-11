@@ -25,7 +25,7 @@ namespace Airport.Controllers
             try
             {
                 var LegsStatus = await _legService.GetLegsStatusAsync();
-                return Ok(LegsStatus);
+                return Ok(LegsStatus.ToList());
             }
             catch (Exception e)
             {
