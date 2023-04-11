@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ProcessLog } from '../models/ProcessLog';
 import { HttpClient } from '@angular/common/http';
+import { map, pipe } from 'rxjs';
+import { LegStatusService } from './httpServices/leg-status.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,7 @@ export class SignalRService {
   hubConnectionBuilder?: HubConnection;
 
   public hubLogs: ProcessLog[] = [];
-  public legsStatus!: LegStatus[];
-  constructor(public http: HttpClient) {}
+  constructor(private legService: LegStatusService) {}
 
   public startConnection() {
     this.hubConnectionBuilder = new HubConnectionBuilder()
@@ -48,15 +49,14 @@ export class SignalRService {
     });
   };
 
-  public updateLegStatus = () => {
+  public updateLegStatus = (legsStatus: LegStatus[]) => {
     this.hubConnectionBuilder?.on(
       'updateLegStatus',
       (legStatusServer: LegStatus) => {
-        for (let legStatus of this.legsStatus) {
-          console.log(legStatusServer);
+        for (let legStatus of legsStatus) {
           if (legStatus.legNumber === legStatusServer.legNumber) {
             legStatus.isOccupied = legStatusServer.isOccupied;
-            console.log(legStatusServer);
+            console.log(`legNum: ${legStatus.legNumber} changed from ${!legStatus.isOccupied} to ${legStatus.isOccupied}`)
             break;
           }
         }
@@ -65,17 +65,7 @@ export class SignalRService {
   };
 
   public getLegsFromServer = () => {
-    this.http
-      .get<LegStatus[]>('https://localhost:7297/api/LegStatus/GetLegStatus')
-      .subscribe(
-        (legStatusServer: LegStatus[]) => {
-          this.legsStatus = legStatusServer;
-          console.log(this.legsStatus);
-        },
-        (error) => {
-          console.error('Error fetching data', error);
-        }
-      );
+    return this.legService.getStatusLegs();
   };
   private updateLogExitDataListener = (obj: any) => {
     for (let i = this.hubLogs.length - 1; i >= 0; i--) {

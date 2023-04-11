@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProcessLog } from 'src/app/shared/models/ProcessLog';
 import { LegStatus } from 'src/app/shared/models/legStatus';
 import { SignalRService } from 'src/app/shared/services/signalR.service';
@@ -8,18 +9,25 @@ import { SignalRService } from 'src/app/shared/services/signalR.service';
   templateUrl: './legs-status.component.html',
   styleUrls: ['./legs-status.component.scss'],
 })
-export class LegsStatusComponent implements OnInit {
-  legsStatus: LegStatus[] = this.signalrService.legsStatus;
+export class LegsStatusComponent implements OnInit, OnDestroy {
   constructor(private signalrService: SignalRService) {}
+  legsStatus!: LegStatus[];
+  private legsSubscription!: Subscription;
 
   ngOnInit(): void {
     this.signalrService.startConnection();
-    this.signalrService.getLegsFromServer();
-    this.signalrService.updateLegStatus();
+    this.legsSubscription = this.signalrService
+      .getLegsFromServer()
+      .subscribe((res: LegStatus[]) => {
+        this.legsStatus = res;
+        this.signalrService.updateLegStatus(this.legsStatus);
+      });
+  }
+  ngOnDestroy(): void {
+    this.legsSubscription.unsubscribe();
   }
 
   clicktho() {
-    this.signalrService.getLegsFromServer();
-    console.log(this.signalrService.legsStatus);
+    console.log(this.legsStatus);
   }
 }

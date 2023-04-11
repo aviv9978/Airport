@@ -96,11 +96,12 @@ namespace Airport.Application.LogicServices
                 {
                     if (leg != null && leg.IsOccupied == false)
                     {
+                        var currentLeg = flight.Leg.CurrentLeg;
                         flight.Leg.IsOccupied = false;
                         flight.Leg = leg;
                         // _nextLegEvent.Invoke(flight, isDeparture);
                         leg.IsOccupied = true;
-                        await UpdateLogExit(procLogId, DateTime.Now, flight);
+                        await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
                         await NextLegAsync(flight, isDeparture);
                         exit = true;
 
@@ -115,7 +116,7 @@ namespace Airport.Application.LogicServices
         private async Task FinishingFlight(Flight flight, int procLogId)
         {
             Thread.Sleep(flight.Leg.PauseTime * 1000);
-            await UpdateLogExit(procLogId, DateTime.Now,flight);
+            await UpdateLogExit(procLogId, DateTime.Now,flight.Leg.CurrentLeg);
             Console.WriteLine("Flight finished!");
             flight.Leg.IsOccupied = false;
         }
@@ -136,11 +137,11 @@ namespace Airport.Application.LogicServices
             return procLog.Id;
         }
 
-        private async Task UpdateLogExit(int procLogId, DateTime exitTime, Flight flight)
+        private async Task UpdateLogExit(int procLogId, DateTime exitTime, LegNumber currentLeg)
         {
             await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
             await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
-            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = flight.Leg.CurrentLeg });
+            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = currentLeg });
 
         }
         private async Task CommonStartAsync()
