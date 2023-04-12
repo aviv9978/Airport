@@ -25,7 +25,6 @@ namespace Airport.Application.LogicServices
         private static ICollection<Leg> _legs;
         public static ICollection<Leg> Legs => _legs;
         private readonly IMapper _mapper;
-        //private event Func<Flight, bool, Task> _nextLegEvent;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
             IFlightRepository rep, ITerminalHub flightHub,
             IMapper mapper)
@@ -103,7 +102,6 @@ namespace Airport.Application.LogicServices
                         flight.Leg.IsOccupied = false;
                         flight.Leg = leg;
                         leg.Flight = flight;
-                        // _nextLegEvent.Invoke(flight, isDeparture);
                         leg.IsOccupied = true;
                         await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
                         await NextLegAsync(flight, isDeparture);
@@ -112,7 +110,6 @@ namespace Airport.Application.LogicServices
                         break;
                     }
                 }
-                // _nextLegEvent += (a, b) => NextLegAsync(flight, isDeparture);
                 if (exit) break;
             }
         }
@@ -148,8 +145,7 @@ namespace Airport.Application.LogicServices
         {
             await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
             await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
-            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = currentLeg, Flight = null });
-
+            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = (int)currentLeg, Flight = null });
         }
         private async Task CommonStartAsync()
         {

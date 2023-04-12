@@ -13,7 +13,7 @@ namespace Core.Profiles
                .ForMember(dest => dest.IsOccupied,
                opt => opt.MapFrom(src => src.IsOccupied))
                .ForMember(dest => dest.LegNumber,
-               opt => opt.MapFrom(src => src.CurrentLeg))
+               opt => opt.MapFrom(src => (int)src.CurrentLeg))
                .ForMember(dest => dest.Flight,
                opt => opt.MapFrom(src => src.Flight));
 
@@ -21,7 +21,7 @@ namespace Core.Profiles
              .ForMember(dest => dest.Flight,
              opt => opt.MapFrom(src => src.Flight))
              .ForMember(dest => dest.LegNumber,
-             opt => opt.MapFrom(src => src.LegNum));
+             opt => opt.MapFrom(src => (int)src.LegNum));
         }
     }
 }

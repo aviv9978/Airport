@@ -1,0 +1,44 @@
+[2023-04-13 01:25:38.677 +03:00  INF]  Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-04-13 01:25:38.797 +03:00  INF]  Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+[2023-04-13 01:25:38.800 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+[2023-04-13 01:25:38.802 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+[2023-04-13 01:25:38.835 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+[2023-04-13 01:25:38.854 +03:00  INF]  Applying migration '20230412222531_changes'.
+[2023-04-13 01:25:38.917 +03:00  INF]  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [NextPosibbleLegs] = 3
+WHERE [Id] = 2;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.920 +03:00  INF]  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 3, [NextPosibbleLegs] = 4
+WHERE [Id] = 3;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.921 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 4, [NextPosibbleLegs] = 13
+WHERE [Id] = 4;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.922 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 5, [NextPosibbleLegs] = 7
+WHERE [Id] = 5;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.923 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 6, [NextPosibbleLegs] = 8
+WHERE [Id] = 6;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.923 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 7, [NextPosibbleLegs] = 8
+WHERE [Id] = 7;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.924 +03:00  INF]  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+UPDATE [Legs] SET [CurrentLeg] = 8, [NextPosibbleLegs] = 4
+WHERE [Id] = 8;
+SELECT @@ROWCOUNT;
+[2023-04-13 01:25:38.925 +03:00  INF]  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20230412222531_changes', N'7.0.4');

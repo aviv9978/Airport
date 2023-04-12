@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let leg of legsStatus">
-      <th scope="row">{{ leg.legNumber }}</th>
+      <th scope="row">Leg {{ leg.legNumber }}</th>
       <td>{{ leg?.isOccupied }}</td>
       <td>{{ leg?.flight?.code }}</td>
       <td>{{ leg?.flight?.plane?.company?.name }}</td>
