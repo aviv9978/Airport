@@ -7,5 +7,4 @@ export enum LegNumber {
   Six = 32,
   Sev = 64,
   Eig = 128,
-  Air = 256,
 }

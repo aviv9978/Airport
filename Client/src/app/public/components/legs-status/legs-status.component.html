@@ -1,21 +1,20 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Leg 1</th>
-      <th scope="col">Leg 2</th>
-      <th scope="col">Leg 3</th>
-      <th scope="col">Leg 4</th>
-      <th scope="col">Leg 5</th>
-      <th scope="col">Leg 6</th>
-      <th scope="col">Leg 7</th>
-      <th scope="col">Leg 8</th>
+      <th scope="col">#</th>
+      <th scope="col">Is Occupied</th>
+      <th scope="col">Flight Code</th>
+      <th scope="col">Company Name</th>
+      <th scope="col">Plane Model</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let leg of legsStatus">
-      <th scope="row">{{ leg.isOccupied }}</th>
-      <td>{{ leg.legNumber }}</td>
-      aaa
+      <th scope="row">Leg {{ leg.legNumber }}</th>
+      <td>{{ leg?.isOccupied }}</td>
+      <td>{{ leg?.flight?.code }}</td>
+      <td>{{ leg?.flight?.plane?.company?.name }}</td>
+      <td>{{ leg?.flight?.plane?.model }}</td>
     </tr>
   </tbody>
 </table>

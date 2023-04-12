@@ -9,7 +9,8 @@ namespace Core.DTOs.Outgoing
 {
     public class LegStatusOutDTO
     {
-        public LegNumber LegNumber { get; set; }
+        public string? LegNumber { get; set; }
         public bool IsOccupied { get; set; }
+        public virtual FlightOutDTO? Flight { get; set; }
     }
 }

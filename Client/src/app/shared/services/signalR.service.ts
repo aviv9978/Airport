@@ -56,7 +56,15 @@ export class SignalRService {
         for (let legStatus of legsStatus) {
           if (legStatus.legNumber === legStatusServer.legNumber) {
             legStatus.isOccupied = legStatusServer.isOccupied;
-            console.log(`legNum: ${legStatus.legNumber} changed from ${!legStatus.isOccupied} to ${legStatus.isOccupied}`)
+            if (legStatus.isOccupied) legStatus.flight = legStatusServer.flight;
+            else legStatus.flight = undefined;
+            console.log(
+              `legNum: ${
+                legStatus.legNumber
+              } changed from ${!legStatus.isOccupied} to ${
+                legStatus.isOccupied
+              }`
+            );
             break;
           }
         }
