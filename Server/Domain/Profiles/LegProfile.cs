@@ -2,6 +2,10 @@
 using Core.Entities.Terminal;
 using AutoMapper;
 using Core.Entities;
+using Newtonsoft.Json.Linq;
+using System;
+using Core.Enums;
+using EnumsNET;
 
 namespace Core.Profiles
 {
@@ -12,8 +16,8 @@ namespace Core.Profiles
             CreateMap<Leg, LegStatusOutDTO>()
                .ForMember(dest => dest.IsOccupied,
                opt => opt.MapFrom(src => src.IsOccupied))
-               .ForMember(dest => dest.LegNumber,
-               opt => opt.MapFrom(src => (int)src.CurrentLeg))
+            .ForMember(dest => dest.LegNumber,
+            opt => opt.MapFrom(src =>((LegNumber)src.CurrentLeg).AsString(EnumFormat.Description)))
                .ForMember(dest => dest.Flight,
                opt => opt.MapFrom(src => src.Flight));
 
@@ -21,7 +25,7 @@ namespace Core.Profiles
              .ForMember(dest => dest.Flight,
              opt => opt.MapFrom(src => src.Flight))
              .ForMember(dest => dest.LegNumber,
-             opt => opt.MapFrom(src => (int)src.LegNum));
+             opt => opt.MapFrom(src => ((LegNumber)src.LegNum).AsString(EnumFormat.Description)));
         }
     }
 }

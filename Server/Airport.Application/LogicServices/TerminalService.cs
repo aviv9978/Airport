@@ -6,6 +6,7 @@ using Core.Entities.Terminal;
 using Core.Enums;
 using Core.Hubs;
 using Core.Interfaces.Repositories;
+using EnumsNET;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -106,7 +107,6 @@ namespace Airport.Application.LogicServices
                         await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
                         await NextLegAsync(flight, isDeparture);
                         exit = true;
-
                         break;
                     }
                 }
@@ -145,7 +145,8 @@ namespace Airport.Application.LogicServices
         {
             await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
             await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
-            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = (int)currentLeg, Flight = null });
+            var legNumber = ((LegNumber)currentLeg).AsString(EnumFormat.Description);
+            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = legNumber, Flight = null });
         }
         private async Task CommonStartAsync()
         {
