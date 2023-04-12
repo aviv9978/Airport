@@ -23,8 +23,9 @@ namespace Airport.Application.LogicServices
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _flightRepos;
         private static ICollection<Leg> _legs;
+        public static ICollection<Leg> Legs => _legs;
         private readonly IMapper _mapper;
-        private event Func<Flight, bool, Task> _nextLegEvent;
+        //private event Func<Flight, bool, Task> _nextLegEvent;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
             IFlightRepository rep, ITerminalHub flightHub,
             IMapper mapper)
@@ -54,6 +55,7 @@ namespace Airport.Application.LogicServices
                     {
                         flight.Leg = leg;
                         leg.IsOccupied = true;
+                        leg.Flight = flight;
                         await NextLegAsync(flight, isDeparture);
                         return;
                     }
@@ -97,8 +99,10 @@ namespace Airport.Application.LogicServices
                     if (leg != null && leg.IsOccupied == false)
                     {
                         var currentLeg = flight.Leg.CurrentLeg;
+                        flight.Leg.Flight = null;
                         flight.Leg.IsOccupied = false;
                         flight.Leg = leg;
+                        leg.Flight = flight;
                         // _nextLegEvent.Invoke(flight, isDeparture);
                         leg.IsOccupied = true;
                         await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
@@ -116,9 +120,10 @@ namespace Airport.Application.LogicServices
         private async Task FinishingFlight(Flight flight, int procLogId)
         {
             Thread.Sleep(flight.Leg.PauseTime * 1000);
-            await UpdateLogExit(procLogId, DateTime.Now,flight.Leg.CurrentLeg);
+            await UpdateLogExit(procLogId, DateTime.Now, flight.Leg.CurrentLeg);
             Console.WriteLine("Flight finished!");
             flight.Leg.IsOccupied = false;
+            flight.Leg.Flight = null;
         }
 
         private async Task<int> AddProcLogAsync(Flight flight, string message)
@@ -133,7 +138,9 @@ namespace Airport.Application.LogicServices
             await _procLogRepos.AddProcLogAsync(procLog);
             var procLogOutDTO = _mapper.Map<ProcessLogOutDTO>(procLog);
             await _terminalHub.SendLogAsync(procLogOutDTO);
-            await _terminalHub.UpdateEnterLeg(new LegStatusOutDTO { IsOccupied = true, LegNumber = flight.Leg.CurrentLeg });
+            var legStatusOutDTO = _mapper.Map<LegStatusOutDTO>(procLog);
+            legStatusOutDTO.IsOccupied = true;
+            await _terminalHub.UpdateEnterLeg(legStatusOutDTO);
             return procLog.Id;
         }
 
@@ -141,7 +148,7 @@ namespace Airport.Application.LogicServices
         {
             await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
             await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
-            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = currentLeg });
+            await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = currentLeg, Flight = null });
 
         }
         private async Task CommonStartAsync()

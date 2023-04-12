@@ -16,6 +16,7 @@ namespace Core.Entities.Terminal
         public int PauseTime { get; set; }
         [NotMapped]
         public bool IsOccupied { get; set; }
-
+        [NotMapped]
+        public virtual Flight? Flight { get; set; }
     }
 }

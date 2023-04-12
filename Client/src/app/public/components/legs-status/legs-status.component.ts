@@ -20,6 +20,7 @@ export class LegsStatusComponent implements OnInit, OnDestroy {
       .getLegsFromServer()
       .subscribe((res: LegStatus[]) => {
         this.legsStatus = res;
+        console.log(this.legsStatus);
         this.signalrService.updateLegStatus(this.legsStatus);
       });
   }
