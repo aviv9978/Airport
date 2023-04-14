@@ -129,3 +129,4 @@ C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Ser
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\ConsoleSimulator\obj\Debug\net7.0\ConsoleSimulator.pdb
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\ConsoleSimulator\obj\Debug\net7.0\ConsoleSimulator.genruntimeconfig.cache
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\ConsoleSimulator\obj\Debug\net7.0\ref\ConsoleSimulator.dll
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\ConsoleSimulator\bin\Debug\net7.0\Newtonsoft.Json.dll

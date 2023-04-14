@@ -1,12 +1,11 @@
-﻿
+﻿using ConsoleSimulator.Dto;
+
 namespace ConsoleSimulator.Models
 {
     internal class FlightDto
     {
-        public string? Code { get; set; }
-        public virtual PilotDto? Pilot { get; set; }
-        public string? Name { get; set; }
-
-        public FlightDto() => Code = Guid.NewGuid().ToString();
+        public Guid Code { get; set; }
+        public PilotDTO? Pilot { get; set; }
+        public PlaneDTO? Plane { get; set; }
     }
 }

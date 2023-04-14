@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProcessLog } from 'src/app/shared/models/ProcessLog';
 import { SignalRService } from 'src/app/shared/services/signalR.service';
 import { SortArrayService } from '../../../shared/services/sort-array.service';
@@ -12,7 +12,7 @@ import { Plane } from 'src/app/shared/models/forFlight/Plane';
   templateUrl: './logs-board.component.html',
   styleUrls: ['./logs-board.component.scss'],
 })
-export class LogsBoardComponent implements OnInit {
+export class LogsBoardComponent implements OnInit, OnDestroy {
   procLogs: ProcessLog[] = this.signalrService.hubLogs;
   sortOrder = 'asc';
 
@@ -23,6 +23,9 @@ export class LogsBoardComponent implements OnInit {
     this.signalrService.addLogsDataListener();
   }
 
+  ngOnDestroy(): void {
+    this.signalrService.stop();
+  }
   procLogSort(property: string) {
     this.procLogs.sort((a, b) => {
       const aValue = a[property as keyof ProcessLog];

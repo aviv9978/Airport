@@ -9,6 +9,6 @@ namespace Airport.Application.ILogicServices
 {
     public interface ILegStatusService
     {
-        Task<ICollection<LegStatusOutDTO>> GetLegsStatusAsync();
+        ICollection<LegStatusOutDTO> GetLegsStatus();
     }
 }

@@ -66,9 +66,7 @@ namespace Airport.Application.LogicServices
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
-            await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
-            int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
-            Thread.Sleep(flight.Leg.PauseTime * 1000);
+            int procLogId = await InLegProcess(flight);
             if (isDeparture)
             {
                 if (flight.Leg.LegType.HasFlag(Core.Enums.LegType.BeforeFly))
@@ -84,6 +82,14 @@ namespace Airport.Application.LogicServices
             }
 
             await MoveLegAsync(flight, isDeparture, procLogId);
+        }
+
+        private async Task<int> InLegProcess(Flight flight)
+        {
+            await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
+            int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
+            Thread.Sleep(flight.Leg.PauseTime * 1000);
+            return procLogId;
         }
 
         private async Task MoveLegAsync(Flight flight, bool isDeparture, int procLogId)
