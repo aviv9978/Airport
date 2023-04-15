@@ -5,17 +5,18 @@ import { ProcessLog } from '../models/ProcessLog';
 import { HttpClient } from '@angular/common/http';
 import { map, pipe } from 'rxjs';
 import { LegStatusService } from './httpServices/leg-status.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalRService {
-  hubUrl = 'https://localhost:7297/terminalHub';
-  baseUrl = 'https://localhost:7297/api/LegStatus';
+  hubUrl = `${environment.baseHub}`;
   hubConnectionBuilder?: HubConnection;
-
   public hubLogs: ProcessLog[] = [];
-  constructor(private legService: LegStatusService) {}
+  public legsStatus: LegStatus[] = [];
+
+  constructor() {}
 
   public startConnection() {
     this.hubConnectionBuilder = new HubConnectionBuilder()
@@ -35,6 +36,10 @@ export class SignalRService {
     this.hubConnectionBuilder?.onclose((error) => {
       console.error(`Connection closed: ${error}`);
     });
+  }
+
+  stop() {
+    return this.hubConnectionBuilder?.stop();
   }
 
   public addLogsDataListener = () => {
@@ -72,15 +77,12 @@ export class SignalRService {
     );
   };
 
-  public getLegsFromServer = () => {
-    return this.legService.getStatusLegs();
-  };
   private updateLogExitDataListener = (obj: any) => {
     for (let i = this.hubLogs.length - 1; i >= 0; i--) {
       if (this.hubLogs[i].id === obj.procLogID) {
         this.hubLogs[i].exitTime = obj.exitTime;
+        break;
       }
-      break;
     }
   };
 }

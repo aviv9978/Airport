@@ -21,16 +21,6 @@ import { SignalRService } from './shared/services/signalR.service';
     SharedModule,
     RouterModule,
   ],
-  // providers: [
-  //   SignalRService,
-  //   {
-  //     provide: APP_INITIALIZER,
-  //     useFactory: (signalrService: SignalRService) => () =>
-  //       signalrService.initiateSignalrConnection(),
-  //     deps: [SignalRService],
-  //     multi: true,
-  //   },
-  // ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -9,12 +9,13 @@ import { LegsStatusComponent } from './components/legs-status/legs-status.compon
 
 @NgModule({
   declarations: [
-    LegsStatusComponent
+    LegsStatusComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    PublicRoutingModule
+    PublicRoutingModule,
+    RouterModule 
   ],
   exports: []
 })
