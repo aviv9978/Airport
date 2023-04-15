@@ -5,7 +5,7 @@ import { ProcessLog } from '../models/ProcessLog';
 import { HttpClient } from '@angular/common/http';
 import { map, pipe } from 'rxjs';
 import { LegStatusService } from './httpServices/leg-status.service';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +41,7 @@ export class SignalRService {
   stop() {
     return this.hubConnectionBuilder?.stop();
   }
-  
+
   public addLogsDataListener = () => {
     this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
@@ -81,8 +81,8 @@ export class SignalRService {
     for (let i = this.hubLogs.length - 1; i >= 0; i--) {
       if (this.hubLogs[i].id === obj.procLogID) {
         this.hubLogs[i].exitTime = obj.exitTime;
+        break;
       }
-      break;
     }
   };
 }

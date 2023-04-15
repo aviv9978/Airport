@@ -13,13 +13,7 @@ timer.Elapsed += async (s, e) => await CreateDepartureFlightAsync();
 timer.Start();
 //await CreateFlightAsync();
 //await CreateFlightAsync();
-Console.ReadLine(); var payload = new
-{
-    firstName = "John",
-    lastName = "Doe"
-};
-
-// Deserialize the JSON string into a RequestBody object
+Console.ReadLine();
 
 async Task CreateFlightAsync()
 {
