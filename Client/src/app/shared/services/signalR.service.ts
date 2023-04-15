@@ -2,9 +2,7 @@ import { LegStatus } from './../models/legStatus';
 import { Injectable, OnDestroy } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ProcessLog } from '../models/ProcessLog';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subscription, map, pipe, firstValueFrom, lastValueFrom } from 'rxjs';
-import { LegStatusService } from './httpServices/leg-status.service';
+import { Subscription, firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProcLogsService } from './httpServices/procLogs.service';
 
