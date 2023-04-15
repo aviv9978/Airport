@@ -11,7 +11,7 @@ import { SignalRService } from 'src/app/shared/services/signalR.service';
   styleUrls: ['./legs-status.component.scss'],
 })
 export class LegsStatusComponent implements OnInit, OnDestroy {
-  legsStatus: LegStatus[] = this.signalrService.legsStatus;
+  legsStatus: LegStatus[] = [];
   private legsSubscription!: Subscription;
 
   constructor(

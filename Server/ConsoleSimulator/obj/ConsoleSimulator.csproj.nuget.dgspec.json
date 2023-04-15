@@ -46,11 +46,11 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[7.0.5, )"
             },
             "NHibernate": {
               "target": "Package",
-              "version": "[5.4.1, )"
+              "version": "[5.4.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

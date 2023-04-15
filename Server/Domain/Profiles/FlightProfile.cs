@@ -9,6 +9,8 @@ namespace Airport.Profiles
     {
         public FlightProfile()
         {
+            //CreateMap<FlightInDTO, Flight>();
+
             CreateMap<FlightInDTO, Flight>()
                 .ForMember(dest => dest.Pilot,
                 opt => opt.MapFrom(src => src.Pilot))

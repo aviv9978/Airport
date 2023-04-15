@@ -1,22 +1,28 @@
 import { LegStatus } from './../models/legStatus';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { ProcessLog } from '../models/ProcessLog';
 import { HttpClient } from '@angular/common/http';
-import { map, pipe } from 'rxjs';
+import { BehaviorSubject, Subscription, map, pipe, firstValueFrom, lastValueFrom } from 'rxjs';
 import { LegStatusService } from './httpServices/leg-status.service';
 import { environment } from 'src/environments/environment';
+import { ProcLogsService } from './httpServices/procLogs.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SignalRService {
+export class SignalRService implements OnDestroy {
   hubUrl = `${environment.baseHub}`;
   hubConnectionBuilder?: HubConnection;
-  public hubLogs: ProcessLog[] = [];
   public legsStatus: LegStatus[] = [];
+  private procLogsSubscription!: Subscription;
 
-  constructor() {}
+  public procLogs: ProcessLog[] = [];
+
+  constructor(public procLogSerivce: ProcLogsService) {}
+  ngOnDestroy(): void {
+    this.procLogsSubscription.unsubscribe();
+  }
 
   public startConnection() {
     this.hubConnectionBuilder = new HubConnectionBuilder()
@@ -42,11 +48,14 @@ export class SignalRService {
     return this.hubConnectionBuilder?.stop();
   }
 
-  public addLogsDataListener = () => {
+  public addLogsDataListener = async () => {
+    let observable = this.procLogSerivce.getAllProcessLogs();
+    this.procLogs = await firstValueFrom(observable);
+
     this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
-      console.log(this.hubLogs);
-      this.hubLogs?.push(log);
+      console.log(this.procLogs);
+      this.procLogs.push(log);
     });
     this.hubConnectionBuilder?.on('logExitUpdate', (data) => {
       let obj = JSON.parse(data);
@@ -78,10 +87,9 @@ export class SignalRService {
   };
 
   private updateLogExitDataListener = (obj: any) => {
-    for (let i = this.hubLogs.length - 1; i >= 0; i--) {
-      if (this.hubLogs[i].id === obj.procLogID) {
-        this.hubLogs[i].exitTime = obj.exitTime;
-        break;
+    for (let i = this.procLogs.length - 1; i >= 0; i--) {
+      if (this.procLogs[i].id === obj.procLogID) {
+        this.procLogs[i].exitTime = obj.exitTime;
       }
     }
   };

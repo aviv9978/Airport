@@ -12,6 +12,6 @@ namespace Core.Entities.Terminal
         public virtual Pilot? Pilot { get; set; }
         [NotMapped]
         public virtual Leg? Leg { get; set; }
-        public virtual ICollection<ProcessLog>? ProcessLog { get; set; }
+        public virtual List<ProcessLog>? ProcessLog { get; set; }
     }
 }

@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LegStatusService {
-  constructor(private http: HttpClient) {}
   private legStatusUrl = `${environment.baseApi}/LegStatus`;
-
+  
+  constructor(private http: HttpClient) {}
+  
   getStatusLegs = () => {
     return this.http
       .get(`${this.legStatusUrl}/GetLegStatus`)
