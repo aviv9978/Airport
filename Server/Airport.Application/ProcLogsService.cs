@@ -18,15 +18,15 @@ namespace Airport.Application
         }
         public async Task<ICollection<ProcessLogOutDTO>> GetProcessLogsAsync()
         {
-            ICollection<ProcessLogOutDTO> processLogsOutDTO = new List<ProcessLogOutDTO>();
+            ICollection<ProcessLogOutDTO> procLogsOutDTO = new List<ProcessLogOutDTO>();
             var allProcLogs = await _procLogRepos.GetAllProcLogsAsync();
             if (allProcLogs != null)
                 foreach (var procLog in allProcLogs)
                 {
                     var prcLogOut = _mapper.Map<ProcessLogOutDTO>(procLog);
-                    processLogsOutDTO.Add(prcLogOut);
+                    procLogsOutDTO.Add(prcLogOut);
                 }
-            return processLogsOutDTO;
+            return procLogsOutDTO;
         }
 
     }

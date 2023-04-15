@@ -1,8 +1,11 @@
 ﻿using Core.DTOs.Outgoing;
 using Core.Entities;
+using Core.Entities.ForFlight;
+using Core.Entities.Terminal;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Airport.Infrastracture.Repositories
 {
@@ -49,15 +52,10 @@ namespace Airport.Infrastracture.Repositories
         }
         public async Task<List<ProcessLog>> GetAllProcLogsAsync()
         {
+
             try
             {
-                var allProcLogs = await _dBContext.ProcessLogger
-                    .Include(p => p.Flight)
-                      .ThenInclude(f => f.Pilot)
-                    .Include(p => p.Flight)
-                      .ThenInclude(f => f.Plane)
-                      .ThenInclude(p => p.Company)
-                      .ToListAsync();
+                var allProcLogs = _dBContext.ProcessLogger.ToList();
                 return allProcLogs;
             }
             catch (Exception e)

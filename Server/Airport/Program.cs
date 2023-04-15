@@ -9,12 +9,12 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
-builder.Services.AddDbContext<AirportDataContext>(options =>
-options.UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
+builder.Services.AddDbContext<AirportDataContext>(options => options.UseLazyLoadingProxies()
+.UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
 builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
-                        .ReferenceHandler = ReferenceHandler.Preserve);
+                        .ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddSwaggerGen();
 

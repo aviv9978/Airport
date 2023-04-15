@@ -14,6 +14,6 @@ export class ProcLogsService {
   getAllProcessLogs = () => {
     return this.http
       .get(`${this.procLogsUrl}/GetAllProcessLogs`)
-      .pipe(map((res: any) => res.$values));
+      .pipe(map((res: any) => res));
   };
 }

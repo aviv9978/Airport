@@ -1,5 +1,6 @@
 ﻿using Airport.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,6 +25,14 @@ namespace Airport.Controllers
             {
                 var allProcLogs = await _procLogService.GetProcessLogsAsync();
                 return Ok(allProcLogs);
+                //var settings = new JsonSerializerSettings
+                //{
+                //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                //};
+                //var allProcLogs = await _procLogService.GetProcessLogsAsync();
+                //var serializedProcLogs = JsonConvert.SerializeObject(allProcLogs, settings);
+
+                //return Content(serializedProcLogs, "application/json");
             }
             catch (Exception)
             {

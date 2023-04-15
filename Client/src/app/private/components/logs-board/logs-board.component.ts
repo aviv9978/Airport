@@ -23,12 +23,15 @@ export class LogsBoardComponent implements OnInit, OnDestroy {
     await this.signalrService.addLogsDataListener();
     this.procLogs = this.signalrService.procLogs;
     console.log(this.procLogs);
+    console.log('555');
+    console.log(this.procLogs);
   }
 
   ngOnDestroy(): void {
     this.signalrService.stop();
   }
   procLogSort(property: string) {
+    console.log(this.procLogs);
     this.procLogs.sort((a, b) => {
       const aValue = a[property as keyof ProcessLog];
       const bValue = b[property as keyof ProcessLog];
@@ -38,6 +41,8 @@ export class LogsBoardComponent implements OnInit, OnDestroy {
   }
 
   flightSort(property: string) {
+    console.log(this.procLogs);
+
     this.procLogs.sort((a, b) => {
       const aValue = this.getProperty(a.flight, property as keyof Flight);
       const bValue = this.getProperty(b.flight, property as keyof Flight);
