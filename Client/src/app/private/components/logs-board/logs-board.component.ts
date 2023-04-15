@@ -13,14 +13,16 @@ import { Plane } from 'src/app/shared/models/forFlight/Plane';
   styleUrls: ['./logs-board.component.scss'],
 })
 export class LogsBoardComponent implements OnInit, OnDestroy {
-  procLogs: ProcessLog[] = this.signalrService.hubLogs;
+  procLogs: ProcessLog[] = [];
   sortOrder = 'asc';
 
   constructor(public signalrService: SignalRService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.signalrService.startConnection();
-    this.signalrService.addLogsDataListener();
+    await this.signalrService.addLogsDataListener();
+    this.procLogs = this.signalrService.procLogs;
+    console.log(this.procLogs);
   }
 
   ngOnDestroy(): void {

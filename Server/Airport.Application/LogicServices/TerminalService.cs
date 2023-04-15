@@ -7,13 +7,6 @@ using Core.Enums;
 using Core.Hubs;
 using Core.Interfaces.Repositories;
 using EnumsNET;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Airport.Application.LogicServices
 {
@@ -23,8 +16,8 @@ namespace Airport.Application.LogicServices
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
         private readonly IFlightRepository _flightRepos;
-        private static ICollection<Leg> _legs;
-        public static ICollection<Leg> Legs => _legs;
+        public static List<Leg> _legs;
+        public static List<Leg> Legs => _legs;
         private readonly IMapper _mapper;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
             IFlightRepository rep, ITerminalHub flightHub,
@@ -40,16 +33,15 @@ namespace Airport.Application.LogicServices
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
         {
             await _flightRepos.AddFlightAsync(flight);
-            IEnumerable<Leg> flightFirstLeg;
+            IEnumerable<Leg> flightFirstLegs;
             await CommonStartAsync();
 
-            if (isDeparture)
-                flightFirstLeg = _legs.Where(leg => leg.LegType == Core.Enums.LegType.StartForDeparture);
-            else flightFirstLeg = _legs.Where(leg => leg.LegType == Core.Enums.LegType.StartForLand);
+            var legType = isDeparture ? LegType.StartForDeparture : LegType.StartForLand;
+            flightFirstLegs = _legs.Where(leg => leg.LegType == legType);
 
             while (true) //instead of event for now
             {
-                foreach (var leg in flightFirstLeg)
+                foreach (var leg in flightFirstLegs)
                 {
                     if (leg.IsOccupied == false)
                     {
@@ -60,7 +52,7 @@ namespace Airport.Application.LogicServices
                         return;
                     }
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
             }
         }
 

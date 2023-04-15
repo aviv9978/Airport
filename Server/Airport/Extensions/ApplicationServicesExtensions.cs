@@ -1,4 +1,6 @@
-﻿using Airport.Application.ILogicServices;
+﻿using Airport.Application;
+using Airport.Application.ILogicServices;
+using Airport.Application.Interfaces;
 using Airport.Application.LogicServices;
 using Airport.Infrastracture.Repositories;
 using Core.Hubs;
@@ -14,12 +16,14 @@ namespace FlightSimulator.Extensions
         {
             services.AddScoped<IFlightRepository, FlightRepository>();
             services.AddScoped<IProcLogRepository, ProcLogRepository>();
-            services.AddScoped<IPilotRepository, PilotRepository>(); 
+            services.AddScoped<IPilotRepository, PilotRepository>();
             services.AddScoped<ILegRepostiroy, LegRepository>();
             services.AddScoped<ITerminalService, TerminalService>();
             services.AddScoped<ILegStatusService, LegStatusService>();
+            services.AddScoped<IProcLogService, ProcLogsService>();
             services.AddSingleton<ITerminalHub, TerminalHub>();
-            services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext => {
+            services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext =>
+            {
                 var error = ActionContext.ModelState.Where(e => e.Value.Errors.Count > 0).SelectMany(e => e.Value.Errors).Select(e => e.ErrorMessage).ToArray();
                 var errorresponce = new APIValidationErrorResponce
                 {

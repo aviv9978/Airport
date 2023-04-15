@@ -36,7 +36,7 @@ namespace Airport.Infrastracture.Repositories
             }
         }
 
-        public async Task<ICollection<Leg>> GetLegsAsync()
+        public async Task<List<Leg>> GetLegsAsync()
         {
             try
             {

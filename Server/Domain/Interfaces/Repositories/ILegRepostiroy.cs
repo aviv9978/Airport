@@ -12,6 +12,6 @@ namespace Core.Interfaces.Repositories
         int GetLegsCount();
         Task AddLegAsync(Leg leg);
 
-        Task<ICollection<Leg>> GetLegsAsync();
+        Task<List<Leg>> GetLegsAsync();
     }
 }
