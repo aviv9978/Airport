@@ -25,14 +25,6 @@ namespace Airport.Controllers
             {
                 var allProcLogs = await _procLogService.GetProcessLogsAsync();
                 return Ok(allProcLogs);
-                //var settings = new JsonSerializerSettings
-                //{
-                //    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                //};
-                //var allProcLogs = await _procLogService.GetProcessLogsAsync();
-                //var serializedProcLogs = JsonConvert.SerializeObject(allProcLogs, settings);
-
-                //return Content(serializedProcLogs, "application/json");
             }
             catch (Exception)
             {
