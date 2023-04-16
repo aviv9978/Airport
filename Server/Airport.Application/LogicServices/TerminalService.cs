@@ -127,7 +127,7 @@ namespace Airport.Application.LogicServices
             {
                 Message = message,
                 Flight = flight,
-                LegNum = ((int)flight.Leg.CurrentLeg),
+                LegNumber = flight?.Leg?.CurrentLeg.AsString(EnumFormat.Description),
                 EnterTime = DateTime.Now
             };
             await _procLogRepos.AddProcLogAsync(procLog);

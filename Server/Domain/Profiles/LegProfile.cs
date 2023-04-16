@@ -25,7 +25,7 @@ namespace Core.Profiles
              .ForMember(dest => dest.Flight,
              opt => opt.MapFrom(src => src.Flight))
              .ForMember(dest => dest.LegNumber,
-             opt => opt.MapFrom(src => ((LegNumber)src.LegNum).AsString(EnumFormat.Description)));
+             opt => opt.MapFrom(src => src.LegNumber));
         }
     }
 }
