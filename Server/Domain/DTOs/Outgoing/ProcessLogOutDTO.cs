@@ -11,7 +11,7 @@ namespace Core.DTOs.Outgoing
     {
         public int Id { get; set; }
         public virtual FlightOutDTO? Flight { get; set; }
-        public int LegNum { get; set; }
+        public string? LegNumber { get; set; }
         public DateTime? EnterTime { get; set; }
         public DateTime? ExitTime { get; set; }
         public string? Message { get; set; }

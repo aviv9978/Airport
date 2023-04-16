@@ -10,6 +10,6 @@ namespace Airport.Application.Interfaces
 {
     public interface IProcLogService
     {
-        Task<ICollection<ProcessLogOutDTO>> GetProcessLogsAsync();
+        Task<List<ProcessLogOutDTO>> GetProcessLogsAsync();
     }
 }

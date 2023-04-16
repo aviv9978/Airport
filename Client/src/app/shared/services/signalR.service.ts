@@ -49,11 +49,11 @@ export class SignalRService implements OnDestroy {
   public addLogsDataListener = async () => {
     let observable = this.procLogSerivce.getAllProcessLogs();
     this.procLogs = await firstValueFrom(observable);
-
+    this.procLogs.sort((a, b) => new Date(b.enterTime).getTime() - new Date(a.enterTime).getTime());
     this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
       console.log(this.procLogs);
-      this.procLogs.push(log);
+      this.procLogs.unshift(log);
     });
     this.hubConnectionBuilder?.on('logExitUpdate', (data) => {
       let obj = JSON.parse(data);
@@ -85,7 +85,7 @@ export class SignalRService implements OnDestroy {
   };
 
   private updateLogExitDataListener = (obj: any) => {
-    for (let i = this.procLogs.length - 1; i >= 0; i--) {
+    for (let i = 0; i <= this.procLogs.length; i++) {
       if (this.procLogs[i].id === obj.procLogID) {
         this.procLogs[i].exitTime = obj.exitTime;
       }

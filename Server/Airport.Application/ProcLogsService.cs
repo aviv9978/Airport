@@ -16,9 +16,9 @@ namespace Airport.Application
             _procLogRepos = procLogRepos;
             _mapper = mapper;
         }
-        public async Task<ICollection<ProcessLogOutDTO>> GetProcessLogsAsync()
+        public async Task<List<ProcessLogOutDTO>> GetProcessLogsAsync()
         {
-            ICollection<ProcessLogOutDTO> procLogsOutDTO = new List<ProcessLogOutDTO>();
+            var procLogsOutDTO = new List<ProcessLogOutDTO>();
             var allProcLogs = await _procLogRepos.GetAllProcLogsAsync();
             if (allProcLogs != null)
                 foreach (var procLog in allProcLogs)

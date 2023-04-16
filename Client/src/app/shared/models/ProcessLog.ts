@@ -2,7 +2,7 @@ import { Flight } from './Flight';
 
 export interface ProcessLog {
   id: number;
-  legNum: number;
+  legNumber: string;
   flight: Flight;
   enterTime: Date;
   exitTime: Date;

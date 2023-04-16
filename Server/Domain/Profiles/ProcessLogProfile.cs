@@ -19,8 +19,8 @@ namespace Core.Profiles
                     opt => opt.MapFrom(src => src.EnterTime))
                     .ForMember(dest => dest.ExitTime,
                     opt => opt.MapFrom(src => src.ExitTime))
-                    .ForMember(dest => dest.LegNum,
-                    opt => opt.MapFrom(src => src.LegNum));
+                    .ForMember(dest => dest.LegNumber,
+                    opt => opt.MapFrom(src => src.LegNumber));
         }
     }
 }
