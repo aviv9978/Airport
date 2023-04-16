@@ -24,14 +24,14 @@ namespace FlightSimulator.Controllers
 
         [HttpPost]
         [Route("AddDepartureFlight")]
-        public async Task<IActionResult> AddDepartureFlight([FromBody] FlightInDTO flightDto) => await startFlightAsync(flightDto, true);
+        public async Task<IActionResult> AddDepartureFlight([FromBody] FlightInDTO flightDto) => await StartFlightAsync(flightDto, true);
 
 
         [HttpPost]
         [Route("AddLandingFlight")]
-        public async Task<IActionResult> AddLandingFlight([FromBody] FlightInDTO flightDto) => await startFlightAsync(flightDto, false);
+        public async Task<IActionResult> AddLandingFlight([FromBody] FlightInDTO flightDto) => await StartFlightAsync(flightDto, false);
 
-        private async Task<IActionResult> startFlightAsync(FlightInDTO flightDto, bool isDeparture)
+        private async Task<IActionResult> StartFlightAsync(FlightInDTO flightDto, bool isDeparture)
         {
             try
             {

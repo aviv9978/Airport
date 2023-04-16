@@ -52,22 +52,23 @@ namespace Airport.Application.LogicServices
                         return;
                     }
                 }
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             }
         }
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
+
             int procLogId = await InLegProcess(flight);
             if (isDeparture)
             {
-                if (flight.Leg.LegType.HasFlag(Core.Enums.LegType.BeforeFly))
+                if (flight.Leg.LegType.HasFlag(LegType.BeforeFly))
                 {
                     await FinishingFlight(flight, procLogId);
                     return;
                 }
             }
-            else if (flight.Leg.LegType == Core.Enums.LegType.StartForDeparture)
+            else if (flight.Leg.LegType == LegType.StartForDeparture)
             {
                 await FinishingFlight(flight, procLogId);
                 return;
@@ -143,7 +144,7 @@ namespace Airport.Application.LogicServices
         {
             await _procLogRepos.UpdateOutLogAsync(procLogId, exitTime);
             await _terminalHub.SendLogOutUpdateAsync(procLogId, exitTime);
-            var legNumber = ((LegNumber)currentLeg).AsString(EnumFormat.Description);
+            var legNumber = currentLeg.AsString(EnumFormat.Description);
             await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = legNumber, Flight = null });
         }
         private async Task CommonStartAsync()
