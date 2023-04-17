@@ -32,9 +32,8 @@ namespace Airport.Application.LogicServices
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
         {
-            await _flightRepos.AddFlightAsync(flight);
             IEnumerable<Leg> flightFirstLegs;
-            await CommonStartAsync();
+            await AddingFlightInitArrAsync(flight);
 
             var legType = isDeparture ? LegType.StartForDeparture : LegType.StartForLand;
             flightFirstLegs = _legs.Where(leg => leg.LegType == legType);
@@ -52,14 +51,19 @@ namespace Airport.Application.LogicServices
                         return;
                     }
                 }
-                //Thread.Sleep(1000);
             }
+        }
+
+        private async Task AddingFlightInitArrAsync(Flight flight)
+        {
+            await _flightRepos.AddFlightAsync(flight);
+            await InitLegsArrayAsync();
         }
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
         {
 
-            int procLogId = await InLegProcess(flight);
+            int procLogId = await InLegProcessAsync(flight);
             if (isDeparture)
             {
                 if (flight.Leg.LegType.HasFlag(LegType.BeforeFly))
@@ -77,7 +81,7 @@ namespace Airport.Application.LogicServices
             await MoveLegAsync(flight, isDeparture, procLogId);
         }
 
-        private async Task<int> InLegProcess(Flight flight)
+        private async Task<int> InLegProcessAsync(Flight flight)
         {
             await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
@@ -97,13 +101,7 @@ namespace Airport.Application.LogicServices
                 {
                     if (leg != null && leg.IsOccupied == false)
                     {
-                        var currentLeg = flight.Leg.CurrentLeg;
-                        flight.Leg.Flight = null;
-                        flight.Leg.IsOccupied = false;
-                        flight.Leg = leg;
-                        leg.Flight = flight;
-                        leg.IsOccupied = true;
-                        await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
+                        await ChangingLegStatusAsync(flight, procLogId, leg);
                         await NextLegAsync(flight, isDeparture);
                         exit = true;
                         break;
@@ -111,6 +109,17 @@ namespace Airport.Application.LogicServices
                 }
                 if (exit) break;
             }
+        }
+
+        private async Task ChangingLegStatusAsync(Flight flight, int procLogId, Leg? leg)
+        {
+            var currentLeg = flight.Leg.CurrentLeg;
+            flight.Leg.Flight = null;
+            flight.Leg.IsOccupied = false;
+            flight.Leg = leg;
+            leg.Flight = flight;
+            leg.IsOccupied = true;
+            await UpdateLogExit(procLogId, DateTime.Now, currentLeg);
         }
 
         private async Task FinishingFlight(Flight flight, int procLogId)
@@ -131,13 +140,18 @@ namespace Airport.Application.LogicServices
                 LegNumber = flight?.Leg?.CurrentLeg.AsString(EnumFormat.Description),
                 EnterTime = DateTime.Now
             };
+            await UpdatingLogsAsync(procLog);
+            return procLog.Id;
+        }
+
+        private async Task UpdatingLogsAsync(ProcessLog procLog)
+        {
             await _procLogRepos.AddProcLogAsync(procLog);
             var procLogOutDTO = _mapper.Map<ProcessLogOutDTO>(procLog);
             await _terminalHub.SendLogAsync(procLogOutDTO);
             var legStatusOutDTO = _mapper.Map<LegStatusOutDTO>(procLog);
             legStatusOutDTO.IsOccupied = true;
             await _terminalHub.UpdateEnterLeg(legStatusOutDTO);
-            return procLog.Id;
         }
 
         private async Task UpdateLogExit(int procLogId, DateTime exitTime, LegNumber currentLeg)
@@ -147,7 +161,7 @@ namespace Airport.Application.LogicServices
             var legNumber = currentLeg.AsString(EnumFormat.Description);
             await _terminalHub.UpdateLogOutLeg(new LegStatusOutDTO { IsOccupied = false, LegNumber = legNumber, Flight = null });
         }
-        private async Task CommonStartAsync()
+        private async Task InitLegsArrayAsync()
         {
             if (_legs == null)
                 _legs = await _legRepos.GetLegsAsync();
