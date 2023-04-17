@@ -13,9 +13,9 @@ namespace Airport.Application.LogicServices
         {
             _mapper = mapper;
         }
-        public ICollection<LegStatusOutDTO> GetLegsStatus()
+        public List<LegStatusOutDTO> GetLegsStatus()
         {
-            ICollection<LegStatusOutDTO> legsStatus = new List<LegStatusOutDTO>();
+            List<LegStatusOutDTO> legsStatus = new List<LegStatusOutDTO>();
             var legs = TerminalService.Legs;
             if (legs != null)
                 foreach (var leg in legs)

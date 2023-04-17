@@ -13,13 +13,13 @@ while (true)
     await semaphore.WaitAsync(3); // Wait until there are 3 available slots in the semaphore
     try
     {
-        await SendApiRequests(); // Send both API requests
+        await SendApiRequests(); 
     }
     finally
     {
-        semaphore.Release(3); // Release 3 semaphore slots when both API requests are done
+        semaphore.Release(3); // Release 3 semaphore slots when 3 API requests are done
     }
-    await Task.Delay(1000); // Wait for 1 second before sending the next set of API requests
+    await Task.Delay(1000); 
 }
 
 async Task CreateDepartureFlightAsync()
@@ -78,7 +78,7 @@ async Task SendApiRequests()
     var request1 = CreateDepartureFlightAsync();
     await Task.Delay(2000);
     var request2 = CreateLandingFlightAsync();
-    await Task.Delay(500);
+    await Task.Delay(2000);
     var request3 = CreateDepartureFlightAsync();
     await Task.WhenAll(request1, request2, request3);
 }

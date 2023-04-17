@@ -33,8 +33,4 @@ export class LegsStatusComponent implements OnInit, OnDestroy {
     this.legsSubscription.unsubscribe();
     this.signalrService.stop();
   }
-
-  clicktho() {
-    console.log(this.legsStatus);
-  }
 }
