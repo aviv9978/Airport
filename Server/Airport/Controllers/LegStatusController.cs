@@ -20,11 +20,11 @@ namespace Airport.Controllers
 
         [HttpGet]
         [Route("GetLegStatus")]
-        public IActionResult GetLegsStatus()
+        public async Task<IActionResult> GetLegsStatus()
         {
             try
             {
-                var LegsStatus =  _legService.GetLegsStatusAsync();
+                var LegsStatus = await _legService.GetLegsStatusAsync();
                 return Ok(LegsStatus);
             }
             catch (Exception e)

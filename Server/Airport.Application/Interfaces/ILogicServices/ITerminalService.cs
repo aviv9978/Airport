@@ -10,6 +10,6 @@ namespace Airport.Application.ILogicServices
     public interface ITerminalService
     {
         Task StartFlightAsync(Flight flight, bool isDeparture);
-        static ICollection<Leg>? Legs { get; }
+        Task ResetLegsAsync();
     }
 }

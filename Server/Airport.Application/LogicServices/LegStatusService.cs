@@ -18,6 +18,9 @@ namespace Airport.Application.LogicServices
         }
         public async Task<IEnumerable<LegStatusOutDTO>> GetLegsStatusAsync()
         {
+            try
+            {
+
             var legsStatus = new List<LegStatusOutDTO>();
             var legs = await _unitOfWork.Leg.GetAllAsync();
             if (legs != null)
@@ -27,6 +30,12 @@ namespace Airport.Application.LogicServices
                     legsStatus.Add(legStatus);
                 }
             return legsStatus;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
     }
 }

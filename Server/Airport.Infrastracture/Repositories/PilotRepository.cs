@@ -5,15 +5,16 @@ using Microsoft.Extensions.Logging;
 
 namespace Airport.Infrastracture.Repositories
 {
-    public class PilotRepository : IPilotRepository
+    public class PilotRepository : GenericRepository<Pilot>, IPilotRepository
     {
         private readonly AirportDataContext _dBContext;
-        private readonly ILogger<PilotRepository> _logger;
+        //private readonly ILogger<PilotRepository> _logger;
 
-        public PilotRepository(AirportDataContext dbContext, ILogger<PilotRepository> logger)
+        public PilotRepository(AirportDataContext dbContext)
+            :base(dbContext)
         {
             _dBContext = dbContext;
-            _logger = logger;
+            //_logger = logger;
         }
         public async Task AddPilotAsync(Pilot pilot)
         {
@@ -21,11 +22,11 @@ namespace Airport.Infrastracture.Repositories
             {
                 await _dBContext.AddAsync(pilot);
                 await _dBContext.SaveChangesAsync();
-                _logger.LogWarning("Added pilot");
+              //  _logger.LogWarning("Added pilot");
             }
             catch (Exception)
             {
-                _logger.LogWarning("Exepction");
+                //_logger.LogWarning("Exepction");
                 throw;
             }
         }

@@ -15,10 +15,10 @@ namespace FlightSimulator.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IFlightRepository, FlightRepository>();
-            services.AddScoped<IProcLogRepository, ProcLogRepository>();
-            services.AddScoped<IPilotRepository, PilotRepository>();
-            services.AddScoped<ILegRepostiroy, LegRepository>();
+           // services.AddScoped<IFlightRepository, FlightRepository>();
+           // services.AddScoped<IProcLogRepository, ProcLogRepository>();
+           // services.AddScoped<IPilotRepository, PilotRepository>();
+          //  services.AddScoped<ILegRepostiroy, LegRepository>();
             services.AddScoped<ITerminalService, TerminalService>();
             services.AddScoped<ILegStatusService, LegStatusService>();
             services.AddScoped<IProcLogService, ProcLogsService>();

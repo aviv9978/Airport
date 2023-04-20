@@ -17,18 +17,14 @@ namespace Airport.Infrastracture.Repositories
         public IPilotRepository Pilot { get; private set; }
         private bool _disposed = false;
         public UnitOfWork(AirportDataContext dbContext,
-            ILogger<UnitOfWork> logger,
-            IFlightRepository flightRepository,
-            ILegRepostiroy leg,
-            IProcLogRepository processLog,
-            IPilotRepository pilot)
+            ILogger<UnitOfWork> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
-            Flight = flightRepository;
-            Leg = leg;
-            ProcessLog = processLog;
-            Pilot = pilot;
+            Flight = new FlightRepository(dbContext);
+            Leg = new LegRepository(dbContext);
+            ProcessLog = new ProcLogRepository(dbContext);
+            Pilot = new PilotRepository(dbContext);
         }
         public AirportDataContext DatabaseContext() => _dbContext;
 

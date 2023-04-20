@@ -14,12 +14,12 @@ namespace Airport.Infrastracture.Repositories
     public class LegRepository : GenericRepository<Leg>, ILegRepostiroy
     {
         private readonly AirportDataContext _dBContext;
-        private readonly ILogger<LegRepository> _logger;
-        public LegRepository(AirportDataContext dbContext, ILogger<LegRepository> logger)
+      //  private readonly ILogger<LegRepository> _logger;
+        public LegRepository(AirportDataContext dbContext)
             : base(dbContext)
         {
             _dBContext = dbContext;
-            _logger = logger;
+            //_logger = logger;
         }
         public int GetLegsCount() => _dBContext.Legs.Count();
 

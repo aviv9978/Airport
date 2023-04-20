@@ -12,13 +12,13 @@ namespace Airport.Infrastracture.Repositories
     public class ProcLogRepository : GenericRepository<ProcessLog>, IProcLogRepository
     {
         private readonly AirportDataContext _dBContext;
-        private readonly ILogger<ProcLogRepository> _logger;
+       // private readonly ILogger<ProcLogRepository> _logger;
 
-        public ProcLogRepository(AirportDataContext dbContext, ILogger<ProcLogRepository> logger)
+        public ProcLogRepository(AirportDataContext dbContext)
             :base(dbContext) 
         {
             _dBContext = dbContext;
-            _logger = logger;
+           // _logger = logger;
         }
         public async Task UpdateOutLogAsync(int procLogId, DateTime exitTime)
         {
@@ -28,11 +28,11 @@ namespace Airport.Infrastracture.Repositories
                     .FirstOrDefaultAsync(log => log.Id == procLogId);
                 reqProcLog.ExitTime = exitTime;
                 _dBContext.Update(reqProcLog);
-                _logger.LogInformation("updated log");
+               // _logger.LogInformation("updated log");
             }
             catch (Exception e)
             {
-                _logger.LogWarning("Exepction", e.Message);
+              //  _logger.LogWarning("Exepction", e.Message);
                 throw;
             }
         }
