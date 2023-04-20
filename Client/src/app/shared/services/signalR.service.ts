@@ -49,7 +49,10 @@ export class SignalRService implements OnDestroy {
   public addLogsDataListener = async () => {
     let observable = this.procLogSerivce.getAllProcessLogs();
     this.procLogs = await firstValueFrom(observable);
-    this.procLogs.sort((a, b) => new Date(b.enterTime).getTime() - new Date(a.enterTime).getTime());
+    this.procLogs.sort(
+      (a, b) =>
+        new Date(b.enterTime).getTime() - new Date(a.enterTime).getTime()
+    );
     this.hubConnectionBuilder?.on('addLog', (log: ProcessLog) => {
       console.log(log);
       console.log(this.procLogs);
@@ -70,13 +73,6 @@ export class SignalRService implements OnDestroy {
             legStatus.isOccupied = legStatusServer.isOccupied;
             if (legStatus.isOccupied) legStatus.flight = legStatusServer.flight;
             else legStatus.flight = undefined;
-            console.log(
-              `legNum: ${
-                legStatus.legNumber
-              } changed from ${!legStatus.isOccupied} to ${
-                legStatus.isOccupied
-              }`
-            );
             break;
           }
         }

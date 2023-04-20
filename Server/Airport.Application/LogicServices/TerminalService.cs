@@ -5,6 +5,7 @@ using Core.Entities;
 using Core.Entities.Terminal;
 using Core.Enums;
 using Core.Hubs;
+using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using EnumsNET;
 
@@ -12,22 +13,26 @@ namespace Airport.Application.LogicServices
 {
     public class TerminalService : ITerminalService
     {
+        private readonly IGenericRepository<T> _repos;
         private readonly ITerminalHub _terminalHub;
         private readonly ILegRepostiroy _legRepos;
         private readonly IProcLogRepository _procLogRepos;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IFlightRepository _flightRepos;
         public static List<Leg> _legs;
         public static List<Leg> Legs => _legs;
         private readonly IMapper _mapper;
         public TerminalService(ILegRepostiroy legRepos, IProcLogRepository procLog,
             IFlightRepository rep, ITerminalHub flightHub,
-            IMapper mapper)
+            IMapper mapper, IUnitOfWork unitOfWork, IGenericRepository<T> repos)
         {
             _legRepos = legRepos;
             _procLogRepos = procLog;
             _flightRepos = rep;
             _terminalHub = flightHub;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
+            _repos = repos;
         }
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
@@ -56,7 +61,8 @@ namespace Airport.Application.LogicServices
 
         private async Task AddingFlightInitArrAsync(Flight flight)
         {
-            await _flightRepos.AddFlightAsync(flight);
+            await _unitOfWork.Flights.AddAsync(flight);
+            await _unitOfWork.CommitAsync();
             await InitLegsArrayAsync();
         }
 

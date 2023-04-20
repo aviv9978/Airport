@@ -7,7 +7,7 @@ namespace Airport.Infrastracture
 {
     public class AirportDataContext : DbContext
     {
-        public AirportDataContext(DbContextOptions<AirportDataContext> options) : base(options) 
+        public AirportDataContext(DbContextOptions<AirportDataContext> contextOptions) : base(contextOptions) 
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

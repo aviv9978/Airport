@@ -4,6 +4,7 @@ using Airport.Application.Interfaces;
 using Airport.Application.LogicServices;
 using Airport.Infrastracture.Repositories;
 using Core.Hubs;
+using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using FlightSimulator.Errors;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace FlightSimulator.Extensions
             services.AddScoped<ILegStatusService, LegStatusService>();
             services.AddScoped<IProcLogService, ProcLogsService>();
             services.AddSingleton<ITerminalHub, TerminalHub>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext =>
             {
                 var error = ActionContext.ModelState.Where(e => e.Value.Errors.Count > 0).SelectMany(e => e.Value.Errors).Select(e => e.ErrorMessage).ToArray();

@@ -10,7 +10,6 @@ namespace Core.Interfaces.Repositories
     public interface ILegRepostiroy
     {
         int GetLegsCount();
-        Task AddLegAsync(Leg leg);
 
         Task<List<Leg>> GetLegsAsync();
     }

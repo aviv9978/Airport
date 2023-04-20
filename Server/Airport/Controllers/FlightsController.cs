@@ -37,7 +37,6 @@ namespace FlightSimulator.Controllers
             {
                 var flight = _mapper.Map<Flight>(flightDto);
                 await _terminalService.StartFlightAsync(flight, isDeparture);
-                _logger.LogError("Successssss");
                 return Ok();
             }
 
