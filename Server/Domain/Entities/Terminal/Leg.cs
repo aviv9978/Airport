@@ -14,9 +14,7 @@ namespace Core.Entities.Terminal
         public LegType LegType { get; set; }
         [Required]
         public int PauseTime { get; set; }
-        [NotMapped]
         public bool IsOccupied { get; set; }
-        [NotMapped]
         public virtual Flight? Flight { get; set; }
     }
 }

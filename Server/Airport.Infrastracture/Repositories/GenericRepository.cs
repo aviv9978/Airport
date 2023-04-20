@@ -1,45 +1,31 @@
 ﻿using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Airport.Infrastracture.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly DbContext _dbContext;
+        private readonly AirportDataContext _dbContext;
+        private readonly DbSet<T> _dbSet;
+        public GenericRepository(AirportDataContext dbContext)
+        {
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
+        }
+        public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-        protected GenericRepository(DbContext context)
-        {
-            _dbContext = context;
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression) => await _dbSet.Where(expression).ToListAsync();
 
-        public async Task<T> GetByIdAsync(int id)
-        {
-            return await _dbContext.Set<T>().FindAsync(id);
-        }
-        protected GenericRepository(IUnitOfWork unitOfWork)
-        {
-            if (unitOfWork == null)
-            {
-                throw new ArgumentNullException(nameof(unitOfWork));
-            }
-            _dbContext = unitOfWork.DatabaseContext();
-        }
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbContext.Set<T>().ToListAsync();
+        public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
-        public async Task AddAsync(T entity)
-        {
-            await _dbContext.Set<T>().AddAsync(entity);
-        }
 
-        public void Delete(T entity)
-        {
-            _dbContext.Set<T>().Remove(entity);
-        }
+        public void Remove(T entity) => _dbSet.Remove(entity);
 
-        public void Update(T entity)
-        {
-            _dbContext.Set<T>().Update(entity);
-        }
+
+        public void Update(T entity) => _dbSet.Update(entity);
+
     }
 }

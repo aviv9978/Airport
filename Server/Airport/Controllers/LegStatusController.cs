@@ -24,7 +24,7 @@ namespace Airport.Controllers
         {
             try
             {
-                var LegsStatus =  _legService.GetLegsStatus();
+                var LegsStatus =  _legService.GetLegsStatusAsync();
                 return Ok(LegsStatus);
             }
             catch (Exception e)

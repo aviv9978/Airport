@@ -11,11 +11,24 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly ILogger<UnitOfWork> _logger;
         private readonly AirportDataContext _dbContext;
+        public IFlightRepository Flight { get; private set; }
+        public ILegRepostiroy Leg{ get; private set; }
+        public IProcLogRepository ProcessLog { get; private set; }
+        public IPilotRepository Pilot { get; private set; }
         private bool _disposed = false;
-        public UnitOfWork(AirportDataContext dbContext, ILogger<UnitOfWork> logger)
+        public UnitOfWork(AirportDataContext dbContext,
+            ILogger<UnitOfWork> logger,
+            IFlightRepository flightRepository,
+            ILegRepostiroy leg,
+            IProcLogRepository processLog,
+            IPilotRepository pilot)
         {
             _dbContext = dbContext;
             _logger = logger;
+            Flight = flightRepository;
+            Leg = leg;
+            ProcessLog = processLog;
+            Pilot = pilot;
         }
         public AirportDataContext DatabaseContext() => _dbContext;
 
@@ -28,7 +41,7 @@ namespace Airport.Infrastracture.Repositories
             }
             catch (Exception e)
             {
-                _logger.LogWarning("Exepction in UnitOfWork, SaveChanges FAILED", e.Message);
+                _logger.LogWarning($"Exepction in UnitOfWork, SaveChanges FAILED: {e.Message}");
                 throw;
             }
         }
@@ -48,6 +61,11 @@ namespace Airport.Infrastracture.Repositories
         {
             return new GenericRepository<T>(_dbContext);
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         private void Dispose(bool disposing)
         {
             if (!_disposed)
@@ -58,11 +76,6 @@ namespace Airport.Infrastracture.Repositories
                 }
             }
             _disposed = true;
-        }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
     }

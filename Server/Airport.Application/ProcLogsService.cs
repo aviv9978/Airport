@@ -2,24 +2,25 @@
 using AutoMapper;
 using Core.DTOs.Outgoing;
 using Core.Entities;
+using Core.Interfaces;
 using Core.Interfaces.Repositories;
 
 namespace Airport.Application
 {
     public class ProcLogsService : IProcLogService
     {
-        private readonly IProcLogRepository _procLogRepos;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ProcLogsService(IProcLogRepository procLogRepos, IMapper mapper)
+        public ProcLogsService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _procLogRepos = procLogRepos;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<List<ProcessLogOutDTO>> GetProcessLogsAsync()
         {
             var procLogsOutDTO = new List<ProcessLogOutDTO>();
-            var allProcLogs = await _procLogRepos.GetAllProcLogsAsync();
+            var allProcLogs = await _unitOfWork.ProcessLog.GetAllAsync();
             if (allProcLogs != null)
                 foreach (var procLog in allProcLogs)
                 {

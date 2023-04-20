@@ -163,6 +163,12 @@ namespace Airport.Infrastracture.Migrations
                     b.Property<int>("CurrentLeg")
                         .HasColumnType("int");
 
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsOccupied")
+                        .HasColumnType("bit");
+
                     b.Property<int>("LegType")
                         .HasColumnType("int");
 
@@ -174,6 +180,8 @@ namespace Airport.Infrastracture.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FlightId");
+
                     b.ToTable("Legs");
 
                     b.HasData(
@@ -181,6 +189,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 1,
                             CurrentLeg = 1,
+                            IsOccupied = false,
                             LegType = 2,
                             NextPosibbleLegs = 2,
                             PauseTime = 3
@@ -189,6 +198,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 2,
                             CurrentLeg = 2,
+                            IsOccupied = false,
                             LegType = 4,
                             NextPosibbleLegs = 4,
                             PauseTime = 4
@@ -197,6 +207,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 3,
                             CurrentLeg = 4,
+                            IsOccupied = false,
                             LegType = 4,
                             NextPosibbleLegs = 8,
                             PauseTime = 5
@@ -205,6 +216,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 4,
                             CurrentLeg = 8,
+                            IsOccupied = false,
                             LegType = 12,
                             NextPosibbleLegs = 272,
                             PauseTime = 2
@@ -213,6 +225,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 5,
                             CurrentLeg = 16,
+                            IsOccupied = false,
                             LegType = 4,
                             NextPosibbleLegs = 96,
                             PauseTime = 3
@@ -221,6 +234,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 6,
                             CurrentLeg = 32,
+                            IsOccupied = false,
                             LegType = 1,
                             NextPosibbleLegs = 128,
                             PauseTime = 4
@@ -229,6 +243,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 7,
                             CurrentLeg = 64,
+                            IsOccupied = false,
                             LegType = 1,
                             NextPosibbleLegs = 128,
                             PauseTime = 4
@@ -237,6 +252,7 @@ namespace Airport.Infrastracture.Migrations
                         {
                             Id = 8,
                             CurrentLeg = 128,
+                            IsOccupied = false,
                             LegType = 4,
                             NextPosibbleLegs = 8,
                             PauseTime = 5
@@ -274,6 +290,15 @@ namespace Airport.Infrastracture.Migrations
                     b.Navigation("Pilot");
 
                     b.Navigation("Plane");
+                });
+
+            modelBuilder.Entity("Core.Entities.Terminal.Leg", b =>
+                {
+                    b.HasOne("Core.Entities.Terminal.Flight", "Flight")
+                        .WithMany()
+                        .HasForeignKey("FlightId");
+
+                    b.Navigation("Flight");
                 });
 
             modelBuilder.Entity("Core.Entities.Terminal.Flight", b =>

@@ -7,6 +7,9 @@ namespace Core.Interfaces
     {
         Task CommitAsync();
         void Rollback();
-        IGenericRepository<T> GenericRepository<T>() where T : class;
+        IFlightRepository Flight { get; }
+        ILegRepostiroy Leg { get; }
+        IPilotRepository Pilot { get; }
+        IProcLogRepository ProcessLog { get; }
     }
 }

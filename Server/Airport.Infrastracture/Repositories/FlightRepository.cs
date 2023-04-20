@@ -12,21 +12,6 @@ namespace Airport.Infrastracture.Repositories
 
         public FlightRepository(AirportDataContext dbContext)
             : base(dbContext) { }
-        public async Task AddFlightAsync(Flight flight)
-        {
-            try
-            {
-                await _dBContext.AddAsync(flight);
-                await _dBContext.SaveChangesAsync();
-                _logger.LogWarning("Added flight");
-            }
-            catch (Exception e)
-            {
-                _logger.LogWarning($"Exepction {e.Message}");
-                throw;
-            }
-        }
-
         public IEnumerable<Flight> GetFlights(string Gender)
         {
             return _dBContext.Flights.ToList();
