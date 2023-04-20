@@ -86,6 +86,7 @@ namespace Airport.Application.LogicServices
             bool exit = false;
             while (true)
             {
+                nextLegs = null;
                 nextLegs = await _unitOfWork.Leg.FindListAsync(leg => nextPosLegs.HasFlag(leg.CurrentLeg));
                 foreach (var leg in nextLegs)
                 {
