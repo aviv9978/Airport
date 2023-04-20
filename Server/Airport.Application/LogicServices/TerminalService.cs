@@ -32,8 +32,6 @@ namespace Airport.Application.LogicServices
             await _unitOfWork.CommitAsync();
 
             var legType = isDeparture ? LegType.StartForDeparture : LegType.StartForLand;
-            flightFirstLegs = await _unitOfWork.Leg.FindListAsync(leg => leg.LegType == legType);
-
             while (true) //instead of event for now
             {
                 flightFirstLegs = await _unitOfWork.Leg.FindListAsync(leg => leg.LegType == legType);
@@ -75,7 +73,7 @@ namespace Airport.Application.LogicServices
         private async Task<int> InLegProcessAsync(Flight flight)
         {
             int procLogId = await AddProcLogAsync(flight, $"Leg number {flight.Leg.CurrentLeg}, leg id: {flight.Leg.Id}");
-            await _terminalHub?.SendEnteringUpdateAsync(flight, flight.Leg.Id);
+            await _terminalHub.SendEnteringUpdateAsync(flight, flight.Leg.Id);
             Thread.Sleep(flight.Leg.PauseTime * 1000);
             return procLogId;
         }
@@ -83,14 +81,15 @@ namespace Airport.Application.LogicServices
         private async Task MoveLegAsync(Flight flight, bool isDeparture, int procLogId)
         {
             IEnumerable<Leg> nextLegs;
-            var nextPosLegs = flight?.Leg.NextPosibbleLegs;
+            var allLegs = await _unitOfWork.Leg.GetAllAsync();
+            var nextPosLegs = flight.Leg.NextPosibbleLegs;
             bool exit = false;
             while (true)
             {
                 nextLegs = await _unitOfWork.Leg.FindListAsync(leg => nextPosLegs.HasFlag(leg.CurrentLeg));
                 foreach (var leg in nextLegs)
                 {
-                    if (leg != null && leg.IsOccupied == false)
+                    if (leg.IsOccupied == false)
                     {
                         await ChangingLegStatusAsync(flight, procLogId, leg);
                         await NextLegAsync(flight, isDeparture);
@@ -102,7 +101,7 @@ namespace Airport.Application.LogicServices
             }
         }
 
-        private async Task ChangingLegStatusAsync(Flight flight, int procLogId, Leg? enteringLeg)
+        private async Task ChangingLegStatusAsync(Flight flight, int procLogId, Leg enteringLeg)
         {
             var leavingLeg = flight.Leg;
             var leavingLegEnum = leavingLeg.CurrentLeg;
@@ -115,7 +114,7 @@ namespace Airport.Application.LogicServices
         }
 
 
-        private void EnteringLegByCode(Flight flight, Leg? enteringLeg)
+        private void EnteringLegByCode(Flight flight, Leg enteringLeg)
         {
             flight.Leg = enteringLeg;
             enteringLeg.IsOccupied = true;
