@@ -2,8 +2,8 @@
 
 namespace Core.Interfaces.Repositories
 {
-    public interface IFlightRepository
+    public interface IFlightRepository : IGenericRepository<Flight>
     {
-        Task AddFlightAsync(Flight flight);
+        IEnumerable<Flight> GetFlights(string Gender);
     }
 }

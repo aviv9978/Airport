@@ -30,6 +30,21 @@ namespace FlightSimulator.Controllers
         [HttpPost]
         [Route("AddLandingFlight")]
         public async Task<IActionResult> AddLandingFlight([FromBody] FlightInDTO flightDto) => await StartFlightAsync(flightDto, false);
+        [HttpGet]
+        [Route("ResetLegs")]
+        public async Task<IActionResult> ResetLegs()
+        {
+            try
+            {
+                await _terminalService.ResetLegsAsync();
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
 
         private async Task<IActionResult> StartFlightAsync(FlightInDTO flightDto, bool isDeparture)
         {
@@ -37,7 +52,6 @@ namespace FlightSimulator.Controllers
             {
                 var flight = _mapper.Map<Flight>(flightDto);
                 await _terminalService.StartFlightAsync(flight, isDeparture);
-                _logger.LogError("Successssss");
                 return Ok();
             }
 

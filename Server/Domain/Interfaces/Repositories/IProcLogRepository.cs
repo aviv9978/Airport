@@ -1,12 +1,11 @@
 ﻿using Core.DTOs.Outgoing;
 using Core.Entities;
+using Core.Entities.Terminal;
 
 namespace Core.Interfaces.Repositories
 {
-    public interface IProcLogRepository
+    public interface IProcLogRepository : IGenericRepository<ProcessLog>
     {
-        Task AddProcLogAsync(ProcessLog log);
         Task UpdateOutLogAsync(int procLogId, DateTime exitTime);
-        Task<List<ProcessLog>> GetAllProcLogsAsync();
     }
 }

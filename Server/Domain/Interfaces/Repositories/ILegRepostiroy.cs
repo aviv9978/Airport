@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces.Repositories
 {
-    public interface ILegRepostiroy
+    public interface ILegRepostiroy : IGenericRepository<Leg>
     {
         int GetLegsCount();
-        Task AddLegAsync(Leg leg);
-
-        Task<List<Leg>> GetLegsAsync();
     }
 }

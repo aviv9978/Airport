@@ -28,3 +28,5 @@ C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Ser
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\obj\Debug\net7.0\refint\Airport.Infrastracture.dll
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\obj\Debug\net7.0\Airport.Infrastracture.pdb
 C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\obj\Debug\net7.0\ref\Airport.Infrastracture.dll
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\bin\Debug\net7.0\Airport.Infrastracture.runtimeconfig.json
+C:\Users\Aviv\OneDrive\שולחן העבודה\GitHubProjects\AirportProject\Server\Airport.Infrastracture\obj\Debug\net7.0\Airport.Infrastracture.genruntimeconfig.cache

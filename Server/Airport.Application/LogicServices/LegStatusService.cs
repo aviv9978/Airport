@@ -1,6 +1,7 @@
 ﻿using Airport.Application.ILogicServices;
 using AutoMapper;
 using Core.DTOs.Outgoing;
+using Core.Interfaces;
 using Core.Interfaces.Repositories;
 
 namespace Airport.Application.LogicServices
@@ -8,15 +9,20 @@ namespace Airport.Application.LogicServices
     public class LegStatusService : ILegStatusService
     {
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LegStatusService(IMapper mapper)
+        public LegStatusService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
-        public List<LegStatusOutDTO> GetLegsStatus()
+        public async Task<IEnumerable<LegStatusOutDTO>> GetLegsStatusAsync()
         {
-            List<LegStatusOutDTO> legsStatus = new List<LegStatusOutDTO>();
-            var legs = TerminalService.Legs;
+            try
+            {
+
+            var legsStatus = new List<LegStatusOutDTO>();
+            var legs = await _unitOfWork.Leg.GetAllAsync();
             if (legs != null)
                 foreach (var leg in legs)
                 {
@@ -24,6 +30,12 @@ namespace Airport.Application.LogicServices
                     legsStatus.Add(legStatus);
                 }
             return legsStatus;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
     }
 }
