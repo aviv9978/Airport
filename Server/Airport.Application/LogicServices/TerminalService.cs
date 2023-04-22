@@ -35,22 +35,19 @@ namespace Airport.Application.LogicServices
             await _unitOfWork.CommitAsync();
 
             var legType = isDeparture ? LegType.StartForDeparture : LegType.StartForLand;
-                flightFirstLegs = await _unitOfWork.Leg.FindListAsync(leg => leg.LegType == legType);
-                foreach (var leg in flightFirstLegs)
-                {
-                    if (leg.IsOccupied == false)
-                    {
-                        EnteringLegByCode(flight, leg);
-                        UOWUpdateFlightAndLeg(flight, leg);
-                        await _unitOfWork.CommitAsync();
-                        await NextLegAsync(flight, isDeparture);
-                        return;
-                    }
-                }
+            flightFirstLegs = await _unitOfWork.Leg.FindListAsync(leg => leg.LegType == legType);
             foreach (var leg in flightFirstLegs)
             {
-
+                if (leg.IsOccupied == false)
+                {
+                    EnteringLegByCode(flight, leg);
+                    UOWUpdateFlightAndLeg(flight, leg);
+                    await _unitOfWork.CommitAsync();
+                    await NextLegAsync(flight, isDeparture);
+                    return;
+                }
             }
+            RegisterToSubjectAndEvent(flight, flightFirstLegs);
         }
 
         private async Task NextLegAsync(Flight flight, bool isDeparture)
@@ -84,10 +81,13 @@ namespace Airport.Application.LogicServices
         private async Task MoveLegAsync(Flight flight, bool isDeparture, int procLogId)
         {
             IEnumerable<Leg>? nextLegs;
+            IEnumerable<Leg>? sixLeg;
             var allLegs = await _unitOfWork.Leg.GetAllAsync();
             var nextPosLegs = flight.Leg.NextPosibbleLegs;
-            bool exit = false;
             nextLegs = null;
+            sixLeg = null;
+            sixLeg = await _unitOfWork.Leg.FindListAsync(leg => leg.CurrentLeg == LegNumber.Six);
+
             nextLegs = await _unitOfWork.Leg.FindListAsync(leg => nextPosLegs.HasFlag(leg.CurrentLeg));
             foreach (var leg in nextLegs)
             {

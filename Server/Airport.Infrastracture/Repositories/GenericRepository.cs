@@ -21,7 +21,6 @@ namespace Airport.Infrastracture.Repositories
 
         public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
-
         public void Remove(T entity) => _dbSet.Remove(entity);
 
 
