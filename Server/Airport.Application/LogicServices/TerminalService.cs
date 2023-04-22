@@ -101,12 +101,11 @@ namespace Airport.Application.LogicServices
             RegisterToSubjectAndEvent(flight, nextLegs);
         }
 
-        private void RegisterToSubjectAndEvent(Flight flight, IEnumerable<Leg>? nextLegs)
+        private void RegisterToSubjectAndEvent(Flight flight, IEnumerable<Leg> nextLegs)
         {
             foreach (var leg in nextLegs)
-            {
                 _subjet.Attach(flight.Leg, leg);
-            }
+
             if (flight.Leg.ClearedLeg is null)
                 flight.Leg.ClearedLeg += UsingEvent;
         }
@@ -120,6 +119,7 @@ namespace Airport.Application.LogicServices
             UOWUpdateFlightAndLeg(flight, leavingLeg);
             _unitOfWork.Leg.Update(enteringLeg);
             DateTime exitTime = await UpdateOutLogAndCommitAsync(procLogId);
+            _subjet.Notify(leavingLeg);
             await SendLogOutHubUpdateAsync(procLogId, exitTime, leavingLegEnum);
         }
 
@@ -222,7 +222,6 @@ namespace Airport.Application.LogicServices
         {
             var leg = (Leg)sender;
             var flight = leg.Flight;
-            _subjet.Detach(leg);
             await NextLegAsync(flight, flight.IsDeparture);
         }
     }

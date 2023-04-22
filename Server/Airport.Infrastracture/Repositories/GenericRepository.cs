@@ -17,7 +17,17 @@ namespace Airport.Infrastracture.Repositories
         public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
         public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
-        public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression) => await _dbSet.Where(expression).ToListAsync();
+        public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression)
+        {
+            var entities = await _dbSet.Where(expression).ToListAsync();
+            foreach (var entity in entities)
+            {
+                var entry = _dbContext.Entry(entity);
+                entry.State = EntityState.Detached;
+            }
+            return entities;
+
+        }
 
         public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 
