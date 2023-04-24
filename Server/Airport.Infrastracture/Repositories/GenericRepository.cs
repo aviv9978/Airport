@@ -17,13 +17,13 @@ namespace Airport.Infrastracture.Repositories
         }
         public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
         public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression)
         {
             List<T> entities;
             try
             {
-                entities = await _dbSet.Where(expression).ToListAsync();
+                entities = await _dbSet.AsNoTracking().Where(expression).ToListAsync();
                 return entities;
             }
             catch (Exception)
@@ -42,15 +42,13 @@ namespace Airport.Infrastracture.Repositories
         public void Remove(T entity) => _dbSet.Remove(entity);
 
 
-        public async Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
             try
             {
+                //_dbSet.Attach(entity);
+                _dbContext.Attach(entity);
                 //_dbContext.ChangeTracker.Clear();
-                var trackedEntity = await _dbSet.SingleOrDefaultAsync(e => e.Id == entity.Id);
-                _dbContext.Entry<T>(trackedEntity).State = EntityState.Detached;
-                _dbSet.Attach(entity);
-                _dbContext.Entry<T>(entity).State = EntityState.Modified;
                 _dbSet.Update(entity);
             }
             catch (Exception)
@@ -58,7 +56,6 @@ namespace Airport.Infrastracture.Repositories
 
                 throw;
             }
-            //_dbSet.Attach(entity);
         }
 
     }

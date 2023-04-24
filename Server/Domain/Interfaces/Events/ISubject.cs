@@ -16,6 +16,6 @@ namespace Core.Interfaces.Events
         void Detach(Leg leg, Flight flight);
 
         // Notify all observers about an event.
-        void Notify(Leg leg);
+        Task NotifyAsync(Leg leg);
     }
 }

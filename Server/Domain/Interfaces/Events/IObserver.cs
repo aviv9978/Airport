@@ -10,6 +10,6 @@ namespace Core.Interfaces.Events
     public interface IObserver
     {
         // Receive update from subject
-         Task Update();
+         Task UpdateAsync(Leg nextLeg);
     }
 }

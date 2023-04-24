@@ -31,7 +31,7 @@ namespace Airport.Application.Events
 
 
         // Trigger an update in each subscriber.
-        public void Notify(Leg leg)
+        public async Task NotifyAsync(Leg leg)
         {
             leg.IsOccupied = true;
             if (_legQueueMap.ContainsKey(leg) && _legQueueMap[leg].Count > 0)
@@ -40,7 +40,7 @@ namespace Airport.Application.Events
                 //var waitingLeg = _legWaitingMap.FirstOrDefault(x => x.Value == leg);
                 //foreach (var item in _legWaitingMap.Where(kv => kv.Key == waitingLeg.Key))
                 //    _legWaitingMap.Remove(item.Key);
-                flightToContinue.Leg.Update();
+                await flightToContinue.Leg.UpdateAsync(leg);
                 //waitingLeg.Key.Update();
             }
 

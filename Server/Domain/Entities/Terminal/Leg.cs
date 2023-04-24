@@ -1,4 +1,5 @@
 ﻿using Core.Enums;
+using Core.Events;
 using Core.Interfaces.Events;
 using Microsoft.VisualStudio.Threading;
 using System;
@@ -23,10 +24,11 @@ namespace Core.Entities.Terminal
         //public AsyncEvent<EventArgs>? ClearedLeg;
         public AsyncEventHandler? ClearedLeg;
 
-        public async Task Update()
+        public async Task UpdateAsync(Leg nextLeg)
         {
+            LegEventArgs legEventArgs = new LegEventArgs(nextLeg);
             //await (ClearedLeg?.InvokeAsync(this, EventArgs.Empty) ?? Task.CompletedTask);
-             await ClearedLeg.InvokeAsync(this, EventArgs.Empty);
+             await ClearedLeg.InvokeAsync(this, legEventArgs);
         }
         public override bool Equals(object obj)
         {
