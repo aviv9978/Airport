@@ -1,11 +1,14 @@
-﻿using Core.Interfaces;
+﻿using Castle.Core.Resource;
+using Core.Entities;
+using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace Airport.Infrastracture.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         private readonly AirportDataContext _dbContext;
         private readonly DbSet<T> _dbSet;
@@ -16,16 +19,44 @@ namespace Airport.Infrastracture.Repositories
         }
         public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
-        public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression) => await _dbSet.Where(expression).ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
+        public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression)
+        {
+            List<T> entities;
+            try
+            {
+                entities = await _dbSet.Where(expression).AsNoTracking().ToListAsync();
+                return entities;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            //foreach (var entity in entities)
+            //{
+            //    var entry = _dbContext.Entry(entity);
+            //    entry.State = EntityState.Detached;
+            //}
+        }
 
         public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
-
 
         public void Remove(T entity) => _dbSet.Remove(entity);
 
 
-        public void Update(T entity) => _dbSet.Update(entity);
+        public async Task UpdateAsync(T entity)
+        {
+            try
+            {
+                 _dbSet.Update(entity);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            //_dbSet.Attach(entity);
+        }
 
     }
 }

@@ -18,9 +18,6 @@ namespace Airport.Infrastracture.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -219,7 +216,7 @@ namespace Airport.Infrastracture.Migrations
                             IsOccupied = false,
                             LegType = 12,
                             NextPosibbleLegs = 272,
-                            PauseTime = 2
+                            PauseTime = 4
                         },
                         new
                         {

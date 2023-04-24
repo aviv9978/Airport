@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Core.Entities;
 using Core.Entities.ForFlight;
 using Core.Interfaces;
 using Core.Interfaces.Repositories;
@@ -11,6 +12,7 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly ILogger<UnitOfWork> _logger;
         private readonly AirportDataContext _dbContext;
+
         public IFlightRepository Flight { get; private set; }
         public ILegRepostiroy Leg{ get; private set; }
         public IProcLogRepository ProcessLog { get; private set; }
@@ -53,7 +55,7 @@ namespace Airport.Infrastracture.Repositories
                 }
             }
         }
-        public IGenericRepository<T> GenericRepository<T>() where T : class
+        public IGenericRepository<T> GenericRepository<T>() where T : BaseEntity
         {
             return new GenericRepository<T>(_dbContext);
         }

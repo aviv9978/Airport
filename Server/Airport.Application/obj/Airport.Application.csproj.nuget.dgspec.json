@@ -123,6 +123,10 @@
               "target": "Package",
               "version": "[7.0.5, )"
             },
+            "Microsoft.VisualStudio.Threading": {
+              "target": "Package",
+              "version": "[17.5.22, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
