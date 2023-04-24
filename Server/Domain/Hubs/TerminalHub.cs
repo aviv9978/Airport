@@ -26,8 +26,8 @@ namespace Core.Hubs
 
         public async Task SendLogOutUpdateAsync(int procLogID, DateTime exitTime) => await _terminalHubContext.Clients.All.SendAsync("logExitUpdate", JsonConvert.SerializeObject(new { procLogID, exitTime }));
 
-        public async Task UpdateEnterLeg(LegStatusOutDTO legStatus) => await _terminalHubContext.Clients.All.SendAsync("updateLegStatus", legStatus);
-        public async Task UpdateLogOutLeg(LegStatusOutDTO legStatus) => await _terminalHubContext.Clients.All.SendAsync("updateLegStatus", legStatus);
+        public async Task UpdateEnterLegAsync(LegStatusOutDTO legStatus) => await _terminalHubContext.Clients.All.SendAsync("updateLegStatus", legStatus);
+        public async Task UpdateLogOutLegAsync(LegStatusOutDTO legStatus) => await _terminalHubContext.Clients.All.SendAsync("updateLegStatus", legStatus);
 
     }
 }

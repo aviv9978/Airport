@@ -4,6 +4,7 @@ using Airport.Infrastracture;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Infrastracture.Migrations
 {
     [DbContext(typeof(AirportDataContext))]
-    partial class AirportDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230423110234_changingPauseTime")]
+    partial class changingPauseTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,7 +219,7 @@ namespace Airport.Infrastracture.Migrations
                             IsOccupied = false,
                             LegType = 12,
                             NextPosibbleLegs = 272,
-                            PauseTime = 4
+                            PauseTime = 6
                         },
                         new
                         {

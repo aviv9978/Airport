@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Core.Entities;
 using Core.Entities.ForFlight;
 using Core.Interfaces;
 using Core.Interfaces.Repositories;
@@ -53,7 +54,7 @@ namespace Airport.Infrastracture.Repositories
                 }
             }
         }
-        public IGenericRepository<T> GenericRepository<T>() where T : class
+        public IGenericRepository<T> GenericRepository<T>() where T : BaseEntity
         {
             return new GenericRepository<T>(_dbContext);
         }

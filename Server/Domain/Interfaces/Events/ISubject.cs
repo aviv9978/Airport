@@ -10,10 +10,10 @@ namespace Core.Interfaces.Events
     public interface ISubject
     {
         // Attach an observer to the subject.
-        void Attach(IObserver observer,Leg leg);
+        void Attach(Leg leg, Flight flight);
 
         // Detach an observer from the subject.
-        void Detach(IObserver observer);
+        void Detach(Leg leg, Flight flight);
 
         // Notify all observers about an event.
         void Notify(Leg leg);

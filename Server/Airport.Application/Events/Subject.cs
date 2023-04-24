@@ -12,23 +12,36 @@ namespace Airport.Application.Events
     {
         private Dictionary<IObserver, Leg> _legWaitingMap = new Dictionary<IObserver, Leg>();
         private Dictionary<Leg, Queue<Flight>> _legQueueMap = new Dictionary<Leg, Queue<Flight>>();
-        public void Attach(IObserver observer, Leg leg) => _legWaitingMap.Add(observer, leg);
+        public void Attach(Leg leg, Flight flight)
+        {
+            if (!_legQueueMap.ContainsKey(leg))
+            {
+                _legQueueMap[leg] = new Queue<Flight>();
+            }
+            //_legWaitingMap.Add(flight.Leg, leg);
+            _legQueueMap[leg].Enqueue(flight);
+        }
 
 
-        public void Detach(IObserver observer) => _legWaitingMap.Remove(observer);
+        public void Detach(Leg leg, Flight flight)
+        {
+            if(_legQueueMap.ContainsKey(leg))
+                _legQueueMap[leg].Dequeue();
+        }
 
 
         // Trigger an update in each subscriber.
         public void Notify(Leg leg)
         {
+            leg.IsOccupied = true;
             if (_legQueueMap.ContainsKey(leg) && _legQueueMap[leg].Count > 0)
             {
-                Flight nextFlight = _legQueueMap[leg].Dequeue();
-                var waitingLeg = _legWaitingMap.FirstOrDefault(x => x.Value == leg);
-                foreach (var item in _legWaitingMap.Where(kv => kv.Key == waitingLeg.Key))
-                    _legWaitingMap.Remove(item.Key);
-
-                waitingLeg.Key.Update();
+                Flight flightToContinue = _legQueueMap[leg].Dequeue();
+                //var waitingLeg = _legWaitingMap.FirstOrDefault(x => x.Value == leg);
+                //foreach (var item in _legWaitingMap.Where(kv => kv.Key == waitingLeg.Key))
+                //    _legWaitingMap.Remove(item.Key);
+                flightToContinue.Leg.Update();
+                //waitingLeg.Key.Update();
             }
 
         }

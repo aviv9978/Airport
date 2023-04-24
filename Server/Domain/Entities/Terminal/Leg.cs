@@ -1,7 +1,10 @@
 ﻿using Core.Enums;
 using Core.Interfaces.Events;
+using Microsoft.VisualStudio.Threading;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace Core.Entities.Terminal
 {
@@ -17,10 +20,25 @@ namespace Core.Entities.Terminal
         public int PauseTime { get; set; }
         public bool IsOccupied { get; set; }
         public virtual Flight? Flight { get; set; }
-        public AsyncEvent<EventArgs>? ClearedLeg;
-        public void Update()
+        //public AsyncEvent<EventArgs>? ClearedLeg;
+        public AsyncEventHandler? ClearedLeg;
+
+        public async Task Update()
         {
-            ClearedLeg?.InvokeAsync(this, EventArgs.Empty);
+            //await (ClearedLeg?.InvokeAsync(this, EventArgs.Empty) ?? Task.CompletedTask);
+             await ClearedLeg.InvokeAsync(this, EventArgs.Empty);
+        }
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Leg other))
+                return false;
+
+            return Id == other.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }

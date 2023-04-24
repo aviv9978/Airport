@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
-builder.Services.AddDbContext<AirportDataContext>(options => options.UseLazyLoadingProxies()
+builder.Services.AddDbContext<AirportDataContext>(options => options
 .UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
 builder.Services.AddApplicationServices();
 
