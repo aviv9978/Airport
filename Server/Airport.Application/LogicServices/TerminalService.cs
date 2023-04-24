@@ -40,13 +40,14 @@ namespace Airport.Application.LogicServices
 
             var legType = isDeparture ? LegType.StartForDeparture : LegType.StartForLand;
             flightFirstLegs = await _unitOfWork.Leg.FindListAsync(leg => leg.LegType == legType);
-            foreach (var leg in flightFirstLegs)
+            foreach (var enteringLeg in flightFirstLegs)
             {
-                if (leg.IsOccupied == false)
+                if (enteringLeg.IsOccupied == false)
                 {
-                    EnteringLegByCode(flight, leg);
-                     UOWUpdateFlightAndLeg(flight, leg);
+                    EnteringLegByCode(flight, enteringLeg);
+                    await UOWUpdateFlightAndLegAsync(flight, enteringLeg);
                     await _unitOfWork.CommitAsync();
+
                     await NextLegAsync(flight, isDeparture);
                     return;
                 }
@@ -93,14 +94,14 @@ namespace Airport.Application.LogicServices
             {
                 if (leg.IsOccupied == false)
                 {
-                    await LeavingCurrentLegEnteringNewLeg(flight, isDeparture, procLogId, leg);
+                    await LeavingCurrentLegEnteringNewLegAsync(flight, isDeparture, procLogId, leg);
                     return;
                 }
             }
             await RegisterToSubjectAndEventAsync(flight, nextLegs);
         }
 
-        private async Task LeavingCurrentLegEnteringNewLeg(Flight flight, bool isDeparture, int procLogId, Leg enteringLeg)
+        private async Task LeavingCurrentLegEnteringNewLegAsync(Flight flight, bool isDeparture, int procLogId, Leg enteringLeg)
         {
             await ChangingLegStatusAsync(flight, procLogId, enteringLeg);
             await NextLegAsync(flight, isDeparture);
@@ -132,8 +133,7 @@ namespace Airport.Application.LogicServices
             var leavingLegEnum = leavingLeg.CurrentLeg;
             LegNotOccupiedByCode(leavingLeg);
             EnteringLegByCode(flight, enteringLeg);
-             UOWUpdateFlightAndLeg(flight, leavingLeg);
-             _unitOfWork.Leg.Update(enteringLeg);
+            await UOWUpdateFlightTwoLegsAsync(flight, leavingLeg, enteringLeg);
             DateTime exitTime = await UpdateOutLogAndCommitAsync(procLogId);
             _subjet.NotifyAsync(leavingLeg);
             await SendLogOutHubUpdateAsync(procLogId, exitTime, leavingLegEnum);
@@ -155,13 +155,14 @@ namespace Airport.Application.LogicServices
                 var finalLegEnum = finalLeg.CurrentLeg;
                 Thread.Sleep(flight.Leg.PauseTime * 1000);
                 LegNotOccupiedByCode(finalLeg);
-                 _unitOfWork.Leg.Update(finalLeg);
+                await _unitOfWork.Leg.UpdateAsync(finalLeg);
                 flight.Leg = null;
-                 _unitOfWork.Flight.Update(flight);
+                await _unitOfWork.Flight.UpdateAsync(flight);
                 DateTime exitTime = await UpdateOutLogAndCommitAsync(procLogId);
                 await SendLogOutHubUpdateAsync(procLogId, exitTime, finalLegEnum);
                 Console.WriteLine("Flight finished!");
-                _subjet.NotifyAsync(finalLeg);
+                await _subjet.NotifyAsync(finalLeg);
+                return;
             }
             catch (Exception)
             {
@@ -201,10 +202,15 @@ namespace Airport.Application.LogicServices
             var legNumber = currentLeg.AsString(EnumFormat.Description);
             await _terminalHub.UpdateLogOutLegAsync(new LegStatusOutDTO { IsOccupied = false, LegNumber = legNumber, Flight = null });
         }
-        private void UOWUpdateFlightAndLeg(Flight flight, Leg leg)
+        private async Task UOWUpdateFlightAndLegAsync(Flight flight, Leg leg)
         {
-             _unitOfWork.Leg.Update(leg);
-             _unitOfWork.Flight.Update(flight);
+            await _unitOfWork.Leg.UpdateAsync(leg);
+            await _unitOfWork.Flight.UpdateAsync(flight);
+        }
+        private async Task UOWUpdateFlightTwoLegsAsync(Flight flight, Leg leavingLeg, Leg enteringLeg)
+        {
+            await UOWUpdateFlightAndLegAsync(flight, leavingLeg);
+            await _unitOfWork.Leg.UpdateAsync(enteringLeg);
         }
         private async Task<DateTime> UpdateOutLogAndCommitAsync(int procLogId)
         {
@@ -226,11 +232,11 @@ namespace Airport.Application.LogicServices
                 if (leg.Flight != null)
                 {
                     leg.Flight.Leg = null;
-                     _unitOfWork.Flight.Update(leg.Flight);
+                    await _unitOfWork.Flight.UpdateAsync(leg.Flight);
                 }
                 leg.IsOccupied = false;
                 leg.Flight = null;
-                 _unitOfWork.Leg.Update(leg);
+                await _unitOfWork.Leg.UpdateAsync(leg);
             }
             await _unitOfWork.CommitAsync();
         }
@@ -240,7 +246,7 @@ namespace Airport.Application.LogicServices
             var flight = currentLeg.Flight;
             var legEventArgs = (LegEventArgs)e;
             var enteringLeg = legEventArgs.NextLeg;
-            await LeavingCurrentLegEnteringNewLeg(flight, flight.IsDeparture, _lastProcId, enteringLeg);
+            await LeavingCurrentLegEnteringNewLegAsync(flight, flight.IsDeparture, _lastProcId, enteringLeg);
             await NextLegAsync(flight, flight.IsDeparture);
         }
     }

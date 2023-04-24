@@ -33,7 +33,6 @@ namespace Airport.Application.Events
         // Trigger an update in each subscriber.
         public async Task NotifyAsync(Leg leg)
         {
-            leg.IsOccupied = true;
             if (_legQueueMap.ContainsKey(leg) && _legQueueMap[leg].Count > 0)
             {
                 Flight flightToContinue = _legQueueMap[leg].Dequeue();

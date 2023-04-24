@@ -1,7 +1,9 @@
-﻿using Core.Entities;
+﻿using Castle.Core.Resource;
+using Core.Entities;
 using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace Airport.Infrastracture.Repositories
@@ -23,7 +25,7 @@ namespace Airport.Infrastracture.Repositories
             List<T> entities;
             try
             {
-                entities = await _dbSet.AsNoTracking().Where(expression).ToListAsync();
+                entities = await _dbSet.Where(expression).AsNoTracking().ToListAsync();
                 return entities;
             }
             catch (Exception)
@@ -42,15 +44,11 @@ namespace Airport.Infrastracture.Repositories
         public void Remove(T entity) => _dbSet.Remove(entity);
 
 
-        public void Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             try
             {
-                //_dbContext.ChangeTracker.Clear();
-                _dbContext.Attach(entity);
-                _dbContext.Entry(entity).CurrentValues.SetValues(entity);
-                _dbSet.Update(entity);
-                //_dbContext.Entry(entity).State = EntityState.Modified;
+                 _dbSet.Update(entity);
             }
             catch (Exception)
             {

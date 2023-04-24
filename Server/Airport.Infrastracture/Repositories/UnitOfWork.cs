@@ -12,6 +12,7 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly ILogger<UnitOfWork> _logger;
         private readonly AirportDataContext _dbContext;
+
         public IFlightRepository Flight { get; private set; }
         public ILegRepostiroy Leg{ get; private set; }
         public IProcLogRepository ProcessLog { get; private set; }

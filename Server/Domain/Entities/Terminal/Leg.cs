@@ -21,13 +21,11 @@ namespace Core.Entities.Terminal
         public int PauseTime { get; set; }
         public bool IsOccupied { get; set; }
         public virtual Flight? Flight { get; set; }
-        //public AsyncEvent<EventArgs>? ClearedLeg;
         public AsyncEventHandler? ClearedLeg;
 
         public async Task UpdateAsync(Leg nextLeg)
         {
             LegEventArgs legEventArgs = new LegEventArgs(nextLeg);
-            //await (ClearedLeg?.InvokeAsync(this, EventArgs.Empty) ?? Task.CompletedTask);
              await ClearedLeg.InvokeAsync(this, legEventArgs);
         }
         public override bool Equals(object obj)
