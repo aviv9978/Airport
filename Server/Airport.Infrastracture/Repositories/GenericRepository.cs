@@ -46,16 +46,18 @@ namespace Airport.Infrastracture.Repositories
         {
             try
             {
-                //_dbSet.Attach(entity);
-                _dbContext.Attach(entity);
                 //_dbContext.ChangeTracker.Clear();
+                _dbContext.Attach(entity);
+                _dbContext.Entry(entity).CurrentValues.SetValues(entity);
                 _dbSet.Update(entity);
+                //_dbContext.Entry(entity).State = EntityState.Modified;
             }
             catch (Exception)
             {
 
                 throw;
             }
+            //_dbSet.Attach(entity);
         }
 
     }

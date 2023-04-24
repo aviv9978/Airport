@@ -40,7 +40,7 @@ namespace Airport.Application.Events
                 //var waitingLeg = _legWaitingMap.FirstOrDefault(x => x.Value == leg);
                 //foreach (var item in _legWaitingMap.Where(kv => kv.Key == waitingLeg.Key))
                 //    _legWaitingMap.Remove(item.Key);
-                await flightToContinue.Leg.UpdateAsync(leg);
+                 await flightToContinue.Leg.UpdateAsync(leg);
                 //waitingLeg.Key.Update();
             }
 
