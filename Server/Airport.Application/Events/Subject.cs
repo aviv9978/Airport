@@ -20,7 +20,7 @@ namespace Airport.Application.Events
     //{
     //    public string FlightId { get; set; }
     //}
-    //configure handlers
+    //configure handlers in program
     public class Subject : ISubject
     {
         //private Dictionary<Topic, List<INotify>> topicToHandlers = new Dictionary<string, List<INotify>>();

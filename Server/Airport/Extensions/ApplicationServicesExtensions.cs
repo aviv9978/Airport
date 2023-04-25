@@ -24,7 +24,7 @@ namespace FlightSimulator.Extensions
             services.AddScoped<ITerminalService, TerminalService>();
             services.AddScoped<ILegStatusService, LegStatusService>();
             services.AddScoped<IProcLogService, ProcLogsService>();
-            services.AddSingleton<ITerminalHub, TerminalHub>();
+            services.AddSingleton<IHUB, TerminalHub>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<ISubject, Subject>();
             services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext =>

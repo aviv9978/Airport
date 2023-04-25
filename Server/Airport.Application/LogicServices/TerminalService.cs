@@ -16,12 +16,12 @@ namespace Airport.Application.LogicServices
 {
     public class TerminalService : ITerminalService
     {
-        private readonly ITerminalHub _terminalHub;
+        private readonly IHUB _terminalHub;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISubject _subjet;
         private readonly IMapper _mapper;
         private int _lastProcId;
-        public TerminalService(ITerminalHub flightHub,
+        public TerminalService(IHUB flightHub,
             IMapper mapper, IUnitOfWork unitOfWork,
             ISubject subjet)
         {
