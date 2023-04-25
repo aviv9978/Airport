@@ -1,4 +1,5 @@
-﻿using Castle.Core.Resource;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+using Castle.Core.Resource;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Interfaces.Repositories;
@@ -48,7 +49,11 @@ namespace Airport.Infrastracture.Repositories
         {
             try
             {
-                 _dbSet.Update(entity);
+                //_dbSet.Attach(entity);
+                //var entry = _dbContext.Entry(entity);
+
+                //entry.State = EntityState.Modified;
+                _dbSet.Update(entity);
             }
             catch (Exception)
             {
