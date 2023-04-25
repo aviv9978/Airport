@@ -33,7 +33,6 @@ namespace Airport.Application.LogicServices
 
         public async Task StartFlightAsync(Flight flight, bool isDeparture)
         {
-
             IEnumerable<Leg> flightFirstLegs;
             await _unitOfWork.Flight.AddAsync(flight);
             await _unitOfWork.CommitAsync();

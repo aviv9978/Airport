@@ -6,22 +6,22 @@ using System.Xml.Linq;
 using ConsoleSimulator.Models;
 
 HttpClient client = new HttpClient { BaseAddress = new Uri("https://localhost:7297/api/Flights/") };
-await SendApiRequests();
-//SemaphoreSlim semaphore = new SemaphoreSlim(4);
+//await SendApiRequests();
+SemaphoreSlim semaphore = new SemaphoreSlim(4);
 
-//while (true)
-//{
-//    await semaphore.WaitAsync(3); // Wait until there are 3 available slots in the semaphore
-//    try
-//    {
-//        await SendApiRequests(); 
-//    }
-//    finally
-//    {
-//        semaphore.Release(3); // Release 3 semaphore slots when 3 API requests are done
-//    }
-//    await Task.Delay(1000); 
-//}
+while (true)
+{
+    await semaphore.WaitAsync(3); // Wait until there are 3 available slots in the semaphore
+    try
+    {
+        await SendApiRequests();
+    }
+    finally
+    {
+        semaphore.Release(3); // Release 3 semaphore slots when 3 API requests are done
+    }
+    await Task.Delay(1000);
+}
 
 async Task CreateDepartureFlightAsync()
 {

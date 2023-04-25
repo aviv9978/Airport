@@ -51,6 +51,7 @@ namespace FlightSimulator.Controllers
             try
             {
                 var flight = _mapper.Map<Flight>(flightDto);
+                flight.IsDeparture= isDeparture;
                 await _terminalService.StartFlightAsync(flight, isDeparture);
                 return Ok();
             }
