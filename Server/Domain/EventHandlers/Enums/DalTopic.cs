@@ -10,6 +10,8 @@ namespace Core.EventHandlers.Enums
     {
         AddFlight,
         UpdateFlight,
-        UpdateLeg
+        UpdateLeg,
+        FlightNextLegs,
+        FlightNextLegClear,
     }
 }

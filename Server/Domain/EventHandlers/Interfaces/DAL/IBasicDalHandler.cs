@@ -1,4 +1,4 @@
-﻿using Core.Entities.Terminal;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.DAL
 {
-    public interface ILegDalHandler : IDalBasicHandler<Leg>
+    public interface IDalBasicHandler<T> where T : BaseEntity
     {
+        Task NotifyAsync(T entity);
     }
 }

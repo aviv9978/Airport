@@ -1,11 +1,9 @@
-﻿
-
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using Core.EventHandlers.Interfaces.DAL;
 using Core.Interfaces;
 using Microsoft.Extensions.Logging;
-
-namespace Airport.Infrastracture.Handlers.Flight
+using Core.Entities.Terminal;
+namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
     public class UpdateFlightHandler : IFlightDalHandler
     {
@@ -18,7 +16,7 @@ namespace Airport.Infrastracture.Handlers.Flight
             _logger = logger;
         }
 
-        public async Task UpdateAsync(Core.Entities.Terminal.Flight flight)
+        public async Task NotifyAsync(Flight flight)
         {
             await _unitOfWork.Flight.UpdateAsync(flight);
             _logger.LogInformation($"Flight {flight} has been updated.");

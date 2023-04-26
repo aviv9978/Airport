@@ -21,7 +21,7 @@ namespace Airport.Infrastracture.Handlers.Leg
             _logger = logger;
         }
 
-        public async Task UpdateAsync(Core.Entities.Terminal.Leg leg)
+        public async Task NotifyAsync(Core.Entities.Terminal.Leg leg)
         {
             await _unitOfWork.Leg.UpdateAsync(leg);
             _logger.LogInformation($"Flight {leg} has been updated.");

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.EventHandlers.Interfaces
+namespace Core.EventHandlers.Interfaces.FlightInterfaces
 {
-    public interface IBaseDalHandler<T>
+    public interface IFlightIncomingHandler : IFlightBasicHandler
     {
-        Task AddEntityAsync(T entity);
     }
 }

@@ -83,7 +83,6 @@ namespace Airport.Application.LogicServices
         private async Task MoveLegAsync(Flight flight, bool isDeparture, int procLogId)
         {
             IEnumerable<Leg>? nextLegs;
-            var allLegs = await _unitOfWork.Leg.GetAllAsync();
             var nextPosLegs = flight.Leg.NextPosibbleLegs;
             nextLegs = null;
             nextLegs = await _unitOfWork.Leg.FindListAsync(leg => nextPosLegs.HasFlag(leg.CurrentLeg));

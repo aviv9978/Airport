@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Terminal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.DAL
 {
-    public interface IDalHandler<T> where T : BaseEntity
+    public interface IFlightLegDalHandler : IDalBasicHandler<FlightLeg>
     {
-        Task UpdateAsync(T entity);
     }
 }

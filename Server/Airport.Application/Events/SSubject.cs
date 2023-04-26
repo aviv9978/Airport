@@ -4,6 +4,8 @@ using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces;
 using Core.EventHandlers.Interfaces.DAL;
+using Core.EventHandlers.Interfaces.Flight;
+using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.Interfaces.Subject;
 
 namespace Airport.Application.Events
@@ -12,74 +14,101 @@ namespace Airport.Application.Events
     {
         private Dictionary<FlightTopic, List<INotify>> _topicToHandlers = new Dictionary<FlightTopic, List<INotify>>();
         //private Dictionary<Topic, BaseAirportEvent> topicToEventType = new Dictionary<Topic, BaseAirportEvent>();
-        private Dictionary<FlightTopic, List<IBaseAirportHandler>> _topicToEventType = new Dictionary<FlightTopic, List<IBaseAirportHandler>>();
-        private Dictionary<DalTopic, List<IDalHandler<BaseEntity>>> _topicToDalType = new Dictionary<DalTopic, List<IDalHandler<BaseEntity>>>();
+        private Dictionary<FlightTopic, List<IFlightBasicHandler>> _topicToFlightHandlers = new Dictionary<FlightTopic, List<IFlightBasicHandler>>();
+        private Dictionary<DalTopic, List<IDalBasicHandler<BaseEntity>>> _topicToDalHandlers = new Dictionary<DalTopic, List<IDalBasicHandler<BaseEntity>>>();
+        private static Dictionary<Leg, Queue<Flight>> _legQueueMap = new Dictionary<Leg, Queue<Flight>>();
 
-        public async Task FlightToDalAsync(DalTopic topic, Flight flight)
+        public void AttachFlightHandlerToEventType(FlightTopic topic, IFlightBasicHandler observer)
         {
-            var eventHandlers = _topicToDalType[topic];
-            foreach (var eventHandler in eventHandlers)
-                await eventHandler.UpdateAsync(flight);
-        }
-        public async Task LegToDalAsync(DalTopic topic, Leg leg)
-        {
-            var eventHandlers = _topicToDalType[topic];
-            foreach (var eventHandler in eventHandlers)
-                await eventHandler.UpdateAsync(leg);
-        }
-        public Task AddObjAsync(FlightTopic topic, object T)
-        {
-
-            throw new NotImplementedException();
-        }
-
-        // The subscription management methods.
-        public void AttachToEventType(FlightTopic topic, IBaseAirportHandler observer)
-        {
-            var KV = _topicToEventType.FirstOrDefault(KV => KV.Key == topic);
+            var KV = _topicToFlightHandlers.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Add(observer);
             throw new NotImplementedException();
         }
-        public void DetachFromEventType(FlightTopic topic, IBaseAirportHandler observer)
+        public void DetachFlightHandlerFromEventType(FlightTopic topic, IFlightBasicHandler observer)
         {
-            var KV = _topicToEventType.FirstOrDefault(KV => KV.Key == topic);
+            var KV = _topicToFlightHandlers.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Remove(observer);
             Console.WriteLine("Subject: Detached an observer.");
         }
-        public void NotifyAdding(Flight flight)
+        public void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer)
         {
-
-        }
-        public void NotifyFlightFinished(Flight flight)
-        {
+            var KV = _topicToDalHandlers.FirstOrDefault(KV => KV.Key == dalTopic);
+            KV.Value.Add(observer);
             throw new NotImplementedException();
         }
-
-        public void NotifyFlightLeftLeg(Flight flight)
+        public void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer)
         {
-            throw new NotImplementedException();
+            var KV = _topicToDalHandlers.FirstOrDefault(KV => KV.Key == dalTopic);
+            KV.Value.Remove(observer);
+            Console.WriteLine("Subject: Detached an observer.");
         }
 
-
-        public void NotifyInComingFlight(Flight flight)
+        public void NotifyIncomingFlight(Flight incomingFlight)
         {
-            var incomingFlightHandlers = _topicToEventType[FlightTopic.FlightInComing];
+            var incomingFlightHandlers = _topicToFlightHandlers[FlightTopic.FlightInComing];
             foreach (var handler in incomingFlightHandlers)
-                handler.Update(flight);
-            throw new NotImplementedException();
+                handler.Notify(incomingFlight);
         }
-
-        // Trigger an update in each subscriber.
-        //public void Notify()
-        //{
-        //    Console.WriteLine("Subject: Notifying observers...");
-
-        //    foreach (var observer in _observers)
-        //    {
-        //        observer.Update(this);
-        //    }
-        //}
-
+        public void NotifyFlightNextLegClear(Flight flight, Leg leg)
+        {
+            var eventHandlers = _topicToDalHandlers[DalTopic.FlightNextLegClear];
+            var FlightLeg = new FlightLeg(flight, leg);
+            foreach (var eventHandler in eventHandlers)
+            {
+                eventHandler.NotifyAsync(FlightLeg);
+            }
+        }
+        public async Task NotifyFlightToDalAsync(DalTopic topic, Flight flight)
+        {
+            var eventHandlers = _topicToDalHandlers[topic];
+            foreach (var eventHandler in eventHandlers)
+                await eventHandler.NotifyAsync(flight);
+        }
+        public async Task NotifyLegToDalAsync(DalTopic topic, Leg leg)
+        {
+            var eventHandlers = _topicToDalHandlers[topic];
+            foreach (var eventHandler in eventHandlers)
+                await eventHandler.NotifyAsync(leg);
+        }
+        public void NotifyFlightEnteredLeg(Flight flight)
+        {
+            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightEnteredLeg];
+            foreach (var eventHandler in eventHandlers)
+                eventHandler.Notify(flight);
+        }
+        public void NotifyFlightFinishedLeg(Flight flight)
+        {
+            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightFinishedLeg];
+            foreach (var eventHandler in eventHandlers)
+                eventHandler.Notify(flight);
+        }
+        public void AttatchFlightToLegQueue(Flight flight, Leg leg)
+        {
+            if (!_legQueueMap.ContainsKey(leg))
+            {
+                _legQueueMap[leg] = new Queue<Flight>();
+            }
+            _legQueueMap[leg].Enqueue(flight);
+        }
+        public void NotifyLegClear(Leg leg)
+        {
+            if (_legQueueMap.ContainsKey(leg) && _legQueueMap[leg].Count > 0)
+            {
+                Flight flightToContinue = _legQueueMap[leg].Dequeue();
+                NotifyFlightNextLegClear(flightToContinue, leg);
+            }
+        }
+        public void NotifyFlightCompleted(Flight flight)
+        {
+            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightCompleted];
+            foreach (var eventHandler in eventHandlers)
+                eventHandler.Notify(flight);
+        }
+        public void Detach(Flight flight, Leg leg)
+        {
+            if (_legQueueMap.ContainsKey(leg))
+                _legQueueMap[leg].Dequeue();
+        }
 
     }
 }

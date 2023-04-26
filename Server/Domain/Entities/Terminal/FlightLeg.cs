@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Application.EventHandlers.FlightHandlers
+namespace Core.Entities.Terminal
 {
-    public class IFlightIncomingHandler
+    internal class FlightLeg
     {
     }
 }

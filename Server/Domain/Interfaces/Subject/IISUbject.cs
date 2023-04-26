@@ -1,8 +1,10 @@
 ﻿using Core.DTOs.Incoming;
+using Core.Entities;
 using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces;
 using Core.EventHandlers.Interfaces.DAL;
+using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.Interfaces.Events;
 using System;
 using System.Collections.Generic;
@@ -14,13 +16,19 @@ namespace Core.Interfaces.Subject
 {
     public interface IISUbject
     {
-        void AttachToEventType(FlightTopic topic, IBaseAirportHandler observer);
-        void DetachFromEventType(FlightTopic topic, IBaseAirportHandler observer);
-        Task AddObjAsync(FlightTopic topic, object T);
-        Task FlightToDalAsync(DalTopic topic, Flight flight);
-        Task LegToDalAsync(DalTopic topic, Leg flight);
-        void NotifyInComingFlight(Flight flight);
-        void NotifyFlightLeftLeg(Flight flight);
-        void NotifyFlightFinished(Flight flight);
+        void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicHandler observer);
+        void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicHandler observer);
+        void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer);
+        void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer);
+        Task NotifyFlightToDalAsync(DalTopic dalTopic, Flight flight);
+        Task NotifyLegToDalAsync(DalTopic dalTopic, Leg flight);
+        void NotifyFlightNextLegClear(Flight flight, Leg leg);
+        void NotifyIncomingFlight(Flight flight);
+        void NotifyFlightEnteredLeg(Flight flight);
+        void NotifyFlightFinishedLeg(Flight flight);
+        void AttatchFlightToLegQueue(Flight flight, Leg leg);
+        void NotifyLegClear(Leg leg);
+        void NotifyFlightCompleted(Flight flight);
+        void Detach(Flight flight, Leg leg);
     }
 }

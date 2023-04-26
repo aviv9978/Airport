@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Application.EventHandlers
+namespace Core.EventHandlers.Interfaces.FlightInterfaces
 {
-    internal class BaseAirportHandler
+    public interface IFlightEnteredLegHandler : IFlightBasicHandler
     {
     }
 }
