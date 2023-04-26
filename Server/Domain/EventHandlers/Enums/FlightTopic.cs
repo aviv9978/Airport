@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Enums
 {
-    public enum Topic
+    public enum FlightTopic
     {
-        FlightInComing = 1,
-        FlightLeftLeg = 2,
-        FlightFinished = 4
+        FlightInComing ,
+        FlightEnteredLeg,
+        FlightLeftLeg,
+        FlightFinished
     }
 }

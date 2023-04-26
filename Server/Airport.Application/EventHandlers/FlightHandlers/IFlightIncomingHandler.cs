@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Interfaces.EventHandlers
+namespace Airport.Application.EventHandlers.FlightHandlers
 {
-    public interface INotify
+    public class IFlightIncomingHandler
     {
-        Task UpdateAsync();
     }
 }

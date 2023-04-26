@@ -1,5 +1,5 @@
 ﻿using Core.EventHandlers.Interfaces;
-using Core.Interfaces.Subject;
+using Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Airport.Application.EventHandlers
 {
-    internal class FlightIncomingHandler : IBaseAirportHandler
+    internal class FlightEnteringLegHandler : IBaseAirportHandler
     {
-        private readonly IISUbject _subject;
+        private readonly IUnitOfWork _UOW;
 
-        public FlightIncomingHandler(IISUbject isubject)
+        public FlightEnteringLegHandler(IUnitOfWork unitOfWork) 
         {
-            _subject = isubject;
+            _UOW = unitOfWork;
         }
         public async Task UpdateAsync()
         {

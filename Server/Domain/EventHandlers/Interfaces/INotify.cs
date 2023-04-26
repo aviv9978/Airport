@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Interfaces.EventHandlers
+namespace Core.EventHandlers.Interfaces
 {
-    public interface IBaseAirportHandler : INotify
+    public interface INotify
     {
+        void Update();
     }
 }

@@ -1,51 +1,54 @@
-﻿using Airport.Application.EventHandlers;
-using Core.DTOs.Incoming;
+﻿using Core.DTOs.Incoming;
+using Core.Entities;
 using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
-using Core.Interfaces.EventHandlers;
-using Core.Interfaces.Events;
+using Core.EventHandlers.Interfaces;
+using Core.EventHandlers.Interfaces.DAL;
 using Core.Interfaces.Subject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Airport.Application.Events
 {
     public class SSubject : IISUbject
     {
-        // For the sake of simplicity, the Subject's state, essential to all
-        // subscribers, is stored in this variable.
-        public int State { get; set; } = -0;
-
-        private Dictionary<Topic, List<INotify>> _topicToHandlers = new Dictionary<Topic, List<INotify>>();
+        private Dictionary<FlightTopic, List<INotify>> _topicToHandlers = new Dictionary<FlightTopic, List<INotify>>();
         //private Dictionary<Topic, BaseAirportEvent> topicToEventType = new Dictionary<Topic, BaseAirportEvent>();
-        private Dictionary<Topic, List<IBaseAirportHandler>> _topicToEventType = new Dictionary<Topic, List<IBaseAirportHandler>>();
-        private Dictionary<Topic, List<IDalHandler>> _topicToDalType = new Dictionary<Topic, List<IDalHandler>>();
+        private Dictionary<FlightTopic, List<IBaseAirportHandler>> _topicToEventType = new Dictionary<FlightTopic, List<IBaseAirportHandler>>();
+        private Dictionary<DalTopic, List<IDalHandler<BaseEntity>>> _topicToDalType = new Dictionary<DalTopic, List<IDalHandler<BaseEntity>>>();
+
+        public async Task FlightToDalAsync(DalTopic topic, Flight flight)
+        {
+            var eventHandlers = _topicToDalType[topic];
+            foreach (var eventHandler in eventHandlers)
+                await eventHandler.UpdateAsync(flight);
+        }
+        public async Task LegToDalAsync(DalTopic topic, Leg leg)
+        {
+            var eventHandlers = _topicToDalType[topic];
+            foreach (var eventHandler in eventHandlers)
+                await eventHandler.UpdateAsync(leg);
+        }
+        public Task AddObjAsync(FlightTopic topic, object T)
+        {
+
+            throw new NotImplementedException();
+        }
 
         // The subscription management methods.
-        public void AttachToTopic(Topic topic, INotify observer)
+        public void AttachToEventType(FlightTopic topic, IBaseAirportHandler observer)
         {
-            var KV = _topicToHandlers.FirstOrDefault(KV => KV.Key == topic);
+            var KV = _topicToEventType.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Add(observer);
             throw new NotImplementedException();
         }
-        public void DetachFromTopic(Topic topic, INotify observer)
+        public void DetachFromEventType(FlightTopic topic, IBaseAirportHandler observer)
         {
-            var KV = _topicToHandlers.FirstOrDefault(KV => KV.Key == topic);
+            var KV = _topicToEventType.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Remove(observer);
             Console.WriteLine("Subject: Detached an observer.");
         }
-        public void AttachDalHandlerToTopic(Topic topic, IDalHandler dalObserver)
+        public void NotifyAdding(Flight flight)
         {
-            var KV = _topicToDalType.FirstOrDefault(KV => KV.Key == topic);
-            KV.Value.Add(dalObserver);
-        }
-        public void DetachDalHandlerFromTopic(Topic topic, IDalHandler dalObserver)
-        {
-            var KV = _topicToDalType.FirstOrDefault(KV => KV.Key == topic);
-            KV.Value.Remove(dalObserver);
+
         }
         public void NotifyFlightFinished(Flight flight)
         {
@@ -57,8 +60,12 @@ namespace Airport.Application.Events
             throw new NotImplementedException();
         }
 
-        public void NotifyInComingFlight(FlightInDTO flightInDto)
+
+        public void NotifyInComingFlight(Flight flight)
         {
+            var incomingFlightHandlers = _topicToEventType[FlightTopic.FlightInComing];
+            foreach (var handler in incomingFlightHandlers)
+                handler.Update(flight);
             throw new NotImplementedException();
         }
 

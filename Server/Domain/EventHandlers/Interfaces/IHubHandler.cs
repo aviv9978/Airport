@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Interfaces.EventHandlers
+namespace Core.EventHandlers.Interfaces
 {
-    public interface IHubHandler : IHUB,IBaseAirportHandler
+    public interface IHubHandler : IHUB, IBaseAirportHandler
     {
     }
 }

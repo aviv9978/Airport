@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airport.Application.EventHandlers
+namespace Core.EventHandlers.Enums
 {
-    internal class BaseAirportHandler
+    public enum DalTopic
     {
+        AddFlight,
+        UpdateFlight,
+        UpdateLeg
     }
 }

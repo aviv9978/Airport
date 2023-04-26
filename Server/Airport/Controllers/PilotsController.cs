@@ -25,7 +25,7 @@ namespace FlightSimulator.Controllers
         }
 
         [HttpPost("AddPilot")]
-        public async Task<IActionResult> AddPilot([FromBody] PilotInDTO pilotInDTO)
+        public async Task<IActionResult> AddPilotAsync([FromBody] PilotInDTO pilotInDTO)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace FlightSimulator.Controllers
         }
 
         [HttpGet("Pilots")]
-        public async Task<IActionResult> GetAllPilots()
+        public async Task<IActionResult> GetAllPilotsAsync()
         {
             var allPilots = await _pilotRepos.GetAllPilotsAsync();
             var _pilots = _mapper.Map<IEnumerable<PilotOutDTO>>(allPilots);
