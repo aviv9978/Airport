@@ -19,16 +19,11 @@ namespace Airport.Application.Events.EventHandlersSubjects
             _flightEventHandlerSubject = flightEventHandlerSubject;
         }
 
-        public void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicEventHandler observer)
-        {
-            throw new NotImplementedException();
-        }
+        public void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicEventHandler flightEventHandler) =>
+            _flightEventHandlerSubject.AttachFlightHandlerToEventType(flightTopic, flightEventHandler);
 
-        public void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicEventHandler observer)
-        {
-            throw new NotImplementedException();
-        }
-
+        public void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicEventHandler flightEventHandler) =>
+            _flightEventHandlerSubject.DetachFlightHandlerFromEventType(flightTopic, flightEventHandler);
         public void NotifyFlightEnteredLeg(Flight flight) => _flightEventHandlerSubject.NotifyFlightEnteredLeg(flight);
 
         public void NotifyFlightOutOfTerminal(Flight flight) => _flightEventHandlerSubject.NotifyFlightOutOfTerminal(flight);

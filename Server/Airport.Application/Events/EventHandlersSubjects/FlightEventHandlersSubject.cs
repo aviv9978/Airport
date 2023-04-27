@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
+using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.EventHandlers.Interfaces.Subjects.EventHandlersSubjects;
 using Core.Interfaces.Events;
@@ -15,10 +16,13 @@ namespace Airport.Application.Events.EventHandlersSubjects
     {
         private Dictionary<FlightTopic, List<IFlightBasicEventHandler>> _topicToFlightHandlers = new Dictionary<FlightTopic, List<IFlightBasicEventHandler>>();
 
-        public void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicEventHandler handler)
+        public void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicEventHandler flightBasicEventHandler)
         {
-            var KV = _topicToFlightHandlers.FirstOrDefault(KV => KV.Key == flightTopic);
-            KV.Value.Add(handler);
+            List<IFlightBasicEventHandler>? flightEventHandlerList = null;
+            if (!_topicToFlightHandlers.TryGetValue(flightTopic, out flightEventHandlerList))
+                flightEventHandlerList = _topicToFlightHandlers[flightTopic] = new List<IFlightBasicEventHandler>();
+
+            flightEventHandlerList.Add(flightBasicEventHandler);
         }
 
         public void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicEventHandler handler)

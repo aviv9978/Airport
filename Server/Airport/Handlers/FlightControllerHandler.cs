@@ -13,8 +13,8 @@ namespace Airport.Handlers
     public class FlightControllerHandler : IFlightControllerHandler
     {
         private readonly IEnumerable<IFlightDalEventHandler> _flightDalEventHandlers;
-        private readonly IFlightLegDalEventHandler _flightLegDalEventHandler;
         private readonly ILegDalEventHandler _legDalEventHandler;
+        private readonly IFlightLegDalEventHandler _flightLegDalEventHandler;
         private readonly IFlightBasicEventHandler _flightBasicEventHandler;
         private readonly IISUbject _subject;
 
@@ -25,27 +25,25 @@ namespace Airport.Handlers
             IFlightBasicEventHandler flightBasicEventHandler)
         {
             _flightDalEventHandlers = flightDalEventHandlers;
-            _flightLegDalEventHandler = flightLegDalEventHandler;
             _legDalEventHandler = legDalEventHandler;
+            _flightLegDalEventHandler = flightLegDalEventHandler;
             _flightBasicEventHandler = flightBasicEventHandler;
             _subject = subject;
             SubscribeToBasicDalHandler();
             SubscribeToFlightBasicEventHandler();
         }
 
-        public async Task AddFlightAsync(Flight flight)
-        {
-            await _subject.NotifyFlightToDalAsync(DalTopic.AddFlight, flight);
-        }
+        public async Task AddFlightAsync(Flight flight) => await _subject.NotifyFlightToDalAsync(DalTopic.AddFlight, flight);
+
 
         private void SubscribeToBasicDalHandler()
         {
             foreach (var flightDalEventHandler in _flightDalEventHandlers)
             {
-                _subject.AttachDalHandlerToEventType(flightDalEventHandler.DalTopic, flightDalEventHandler);
+                _subject.AttachFlightDalHandlerToEventType(flightDalEventHandler.DalTopic, flightDalEventHandler);
             }
-            _subject.AttachDalHandlerToEventType(_flightLegDalEventHandler.DalTopic, _flightLegDalEventHandler);
-            _subject.AttachDalHandlerToEventType(_legDalEventHandler.DalTopic, _legDalEventHandler);
+            _subject.AttachFlightLegDalHandlerToEventType(_flightLegDalEventHandler.DalTopic, _flightLegDalEventHandler);
+            _subject.AttachLegDalHandlerToEventType(_legDalEventHandler.DalTopic, _legDalEventHandler);
         }
 
         private void SubscribeToFlightBasicEventHandler()

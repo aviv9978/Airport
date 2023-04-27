@@ -26,11 +26,11 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
-        public async Task NotifyAsync(FlightLeg flightAndLeg)
+        public async Task NotifyAsync(FlightAndNextLeg flightAndLeg)
         {
             var flight = flightAndLeg.Flight;
-            var currentLeg = flight.Leg;
-            var nextLeg = flightAndLeg.Leg;
+            var currentLeg = flight?.Leg;
+            var nextLeg = flightAndLeg.NextLeg;
             UpdateFlightAndLegCode(flight, currentLeg, nextLeg);
             await UpdateFlightAndLegsInDBAsync(flight, currentLeg, nextLeg);
             await _unitOfWork.CommitAsync();
@@ -47,8 +47,11 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
 
         private static void UpdateFlightAndLegCode(Flight? flight, Leg? currentLeg, Leg? nextLeg)
         {
-            currentLeg.Flight = null;
-            currentLeg.IsOccupied = false;
+            if (currentLeg != null)
+            {
+                currentLeg.Flight = null;
+                currentLeg.IsOccupied = false;
+            }
             nextLeg.Flight = flight;
             nextLeg.IsOccupied = true;
             flight.Leg = nextLeg;

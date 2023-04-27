@@ -3,6 +3,7 @@ using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.Subjects.DAL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,10 +24,14 @@ namespace Airport.Application.Events.DalSubjects
         {
             _iFlightLegDalSub = iFlightLegDalSub;
         }
-        public void AttachDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler observer)
+        public void AttachFlightDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler flightLegDalHandler)
         {
-            var KV = _topicToFlightDalHandler.FirstOrDefault(KV => KV.Key == dalTopic);
-            KV.Value.Add(observer);
+            List<IFlightDalEventHandler> listFlighLegtDalHandlers = null;
+            if (!_topicToFlightDalHandler.TryGetValue(dalTopic, out listFlighLegtDalHandlers))
+                listFlighLegtDalHandlers = _topicToFlightDalHandler[dalTopic] = new List<IFlightDalEventHandler>();
+
+            listFlighLegtDalHandlers.Add(flightLegDalHandler);
+
         }
         public void DetachFlightDalHandlerFromEventType(DalTopic dalTopic, IFlightDalEventHandler observer)
         {
@@ -63,7 +68,7 @@ namespace Airport.Application.Events.DalSubjects
             }
             _legQueueMap[leg].Enqueue(flight);
         }
-        public void NotifyLegClear(Leg leg)
+        public void NotifyLegHasBeenCleared(Leg leg)
         {
             if (_legQueueMap.ContainsKey(leg) && _legQueueMap[leg].Count > 0)
             {

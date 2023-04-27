@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Terminal
 {
-    public class FlightLeg : IBaseEntity
+    public class FlightAndNextLeg : IBaseEntity
     {
         public Flight? Flight { get; set; }
-        public Leg? Leg { get; set; }
-        public FlightLeg(Flight? flight, Leg? leg)
+        public Leg? NextLeg { get; set; }
+        public FlightAndNextLeg(Flight? flight, Leg? nextLeg)
         {
             Flight = flight;
-            Leg = leg;
+            NextLeg = nextLeg;
         }
     }
 }

@@ -24,16 +24,29 @@ namespace Airport.Application.Events.DalSubjects
             _legDalSubject = legDalSubject;
         }
 
-        public void AttachDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler) => _flightDalSubject.AttachDalHandlerToEventType(dalTopic, flightDalEventHandler);
-        public void DetachFlightDalHandlerFromEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler) => _flightDalSubject.DetachFlightDalHandlerFromEventType(dalTopic, flightDalEventHandler);
+        public void AttachFlightDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler)
+            => _flightDalSubject.AttachFlightDalHandlerToEventType(dalTopic, flightDalEventHandler);
+        public void DetachFlightDalHandlerFromEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler)
+            => _flightDalSubject.DetachFlightDalHandlerFromEventType(dalTopic, flightDalEventHandler);
+        public void AttachLegDalHandlerToEventType(DalTopic dalTopic, ILegDalEventHandler legDalEventHandler)
+            => _legDalSubject.AttachLegDalHandlerToEventType(dalTopic, legDalEventHandler);
+        public void DetachLegDalHandlerFromEventType(DalTopic dalTopic, ILegDalEventHandler legDalEventHandler)
+            => _legDalSubject.DetachLegDalHandlerFromEventType(dalTopic, legDalEventHandler);
+        public void AttachFlightLegDalHandlerToEventType(DalTopic dalTopic, IFlightLegDalEventHandler flightLegDalEventHandler)
+            => _flightLegDalSubject.AttachFlightLegDalHandlerToEventType(dalTopic, flightLegDalEventHandler);
+
+        public void DetachFlightLegDalHandlerFromEventType(DalTopic dalTopic, IFlightLegDalEventHandler flightLegDalEventHandler)
+            => _flightLegDalSubject.DetachFlightLegDalHandlerFromEventType(dalTopic, flightLegDalEventHandler);
         public void NotifyIncomingFlight(Flight incomingFlight) => _flightDalSubject.NotifyIncomingFlight(incomingFlight);
         public Task NotifyFlightToDalAsync(DalTopic topic, Flight flight) => _flightDalSubject.NotifyFlightToDalAsync(topic, flight);
         public void NotifyFlightFinishedLeg(Flight flight) => _flightDalSubject.NotifyFlightFinishedLeg(flight);
         public void AttatchFlightToLegQueue(Flight flight, Leg leg) => _flightDalSubject.AttatchFlightToLegQueue(flight, leg);
-        public void NotifyLegClear(Leg leg) => _flightDalSubject.NotifyLegClear(leg);
+        public void NotifyLegHasBeenCleared(Leg leg) => _flightDalSubject.NotifyLegHasBeenCleared(leg);
         public void NotifyFlightCompleted(Flight flight) => _flightDalSubject.NotifyFlightCompleted(flight);
         public void Detach(Flight flight, Leg leg) => _flightDalSubject.Detach(flight, leg);
         public Task NotifyLegToDalAsync(DalTopic topic, Leg leg) => _legDalSubject.NotifyLegToDalAsync(topic, leg);
+
+        public void NotifyFlightNextLegClear(Flight flight, Leg leg) => _flightLegDalSubject.NotifyFlightNextLegClear(flight, leg);
 
     }
 }

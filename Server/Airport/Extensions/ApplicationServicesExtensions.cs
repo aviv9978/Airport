@@ -1,6 +1,8 @@
 ﻿using Airport.Application;
 using Airport.Application.EventHandlers.FlightHandlers;
 using Airport.Application.Events;
+using Airport.Application.Events.DalSubjects;
+using Airport.Application.Events.EventHandlersSubjects;
 using Airport.Application.ILogicServices;
 using Airport.Application.Interfaces;
 using Airport.Application.LogicServices;
@@ -15,6 +17,8 @@ using Core.Entities;
 using Core.Entities.Terminal;
 using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
+using Core.EventHandlers.Interfaces.Subjects.DAL;
+using Core.EventHandlers.Interfaces.Subjects.EventHandlersSubjects;
 using Core.Hubs;
 using Core.Interfaces;
 using Core.Interfaces.Events;
@@ -39,7 +43,6 @@ namespace FlightSimulator.Extensions
             //services.AddSingleton<IHUB, TerminalHub>();
             services.AddScoped<ISubject, Subject>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IISUbject, SSubject>();
             services.AddScoped<IFlightDalEventHandler, AddFlightHandler>();
             services.AddScoped<IFlightDalEventHandler, FlightIncomingHandler>();
             services.AddScoped<IFlightDalEventHandler, FlightCompletedHandler>();
@@ -49,6 +52,13 @@ namespace FlightSimulator.Extensions
             services.AddScoped<ILegDalEventHandler, UpdateLegHandler>();
             services.AddScoped<IFlightBasicEventHandler, FlightEnteredLegHandler>();
             services.AddScoped<IFlightControllerHandler, FlightControllerHandler>();
+            services.AddScoped<IDalSubject, DalSubject>();
+            services.AddScoped<IFlightDalSubject, FlightDalSubject>();
+            services.AddScoped<IFlightLegDalSubject, FlightLegDalSubject>();
+            services.AddScoped<ILegDalSubject, LegDalSubject>();
+            services.AddScoped<IEventHandlerSubject, EventHandlerSubject>();
+            services.AddScoped<IFlightEventHandlerSubject, FlightEventHandlersSubject>();
+            services.AddScoped<IISUbject, SSubject>();
 
             services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext =>
             {

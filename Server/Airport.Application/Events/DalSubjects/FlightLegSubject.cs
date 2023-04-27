@@ -14,10 +14,26 @@ namespace Airport.Application.Events.DalSubjects
     {
         private Dictionary<DalTopic, List<IFlightLegDalEventHandler>> _topicToFlightLegDalHandler =
             new Dictionary<DalTopic, List<IFlightLegDalEventHandler>>();
+
+        public void AttachFlightLegDalHandlerToEventType(DalTopic dalTopic, IFlightLegDalEventHandler flightLegDalEventHandler)
+        {
+            List<IFlightLegDalEventHandler>? listFlightLegDalHandlers = null;
+            if (!_topicToFlightLegDalHandler.TryGetValue(dalTopic, out listFlightLegDalHandlers))
+                listFlightLegDalHandlers = _topicToFlightLegDalHandler[dalTopic] = new List<IFlightLegDalEventHandler>();
+
+            listFlightLegDalHandlers.Add(flightLegDalEventHandler);
+        }
+
+        public void DetachFlightLegDalHandlerFromEventType(DalTopic dalTopic, IFlightLegDalEventHandler flightLegDalEventHandler)
+        {
+            var KV = _topicToFlightLegDalHandler.FirstOrDefault(KV => KV.Key == dalTopic);
+            KV.Value.Remove(flightLegDalEventHandler);
+        }
+
         public void NotifyFlightNextLegClear(Flight flight, Leg leg)
         {
             var eventHandlers = _topicToFlightLegDalHandler[DalTopic.FlightNextLegClear];
-            var FlightLeg = new FlightLeg(flight, leg);
+            var FlightLeg = new FlightAndNextLeg(flight, leg);
             foreach (var eventHandler in eventHandlers)
                 eventHandler.NotifyAsync(FlightLeg);
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.Subjects.DAL
 {
-    public interface IDalSubject : IFlightDalSubject, ILegDalSubject
+    public interface IDalSubject : IFlightDalSubject, ILegDalSubject, IFlightLegDalSubject
     {
     }
 }

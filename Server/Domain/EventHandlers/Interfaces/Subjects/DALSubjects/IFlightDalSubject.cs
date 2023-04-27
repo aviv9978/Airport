@@ -11,13 +11,13 @@ namespace Core.EventHandlers.Interfaces.Subjects.DAL
 {
     public interface IFlightDalSubject
     {
-        void AttachDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler);
+        void AttachFlightDalHandlerToEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler);
         void DetachFlightDalHandlerFromEventType(DalTopic dalTopic, IFlightDalEventHandler flightDalEventHandler);
         void NotifyIncomingFlight(Flight incomingFlight);
         Task NotifyFlightToDalAsync(DalTopic topic, Flight flight);
         void NotifyFlightFinishedLeg(Flight flight);
         void AttatchFlightToLegQueue(Flight flight, Leg leg);
-        void NotifyLegClear(Leg leg);
+        void NotifyLegHasBeenCleared(Leg leg);
         void NotifyFlightCompleted(Flight flight);
         void Detach(Flight flight, Leg leg);
     }
