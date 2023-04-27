@@ -16,10 +16,10 @@ namespace Core.Interfaces.Subject
 {
     public interface IISUbject
     {
-        void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicHandler observer);
-        void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicHandler observer);
-        void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer);
-        void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer);
+        void AttachFlightHandlerToEventType(FlightTopic flightTopic, IFlightBasicEventHandler observer);
+        void DetachFlightHandlerFromEventType(FlightTopic flightTopic, IFlightBasicEventHandler observer);
+        void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicEventHandler<BaseEntity> observer);
+        void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicEventHandler<BaseEntity> observer);
         Task NotifyFlightToDalAsync(DalTopic dalTopic, Flight flight);
         Task NotifyLegToDalAsync(DalTopic dalTopic, Leg flight);
         void NotifyFlightNextLegClear(Flight flight, Leg leg);
@@ -29,6 +29,7 @@ namespace Core.Interfaces.Subject
         void AttatchFlightToLegQueue(Flight flight, Leg leg);
         void NotifyLegClear(Leg leg);
         void NotifyFlightCompleted(Flight flight);
+        void NotifyFlightOutOfTerminal(Flight flight);
         void Detach(Flight flight, Leg leg);
     }
 }

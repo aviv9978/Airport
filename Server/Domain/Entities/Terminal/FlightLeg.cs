@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Terminal
 {
-    internal class FlightLeg
+    public class FlightLeg : BaseEntity
     {
+        public Flight? Flight { get; set; }
+        public Leg? Leg { get; set; }
+        public FlightLeg(Flight? flight, Leg? leg)
+        {
+            Flight = flight;
+            Leg = leg;
+        }
     }
 }

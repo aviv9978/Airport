@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Core.EventHandlers.Enums;
 namespace Airport.Infrastracture.Handlers.FlightLegHandlers
 {
-    public class FlightNextLegClearHandler : IFlightLegDalHandler
+    public class FlightNextLegClearHandler : IFlightLegDalEventHandler
     {
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;

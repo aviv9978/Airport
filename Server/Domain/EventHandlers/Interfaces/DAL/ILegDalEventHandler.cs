@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.DAL
 {
-    public interface IFlightLegDalHandler : IDalBasicHandler<FlightLeg>
+    public interface ILegDalEventHandler : IDalBasicEventHandler<Leg>
     {
     }
 }

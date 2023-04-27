@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.DAL
 {
-    public interface IDalBasicHandler<T> where T : BaseEntity
+    public interface IDalBasicEventHandler<T> where T : BaseEntity
     {
         Task NotifyAsync(T entity);
     }

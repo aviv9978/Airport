@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
-    public class FlightFinishedLegHandler : IFlightDalHandler
+    public class FlightFinishedLegHandler : IFlightDalEventHandler
     {
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;

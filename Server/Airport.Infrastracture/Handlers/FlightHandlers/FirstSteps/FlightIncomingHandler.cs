@@ -7,7 +7,7 @@ using Core.Enums;
 
 namespace Airport.Infrastracture.Handlers.FlightHandlers.FirstSteps
 {
-    public class FlightIncomingHandler : IFlightDalHandler
+    public class FlightIncomingHandler : IFlightDalEventHandler
     {
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;

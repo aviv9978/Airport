@@ -12,6 +12,7 @@ namespace Core.EventHandlers.Enums
         FlightEnteredLeg,
         FlightFinishedLeg,
         FlightLeftLeg,
-        FlightCompleted
+        FlightCompleted,
+        FlightOutOfTereminal
     }
 }

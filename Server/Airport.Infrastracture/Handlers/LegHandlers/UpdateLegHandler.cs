@@ -1,16 +1,10 @@
-﻿using Airport.Infrastracture.Handlers.Flight;
-using Core.EventHandlers.Interfaces.DAL;
+﻿using Core.EventHandlers.Interfaces.DAL;
 using Core.Interfaces;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Airport.Infrastracture.Handlers.Leg
+using Core.Entities.Terminal;
+namespace Airport.Infrastracture.Handlers.LegHandlers
 {
-    public class UpdateLegHandler : ILegDalHandler
+    public class UpdateLegHandler : ILegDalEventHandler
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UpdateLegHandler> _logger;
@@ -21,7 +15,7 @@ namespace Airport.Infrastracture.Handlers.Leg
             _logger = logger;
         }
 
-        public async Task NotifyAsync(Core.Entities.Terminal.Leg leg)
+        public async Task NotifyAsync(Leg leg)
         {
             await _unitOfWork.Leg.UpdateAsync(leg);
             _logger.LogInformation($"Flight {leg} has been updated.");

@@ -2,7 +2,7 @@
 
 namespace Core.EventHandlers.Interfaces.DAL
 {
-    public interface IFlightDalHandler : IDalBasicHandler<Flight>
+    public interface IFlightDalEventHandler : IDalBasicEventHandler<Flight>
     {
     }
 }

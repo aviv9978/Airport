@@ -2,7 +2,7 @@
 
 namespace Core.EventHandlers.Interfaces.FlightInterfaces
 {
-    public interface IFlightBasicHandler
+    public interface IFlightBasicEventHandler
     {
         Task Notify(Flight flight);
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.EventHandlers.Interfaces.FlightInterfaces
 {
-    public interface IFlightIncomingHandler : IFlightBasicHandler
+    public interface IFlightIncomingHandler : IFlightBasicEventHandler
     {
     }
 }

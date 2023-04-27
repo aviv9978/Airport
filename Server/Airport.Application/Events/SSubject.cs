@@ -14,29 +14,29 @@ namespace Airport.Application.Events
     {
         private Dictionary<FlightTopic, List<INotify>> _topicToHandlers = new Dictionary<FlightTopic, List<INotify>>();
         //private Dictionary<Topic, BaseAirportEvent> topicToEventType = new Dictionary<Topic, BaseAirportEvent>();
-        private Dictionary<FlightTopic, List<IFlightBasicHandler>> _topicToFlightHandlers = new Dictionary<FlightTopic, List<IFlightBasicHandler>>();
-        private Dictionary<DalTopic, List<IDalBasicHandler<BaseEntity>>> _topicToDalHandlers = new Dictionary<DalTopic, List<IDalBasicHandler<BaseEntity>>>();
+        private Dictionary<FlightTopic, List<IFlightBasicEventHandler>> _topicToFlightHandlers = new Dictionary<FlightTopic, List<IFlightBasicEventHandler>>();
+        private Dictionary<DalTopic, List<IDalBasicEventHandler<BaseEntity>>> _topicToDalHandlers = new Dictionary<DalTopic, List<IDalBasicEventHandler<BaseEntity>>>();
         private static Dictionary<Leg, Queue<Flight>> _legQueueMap = new Dictionary<Leg, Queue<Flight>>();
 
-        public void AttachFlightHandlerToEventType(FlightTopic topic, IFlightBasicHandler observer)
+        public void AttachFlightHandlerToEventType(FlightTopic topic, IFlightBasicEventHandler observer)
         {
             var KV = _topicToFlightHandlers.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Add(observer);
             throw new NotImplementedException();
         }
-        public void DetachFlightHandlerFromEventType(FlightTopic topic, IFlightBasicHandler observer)
+        public void DetachFlightHandlerFromEventType(FlightTopic topic, IFlightBasicEventHandler observer)
         {
             var KV = _topicToFlightHandlers.FirstOrDefault(KV => KV.Key == topic);
             KV.Value.Remove(observer);
             Console.WriteLine("Subject: Detached an observer.");
         }
-        public void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer)
+        public void AttachDalHandlerToEventType(DalTopic dalTopic, IDalBasicEventHandler<BaseEntity> observer)
         {
             var KV = _topicToDalHandlers.FirstOrDefault(KV => KV.Key == dalTopic);
             KV.Value.Add(observer);
             throw new NotImplementedException();
         }
-        public void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicHandler<BaseEntity> observer)
+        public void DetachDalHandlerFromEventType(DalTopic dalTopic, IDalBasicEventHandler<BaseEntity> observer)
         {
             var KV = _topicToDalHandlers.FirstOrDefault(KV => KV.Key == dalTopic);
             KV.Value.Remove(observer);
@@ -96,11 +96,35 @@ namespace Airport.Application.Events
             {
                 Flight flightToContinue = _legQueueMap[leg].Dequeue();
                 NotifyFlightNextLegClear(flightToContinue, leg);
+
+                foreach (var kvp in _legQueueMap)
+                {
+                    if (kvp.Key == leg) continue; 
+
+                    Queue<Flight> otherLegQueue = kvp.Value;
+                    int count = otherLegQueue.Count;
+                    while (count > 0)
+                    {
+                        Flight otherFlight = otherLegQueue.Dequeue();
+                        if (!otherFlight.Equals(flightToContinue))
+                        {
+                            otherLegQueue.Enqueue(otherFlight);
+                        }
+                        count--;
+                    }
+                }
             }
+
         }
         public void NotifyFlightCompleted(Flight flight)
         {
             var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightCompleted];
+            foreach (var eventHandler in eventHandlers)
+                eventHandler.Notify(flight);
+        }
+        public void NotifyFlightOutOfTerminal(Flight flight)
+        {
+            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightOutOfTereminal];
             foreach (var eventHandler in eventHandlers)
                 eventHandler.Notify(flight);
         }

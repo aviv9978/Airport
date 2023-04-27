@@ -5,9 +5,9 @@ using Microsoft.Extensions.Logging;
 using Core.Entities.Terminal;
 
 
-namespace Airport.Infrastracture.Handlers.FlightHandlers.FirstSteps
+namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
-    public class AddFlightHandler : IFlightDalHandler
+    public class AddFlightHandler : IFlightDalEventHandler
     {
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;

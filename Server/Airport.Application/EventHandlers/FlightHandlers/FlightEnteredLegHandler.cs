@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Airport.Application.EventHandlers.FlightHandlers
 {
-    public class FlightEnteredLegHandler : IFlightBasicHandler
+    public class FlightEnteredLegHandler : IFlightBasicEventHandler
     {
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
