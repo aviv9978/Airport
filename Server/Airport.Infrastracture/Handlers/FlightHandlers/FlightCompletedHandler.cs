@@ -15,6 +15,8 @@ namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
     public class FlightCompletedHandler : IFlightDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.FlightCompleted;
+
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightCompletedHandler> _logger;

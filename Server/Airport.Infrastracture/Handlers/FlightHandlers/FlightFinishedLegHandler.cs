@@ -8,11 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.EventHandlers.Enums;
 
 namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
     public class FlightFinishedLegHandler : IFlightDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.FlightFinishedLeg;
+
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
 

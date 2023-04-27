@@ -14,6 +14,8 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
 {
     public class FlightNextLegClearHandler : IFlightLegDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.FlightNextLegClear;
+
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightNextLegClearHandler> _logger;

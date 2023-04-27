@@ -1,6 +1,7 @@
 ﻿using Airport.Infrastracture.Handlers.FlightHandlers;
 using Core.ApiHandlers;
 using Core.Entities;
+using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
@@ -10,22 +11,45 @@ namespace Airport.Handlers
 {
     public class FlightControllerHandler : IFlightControllerHandler
     {
+        private readonly IEnumerable<IFlightDalEventHandler> _flightDalEventHandlers;
+        private readonly IFlightLegDalEventHandler _flightLegDalEventHandler;
+        private readonly ILegDalEventHandler _legDalEventHandler;
+        private readonly IFlightBasicEventHandler _flightBasicEventHandler;
         private readonly IISUbject _subject;
 
-        public FlightControllerHandler(IISUbject subject, IFlightDalEventHandler addFlightHandler)
+        public FlightControllerHandler(IISUbject subject,
+            IEnumerable<IFlightDalEventHandler> flightDalEventHandlers,
+            IFlightLegDalEventHandler flightLegDalEventHandler,
+            ILegDalEventHandler legDalEventHandler,
+            IFlightBasicEventHandler flightBasicEventHandler)
         {
+            _flightDalEventHandlers = flightDalEventHandlers;
+            _flightLegDalEventHandler = flightLegDalEventHandler;
+            _legDalEventHandler = legDalEventHandler;
+            _flightBasicEventHandler = flightBasicEventHandler;
             _subject = subject;
-            _subject.AttachDalHandlerToEventType(DalTopic.AddFlight, addFlightHandler);
+            SubscribeToBasicDalHandler();
+            SubscribeToFlightBasicEventHandler();
         }
 
-        public void SubscribeToBasicDalHandler(IDalBasicEventHandler<BaseEntity> flightDalHandler, DalTopic dalTopic)
+        public async Task AddFlightAsync(Flight flight)
         {
-            throw new NotImplementedException();
+            await _subject.NotifyFlightToDalAsync(DalTopic.AddFlight, flight);
         }
 
-        public void SubscribeToFlightBasicEventHandler(IFlightBasicEventHandler flightDalHandler, FlightTopic flightTopic)
+        private void SubscribeToBasicDalHandler()
         {
-            throw new NotImplementedException();
+            foreach (var flightDalEventHandler in _flightDalEventHandlers)
+            {
+                _subject.AttachDalHandlerToEventType(flightDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)flightDalEventHandler);
+            }
+            _subject.AttachDalHandlerToEventType(_flightLegDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)_flightLegDalEventHandler);
+            _subject.AttachDalHandlerToEventType(_legDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)_legDalEventHandler);
+        }
+
+        private void SubscribeToFlightBasicEventHandler()
+        {
+            _subject.AttachFlightHandlerToEventType(_flightBasicEventHandler.FlightTopic, _flightBasicEventHandler);
         }
     }
 }

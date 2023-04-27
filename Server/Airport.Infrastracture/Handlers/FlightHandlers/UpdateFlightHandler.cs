@@ -9,7 +9,7 @@ namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
     public class UpdateFlightHandler : IFlightDalEventHandler
     {
-        public DalTopic Topic = DalTopic.UpdateFlight;
+        public DalTopic DalTopic { get; set; } = DalTopic.UpdateFlight;
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UpdateFlightHandler> _logger;

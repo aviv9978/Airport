@@ -9,11 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.EventHandlers.Enums;
 
 namespace Airport.Application.EventHandlers.FlightHandlers
 {
     public class FlightEnteredLegHandler : IFlightBasicEventHandler
     {
+        public FlightTopic FlightTopic { get; set; } = FlightTopic.FlightEnteredLeg;
+
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightEnteredLegHandler> _logger;

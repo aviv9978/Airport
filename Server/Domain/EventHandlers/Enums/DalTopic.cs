@@ -9,9 +9,12 @@ namespace Core.EventHandlers.Enums
     public enum DalTopic
     {
         AddFlight,
+        FlightInComing,
         UpdateFlight,
         UpdateLeg,
         FlightNextLegs,
+        FlightFinishedLeg,
         FlightNextLegClear,
+        FlightCompleted,
     }
 }

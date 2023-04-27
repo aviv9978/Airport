@@ -4,7 +4,6 @@ using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces;
 using Core.EventHandlers.Interfaces.DAL;
-using Core.EventHandlers.Interfaces.Flight;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.Interfaces.Subject;
 
@@ -42,12 +41,11 @@ namespace Airport.Application.Events
             KV.Value.Remove(observer);
             Console.WriteLine("Subject: Detached an observer.");
         }
-
         public void NotifyIncomingFlight(Flight incomingFlight)
         {
-            var incomingFlightHandlers = _topicToFlightHandlers[FlightTopic.FlightInComing];
+            var incomingFlightHandlers = _topicToDalHandlers[DalTopic.FlightInComing];
             foreach (var handler in incomingFlightHandlers)
-                handler.Notify(incomingFlight);
+                handler.NotifyAsync(incomingFlight);
         }
         public void NotifyFlightNextLegClear(Flight flight, Leg leg)
         {
@@ -78,9 +76,9 @@ namespace Airport.Application.Events
         }
         public void NotifyFlightFinishedLeg(Flight flight)
         {
-            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightFinishedLeg];
+            var eventHandlers = _topicToDalHandlers[DalTopic.FlightFinishedLeg];
             foreach (var eventHandler in eventHandlers)
-                eventHandler.Notify(flight);
+                eventHandler.NotifyAsync(flight);
         }
         public void AttatchFlightToLegQueue(Flight flight, Leg leg)
         {
@@ -118,9 +116,9 @@ namespace Airport.Application.Events
         }
         public void NotifyFlightCompleted(Flight flight)
         {
-            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightCompleted];
+            var eventHandlers = _topicToDalHandlers[DalTopic.FlightCompleted];
             foreach (var eventHandler in eventHandlers)
-                eventHandler.Notify(flight);
+                eventHandler.NotifyAsync(flight);
         }
         public void NotifyFlightOutOfTerminal(Flight flight)
         {
@@ -133,6 +131,5 @@ namespace Airport.Application.Events
             if (_legQueueMap.ContainsKey(leg))
                 _legQueueMap[leg].Dequeue();
         }
-
     }
 }

@@ -2,10 +2,15 @@
 using Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using Core.Entities.Terminal;
+using Core.EventHandlers.Enums;
+
 namespace Airport.Infrastracture.Handlers.LegHandlers
 {
     public class UpdateLegHandler : ILegDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.UpdateLeg;
+
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UpdateLegHandler> _logger;
 
@@ -14,6 +19,7 @@ namespace Airport.Infrastracture.Handlers.LegHandlers
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
+
 
         public async Task NotifyAsync(Leg leg)
         {

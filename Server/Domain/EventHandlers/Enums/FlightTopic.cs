@@ -8,11 +8,8 @@ namespace Core.EventHandlers.Enums
 {
     public enum FlightTopic
     {
-        FlightInComing,
         FlightEnteredLeg,
-        FlightFinishedLeg,
         FlightLeftLeg,
-        FlightCompleted,
         FlightOutOfTereminal
     }
 }

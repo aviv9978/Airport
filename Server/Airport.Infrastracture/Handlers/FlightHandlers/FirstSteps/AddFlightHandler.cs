@@ -3,12 +3,13 @@ using Core.Interfaces;
 using Core.Interfaces.Subject;
 using Microsoft.Extensions.Logging;
 using Core.Entities.Terminal;
-
+using Core.EventHandlers.Enums;
 
 namespace Airport.Infrastracture.Handlers.FlightHandlers
 {
     public class AddFlightHandler : IFlightDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.AddFlight;
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<AddFlightHandler> _logger;

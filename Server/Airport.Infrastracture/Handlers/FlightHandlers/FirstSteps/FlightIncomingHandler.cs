@@ -4,11 +4,14 @@ using Core.Interfaces.Subject;
 using Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using Core.Enums;
+using Core.EventHandlers.Enums;
 
 namespace Airport.Infrastracture.Handlers.FlightHandlers.FirstSteps
 {
     public class FlightIncomingHandler : IFlightDalEventHandler
     {
+        public DalTopic DalTopic { get; set; } = DalTopic.FlightInComing;
+
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
 
