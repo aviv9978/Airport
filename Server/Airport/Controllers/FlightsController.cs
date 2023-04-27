@@ -1,7 +1,10 @@
 ﻿using Airport.Application.ILogicServices;
+using Airport.Handlers;
 using AutoMapper;
+using Core.ApiHandlers;
 using Core.DTOs.Incoming;
 using Core.Entities.Terminal;
+using Core.Interfaces.Subject;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightSimulator.Controllers
@@ -10,15 +13,14 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-
+        private readonly IFlightControllerHandler _flightControllerHandler;
         private readonly ILogger<FlightsController> _logger;
-        private readonly ITerminalService _terminalService;
         private readonly IMapper _mapper;
-        public FlightsController(ITerminalService terminal, ILogger<FlightsController> logger,
+        public FlightsController(IFlightControllerHandler flightControllerHandler, ILogger<FlightsController> logger,
                  IMapper mapper)
         {
+            _flightControllerHandler = flightControllerHandler;
             _logger = logger;
-            _terminalService = terminal;
             _mapper = mapper;
         }
 
@@ -36,7 +38,7 @@ namespace FlightSimulator.Controllers
         {
             try
             {
-                await _terminalService.ResetLegsAsync();
+               // await _terminalService.ResetLegsAsync();
                 return Ok();
 
             }
@@ -51,8 +53,8 @@ namespace FlightSimulator.Controllers
             try
             {
                 var flight = _mapper.Map<Flight>(flightDto);
-                flight.IsDeparture= isDeparture;
-                await _terminalService.StartFlightAsync(flight, isDeparture);
+                flight.IsDeparture = isDeparture;
+               await _flightControllerHandler.AddFlightAsync(flight);
                 return Ok();
             }
 

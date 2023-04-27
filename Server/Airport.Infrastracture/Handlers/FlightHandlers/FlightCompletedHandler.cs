@@ -33,6 +33,7 @@ namespace Airport.Infrastracture.Handlers.FlightHandlers
             UpdateFlightAndLegCode(flight, leg);
             await _subject.NotifyFlightToDalAsync(DalTopic.UpdateFlight, flight);
             await _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, leg);
+            await _unitOfWork.CommitAsync();
             _logger.LogInformation($"Flight {flight.Id} Completed.");
             _subject.NotifyFlightOutOfTerminal(flight);
         }

@@ -5,6 +5,7 @@ using Core.Entities.Terminal;
 using Core.EventHandlers.Enums;
 using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
+using Core.Interfaces;
 using Core.Interfaces.Subject;
 
 namespace Airport.Handlers
@@ -41,10 +42,10 @@ namespace Airport.Handlers
         {
             foreach (var flightDalEventHandler in _flightDalEventHandlers)
             {
-                _subject.AttachDalHandlerToEventType(flightDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)flightDalEventHandler);
+                _subject.AttachDalHandlerToEventType(flightDalEventHandler.DalTopic, flightDalEventHandler);
             }
-            _subject.AttachDalHandlerToEventType(_flightLegDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)_flightLegDalEventHandler);
-            _subject.AttachDalHandlerToEventType(_legDalEventHandler.DalTopic, (IDalBasicEventHandler<BaseEntity>)_legDalEventHandler);
+            _subject.AttachDalHandlerToEventType(_flightLegDalEventHandler.DalTopic, _flightLegDalEventHandler);
+            _subject.AttachDalHandlerToEventType(_legDalEventHandler.DalTopic, _legDalEventHandler);
         }
 
         private void SubscribeToFlightBasicEventHandler()

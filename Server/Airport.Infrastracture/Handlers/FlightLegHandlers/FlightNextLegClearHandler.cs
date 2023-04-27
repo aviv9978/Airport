@@ -33,6 +33,7 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
             var nextLeg = flightAndLeg.Leg;
             UpdateFlightAndLegCode(flight, currentLeg, nextLeg);
             await UpdateFlightAndLegsInDBAsync(flight, currentLeg, nextLeg);
+            await _unitOfWork.CommitAsync();
             _logger.LogInformation($"Flight {flight.Id} entered log number {nextLeg.Id}");
             _subject.NotifyFlightEnteredLeg(flight);
         }

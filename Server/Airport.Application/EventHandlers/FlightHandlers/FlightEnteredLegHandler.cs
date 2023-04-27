@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.EventHandlers.Enums;
+using Core.Entities;
 
 namespace Airport.Application.EventHandlers.FlightHandlers
 {
@@ -18,13 +19,11 @@ namespace Airport.Application.EventHandlers.FlightHandlers
         public FlightTopic FlightTopic { get; set; } = FlightTopic.FlightEnteredLeg;
 
         private readonly IISUbject _subject;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightEnteredLegHandler> _logger;
 
-        public FlightEnteredLegHandler(IISUbject subject, IUnitOfWork unitOfWork, ILogger<FlightEnteredLegHandler> logger)
+        public FlightEnteredLegHandler(IISUbject subject, ILogger<FlightEnteredLegHandler> logger)
         {
             _subject = subject;
-            _unitOfWork = unitOfWork;
             _logger = logger;
         }
         public async Task Notify(Flight flight)
