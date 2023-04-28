@@ -23,8 +23,7 @@ namespace Airport.Infrastracture.Handlers.FlightHandlers
         public async Task NotifyAsync(Flight flight)
         {
              _unitOfWork.Flight.Update(flight);
-            await _unitOfWork.CommitAsync();
-            _logger.LogInformation($"Flight {flight} has been updated.");
+            _logger.LogInformation($"Flight {flight} has been updated - without commitAsync.");
         }
     }
 }

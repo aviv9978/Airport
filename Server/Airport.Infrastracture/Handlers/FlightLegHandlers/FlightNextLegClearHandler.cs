@@ -31,30 +31,42 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
             var flight = flightAndLeg.Flight;
             var currentLeg = flight?.Leg;
             var nextLeg = flightAndLeg.NextLeg;
-            UpdateFlightAndLegCode(flight, currentLeg, nextLeg);
-            await UpdateFlightAndLegsInDBAsync(flight, currentLeg, nextLeg);
+            if (currentLeg == null)
+            {
+                UpdateFlightAndLegCode(flight, nextLeg);
+                UpdateFlightAndLegInDBAsync(flight, nextLeg);
+            }
+            else
+            {
+                UpdateFlightAndBothLegCode(flight, currentLeg, nextLeg);
+                UpdateFlightAndBothLegsInDBAsync(flight, currentLeg, nextLeg);
+            }
             await _unitOfWork.CommitAsync();
             _logger.LogInformation($"Flight {flight.Id} entered log number {nextLeg.Id}");
             _subject.NotifyFlightEnteredLeg(flight);
         }
 
-        private async Task UpdateFlightAndLegsInDBAsync(Flight? flight, Leg? currentLeg, Leg? nextLeg)
+        private async Task UpdateFlightAndLegInDBAsync(Flight? flight, Leg? nextLeg)
         {
-            await _subject.NotifyFlightToDalAsync(DalTopic.UpdateFlight, flight);
-            await _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, currentLeg);
-            await _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, nextLeg);
+             _subject.NotifyFlightToDalAsync(DalTopic.UpdateFlight, flight);
+             _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, nextLeg);
         }
-
-        private static void UpdateFlightAndLegCode(Flight? flight, Leg? currentLeg, Leg? nextLeg)
+        private async Task UpdateFlightAndBothLegsInDBAsync(Flight? flight, Leg? currentLeg, Leg? nextLeg)
         {
-            if (currentLeg != null)
-            {
-                currentLeg.Flight = null;
-                currentLeg.IsOccupied = false;
-            }
+             UpdateFlightAndLegInDBAsync(flight, nextLeg);
+             _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, currentLeg);
+        }
+        private static void UpdateFlightAndLegCode(Flight? flight, Leg? nextLeg)
+        {
             nextLeg.Flight = flight;
             nextLeg.IsOccupied = true;
             flight.Leg = nextLeg;
+        }
+        private static void UpdateFlightAndBothLegCode(Flight? flight, Leg currentLeg, Leg? nextLeg)
+        {
+            UpdateFlightAndLegCode(flight, nextLeg);
+            currentLeg.Flight = null;
+            currentLeg.IsOccupied = false;
         }
     }
 }

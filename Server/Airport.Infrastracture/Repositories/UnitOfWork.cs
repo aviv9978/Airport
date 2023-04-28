@@ -60,22 +60,22 @@ namespace Airport.Infrastracture.Repositories
         {
             return new GenericRepository<T>(_dbContext);
         }
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        private void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-            }
-            _disposed = true;
-        }
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
+        //private void Dispose(bool disposing)
+        //{
+        //    if (!_disposed)
+        //    {
+        //        if (disposing)
+        //        {
+        //            _dbContext.Dispose();
+        //        }
+        //    }
+        //    _disposed = true;
+        //}
 
     }
 }

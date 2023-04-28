@@ -6,6 +6,7 @@ using Core.Hubs;
 using Serilog;
 using System.Text.Json.Serialization;
 using Hangfire;
+using Hangfire.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration["ConnectionStrings:myAirport"];
@@ -17,11 +18,21 @@ builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                         .ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddHangfire(config => config
-.UseSimpleAssemblyNameTypeSerializer()
-.UseRecommendedSerializerSettings()
-.UseSqlServerStorage(connectionString));
+builder.Services.AddHangfire(configuration => configuration
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(connectionString, new SqlServerStorageOptions
+        {
+            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            QueuePollInterval = TimeSpan.Zero,
+            UseRecommendedIsolationLevel = true,
+            DisableGlobalLocks = true
+        }));
+
 builder.Services.AddHangfireServer();
+
 
 builder.Services.AddSwaggerGen();
 
@@ -75,5 +86,4 @@ app.MapHub<TerminalHub>("/terminalHub");
 
 app.UseHangfireDashboard();
 app.MapHangfireDashboard();
-
 app.Run();

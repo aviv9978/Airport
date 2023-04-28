@@ -16,14 +16,14 @@ namespace FlightSimulator.Controllers
     {
         private readonly ILogger<FlightsController> _logger;
         private readonly IMapper _mapper;
-        private readonly IFlightControllerHandler _flightControllerHandler;
-
+        private readonly IBackgroundJobClient _backgroundJobClient;
         public FlightsController(ILogger<FlightsController> logger,
-            IMapper mapper, IFlightControllerHandler flightControllerHandler)
+            IMapper mapper,
+            IBackgroundJobClient backgroundJobClient)
         {
             _logger = logger;
             _mapper = mapper;
-            _flightControllerHandler = flightControllerHandler;
+            _backgroundJobClient = backgroundJobClient;
         }
 
         [HttpPost]
@@ -56,7 +56,7 @@ namespace FlightSimulator.Controllers
             {
                 var flight = _mapper.Map<Flight>(flightDto);
                 flight.IsDeparture = isDeparture;
-                BackgroundJob.Enqueue<IFlightControllerHandler>(task =>  task.AddFlightAsync(flight));
+                _backgroundJobClient.Enqueue<IFlightControllerHandler>(task => task.AddFlightAsync(flight));
 
                 return Ok();
             }
