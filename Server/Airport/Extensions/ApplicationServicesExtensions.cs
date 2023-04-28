@@ -7,6 +7,7 @@ using Airport.Application.ILogicServices;
 using Airport.Application.Interfaces;
 using Airport.Application.LogicServices;
 using Airport.Handlers;
+using Airport.Handlers.Airport.Handlers;
 using Airport.Infrastracture.Handlers.FlightHandlers;
 using Airport.Infrastracture.Handlers.FlightHandlers.FirstSteps;
 using Airport.Infrastracture.Handlers.FlightLegHandlers;
@@ -51,15 +52,15 @@ namespace FlightSimulator.Extensions
             services.AddScoped<IFlightLegDalEventHandler, FlightNextLegClearHandler>();
             services.AddScoped<ILegDalEventHandler, UpdateLegHandler>();
             services.AddScoped<IFlightBasicEventHandler, FlightEnteredLegHandler>();
-            services.AddScoped<IFlightControllerHandler, FlightControllerHandler>();
             services.AddScoped<IDalSubject, DalSubject>();
             services.AddScoped<IFlightDalSubject, FlightDalSubject>();
             services.AddScoped<IFlightLegDalSubject, FlightLegDalSubject>();
             services.AddScoped<ILegDalSubject, LegDalSubject>();
             services.AddScoped<IEventHandlerSubject, EventHandlerSubject>();
             services.AddScoped<IFlightEventHandlerSubject, FlightEventHandlersSubject>();
+            services.AddScoped<IFlightControllerHandler, FlightControllerHandler>();
             services.AddScoped<IISUbject, SSubject>();
-
+            
             services.Configure<ApiBehaviorOptions>(options => options.InvalidModelStateResponseFactory = ActionContext =>
             {
                 var error = ActionContext.ModelState.Where(e => e.Value.Errors.Count > 0).SelectMany(e => e.Value.Errors).Select(e => e.ErrorMessage).ToArray();

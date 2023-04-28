@@ -23,7 +23,7 @@ namespace Airport.Infrastracture.Handlers.LegHandlers
 
         public async Task NotifyAsync(Leg leg)
         {
-            await _unitOfWork.Leg.UpdateAsync(leg);
+             _unitOfWork.Leg.Update(leg);
             await _unitOfWork.CommitAsync();
             _logger.LogInformation($"Flight {leg} has been updated.");
         }

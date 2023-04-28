@@ -5,6 +5,7 @@ using Core.ApiHandlers;
 using Core.DTOs.Incoming;
 using Core.Entities.Terminal;
 using Core.Interfaces.Subject;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightSimulator.Controllers
@@ -13,15 +14,16 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-        private readonly IFlightControllerHandler _flightControllerHandler;
         private readonly ILogger<FlightsController> _logger;
         private readonly IMapper _mapper;
-        public FlightsController(IFlightControllerHandler flightControllerHandler, ILogger<FlightsController> logger,
-                 IMapper mapper)
+        private readonly IFlightControllerHandler _flightControllerHandler;
+
+        public FlightsController(ILogger<FlightsController> logger,
+            IMapper mapper, IFlightControllerHandler flightControllerHandler)
         {
-            _flightControllerHandler = flightControllerHandler;
             _logger = logger;
             _mapper = mapper;
+            _flightControllerHandler = flightControllerHandler;
         }
 
         [HttpPost]
@@ -38,7 +40,7 @@ namespace FlightSimulator.Controllers
         {
             try
             {
-               // await _terminalService.ResetLegsAsync();
+                // await _terminalService.ResetLegsAsync();
                 return Ok();
 
             }
@@ -54,7 +56,8 @@ namespace FlightSimulator.Controllers
             {
                 var flight = _mapper.Map<Flight>(flightDto);
                 flight.IsDeparture = isDeparture;
-               await _flightControllerHandler.AddFlightAsync(flight);
+                BackgroundJob.Enqueue<IFlightControllerHandler>(task =>  task.AddFlightAsync(flight));
+
                 return Ok();
             }
 

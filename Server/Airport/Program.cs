@@ -5,18 +5,26 @@ using Microsoft.EntityFrameworkCore;
 using Core.Hubs;
 using Serilog;
 using System.Text.Json.Serialization;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration["ConnectionStrings:myAirport"];
 // Add services to the container.
 
 builder.Services.AddDbContext<AirportDataContext>(options => options
-.UseSqlServer(builder.Configuration["ConnectionStrings:myAirport"]));
+.UseSqlServer(connectionString));
 builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                         .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddHangfire(config => config
+.UseSimpleAssemblyNameTypeSerializer()
+.UseRecommendedSerializerSettings()
+.UseSqlServerStorage(connectionString));
+builder.Services.AddHangfireServer();
 
 builder.Services.AddSwaggerGen();
+
 
 //To enable client to communicate with server
 var configureService = new ConfigureService();
@@ -64,5 +72,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<TerminalHub>("/terminalHub");
+
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
 
 app.Run();

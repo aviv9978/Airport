@@ -45,7 +45,7 @@ namespace Airport.Infrastracture.Repositories
         public void Remove(T entity) => _dbSet.Remove(entity);
 
 
-        public async Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
             try
             {

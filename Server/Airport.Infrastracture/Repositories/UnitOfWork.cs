@@ -5,6 +5,7 @@ using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Threading;
 
 namespace Airport.Infrastracture.Repositories
 {

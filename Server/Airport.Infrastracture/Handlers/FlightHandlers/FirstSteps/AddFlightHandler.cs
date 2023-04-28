@@ -24,10 +24,12 @@ namespace Airport.Infrastracture.Handlers.FlightHandlers
 
         public async Task NotifyAsync(Flight flight)
         {
+
             await _unitOfWork.Flight.AddAsync(flight);
             await _unitOfWork.CommitAsync();
             _logger.LogInformation($"Flight {flight.Id} has been added");
             _subject.NotifyIncomingFlight(flight);
+           
         }
     }
 }
