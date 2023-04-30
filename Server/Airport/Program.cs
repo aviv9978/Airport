@@ -9,15 +9,29 @@ using Hangfire;
 using Hangfire.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
+//var serviceProvider = builder.Services.BuildServiceProvider();
 var connectionString = builder.Configuration["ConnectionStrings:myAirport"];
 // Add services to the container.
 
 builder.Services.AddDbContext<AirportDataContext>(options => options
-.UseSqlServer(connectionString));
+.UseSqlServer(connectionString), ServiceLifetime.Scoped);
 builder.Services.AddApplicationServices();
+//GlobalConfiguration.Configuration.UseActivator(new FlightJobActivator(serviceProvider));
+
+//builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+//    .ConfigureContainer<ContainerBuilder>(builder =>
+//{
+//    builder.RegisterModule(new AutofacBusinessModule());
+//}); 
+
+//builder.RegisterType<Database>()
+//    .InstancePerBackgroundJob()
+//    .InstancePerHttpRequest();
 
 builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions
                         .ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
 builder.Services.AddHangfire(configuration => configuration
         .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
         .UseSimpleAssemblyNameTypeSerializer()
@@ -84,6 +98,8 @@ app.MapControllers();
 
 app.MapHub<TerminalHub>("/terminalHub");
 
+var options = new BackgroundJobServerOptions { WorkerCount = 1 };
+app.UseHangfireServer(options);
 app.UseHangfireDashboard();
 app.MapHangfireDashboard();
 app.Run();

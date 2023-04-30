@@ -38,13 +38,13 @@ namespace Airport.Application.Events.DalSubjects
         public void DetachFlightLegDalHandlerFromEventType(DalTopic dalTopic, IFlightLegDalEventHandler flightLegDalEventHandler)
             => _flightLegDalSubject.DetachFlightLegDalHandlerFromEventType(dalTopic, flightLegDalEventHandler);
         public void NotifyIncomingFlight(Flight incomingFlight) => _flightDalSubject.NotifyIncomingFlight(incomingFlight);
-        public Task NotifyFlightToDalAsync(DalTopic topic, Flight flight) => _flightDalSubject.NotifyFlightToDalAsync(topic, flight);
+        public async Task NotifyFlightToDalAsync(DalTopic topic, Flight flight) => await _flightDalSubject.NotifyFlightToDalAsync(topic, flight);
         public void NotifyFlightFinishedLeg(Flight flight) => _flightDalSubject.NotifyFlightFinishedLeg(flight);
         public void AttatchFlightToLegQueue(Flight flight, Leg leg) => _flightDalSubject.AttatchFlightToLegQueue(flight, leg);
         public void NotifyLegHasBeenCleared(Leg leg) => _flightDalSubject.NotifyLegHasBeenCleared(leg);
         public void NotifyFlightCompleted(Flight flight) => _flightDalSubject.NotifyFlightCompleted(flight);
         public void Detach(Flight flight, Leg leg) => _flightDalSubject.Detach(flight, leg);
-        public Task NotifyLegToDalAsync(DalTopic topic, Leg leg) => _legDalSubject.NotifyLegToDalAsync(topic, leg);
+        public async Task NotifyLegToDalAsync(DalTopic topic, Leg leg) => await _legDalSubject.NotifyLegToDalAsync(topic, leg);
 
         public void NotifyFlightNextLegClear(Flight flight, Leg leg) => _flightLegDalSubject.NotifyFlightNextLegClear(flight, leg);
 

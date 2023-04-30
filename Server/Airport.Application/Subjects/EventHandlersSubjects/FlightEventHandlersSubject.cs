@@ -39,9 +39,9 @@ namespace Airport.Application.Events.EventHandlersSubjects
         }
         public void NotifyFlightOutOfTerminal(Flight flight)
         {
-            var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightOutOfTereminal];
-            foreach (var eventHandler in eventHandlers)
-                eventHandler.Notify(flight);
+            //var eventHandlers = _topicToFlightHandlers[FlightTopic.FlightOutOfTereminal];
+            //foreach (var eventHandler in eventHandlers)
+            //    eventHandler.Notify(flight);
         }
     }
 }

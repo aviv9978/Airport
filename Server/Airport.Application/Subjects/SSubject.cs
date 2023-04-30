@@ -7,6 +7,7 @@ using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.EventHandlers.Interfaces.Subjects.DAL;
 using Core.EventHandlers.Interfaces.Subjects.EventHandlersSubjects;
+using Core.EventHandlers.Interfaces.Subjects.Subscribers;
 using Core.Interfaces;
 using Core.Interfaces.Subject;
 
@@ -16,10 +17,14 @@ namespace Airport.Application.Events
     {
         private readonly IDalSubject _dalSubject;
         private readonly IEventHandlerSubject _eventHandlerSubject;
-        public SSubject(IDalSubject dalSubject, IEventHandlerSubject eventHandlerSubject)
+        //private readonly ISubscribeSubject _subscribeSubject;
+        public SSubject(IDalSubject dalSubject,
+                        IEventHandlerSubject eventHandlerSubject)
+                        //ISubscribeSubject subscribeSubject)
         {
             _dalSubject = dalSubject;
             _eventHandlerSubject = eventHandlerSubject;
+            //_subscribeSubject = subscribeSubject;
         }
 
 
@@ -56,6 +61,6 @@ namespace Airport.Application.Events
         public void NotifyFlightCompleted(Flight flight) => _dalSubject.NotifyFlightCompleted(flight);
         public void NotifyFlightOutOfTerminal(Flight flight) => _eventHandlerSubject.NotifyFlightOutOfTerminal(flight);
         public void Detach(Flight flight, Leg leg) => _dalSubject.Detach(flight, leg);
-
+        //public void AddingFlight(Flight flight) => _subscribeSubject.AddingFlight(flight);
     }
 }

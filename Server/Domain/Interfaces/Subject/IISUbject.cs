@@ -7,6 +7,7 @@ using Core.EventHandlers.Interfaces.DAL;
 using Core.EventHandlers.Interfaces.FlightInterfaces;
 using Core.EventHandlers.Interfaces.Subjects.DAL;
 using Core.EventHandlers.Interfaces.Subjects.EventHandlersSubjects;
+using Core.EventHandlers.Interfaces.Subjects.Subscribers;
 using Core.Interfaces.Events;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces.Subject
 {
-    public interface IISUbject : IDalSubject, IEventHandlerSubject
+    public interface IISUbject : IDalSubject, IEventHandlerSubject//, ISubscribeSubject
     {
     }
 }

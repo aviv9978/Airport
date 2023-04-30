@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.EventHandlers.Enums;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Airport.Infrastracture.Handlers.FlightLegHandlers
 {
     public class FlightNextLegClearHandler : IFlightLegDalEventHandler
@@ -19,8 +21,8 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
         private readonly IISUbject _subject;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<FlightNextLegClearHandler> _logger;
-
-        public FlightNextLegClearHandler(IISUbject subject, IUnitOfWork unitOfWork, ILogger<FlightNextLegClearHandler> logger)
+        public FlightNextLegClearHandler(IISUbject subject, IUnitOfWork unitOfWork,
+            ILogger<FlightNextLegClearHandler> logger)
         {
             _subject = subject;
             _unitOfWork = unitOfWork;
@@ -31,30 +33,32 @@ namespace Airport.Infrastracture.Handlers.FlightLegHandlers
             var flight = flightAndLeg.Flight;
             var currentLeg = flight?.Leg;
             var nextLeg = flightAndLeg.NextLeg;
-            if (currentLeg == null)
-            {
-                UpdateFlightAndLegCode(flight, nextLeg);
-                UpdateFlightAndLegInDBAsync(flight, nextLeg);
-            }
-            else
-            {
-                UpdateFlightAndBothLegCode(flight, currentLeg, nextLeg);
-                UpdateFlightAndBothLegsInDBAsync(flight, currentLeg, nextLeg);
-            }
-            await _unitOfWork.CommitAsync();
+                if (currentLeg == null)
+                {
+                    UpdateFlightAndLegCode(flight, nextLeg);
+                    UpdateFlightAndLegInDBAsync(flight, nextLeg);
+                }
+                else
+                {
+                    UpdateFlightAndBothLegCode(flight, currentLeg, nextLeg);
+                    UpdateFlightAndBothLegsInDBAsync(flight, currentLeg, nextLeg);
+                }
+                await _unitOfWork.CommitAsync();
+
+            
             _logger.LogInformation($"Flight {flight.Id} entered log number {nextLeg.Id}");
             _subject.NotifyFlightEnteredLeg(flight);
         }
 
         private async Task UpdateFlightAndLegInDBAsync(Flight? flight, Leg? nextLeg)
         {
-             _subject.NotifyFlightToDalAsync(DalTopic.UpdateFlight, flight);
-             _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, nextLeg);
+            _subject.NotifyFlightToDalAsync(DalTopic.UpdateFlight, flight);
+            _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, nextLeg);
         }
         private async Task UpdateFlightAndBothLegsInDBAsync(Flight? flight, Leg? currentLeg, Leg? nextLeg)
         {
-             UpdateFlightAndLegInDBAsync(flight, nextLeg);
-             _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, currentLeg);
+            UpdateFlightAndLegInDBAsync(flight, nextLeg);
+            _subject.NotifyLegToDalAsync(DalTopic.UpdateLeg, currentLeg);
         }
         private static void UpdateFlightAndLegCode(Flight? flight, Leg? nextLeg)
         {

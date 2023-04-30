@@ -7,6 +7,9 @@ using Core.Entities.Terminal;
 using Core.Interfaces.Subject;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting.Internal;
+using System.Linq.Expressions;
 
 namespace FlightSimulator.Controllers
 {
@@ -17,13 +20,19 @@ namespace FlightSimulator.Controllers
         private readonly ILogger<FlightsController> _logger;
         private readonly IMapper _mapper;
         private readonly IBackgroundJobClient _backgroundJobClient;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IFlightControllerHandler _flightControllerHandler;
         public FlightsController(ILogger<FlightsController> logger,
             IMapper mapper,
-            IBackgroundJobClient backgroundJobClient)
+            IBackgroundJobClient backgroundJobClient,
+            IServiceProvider serviceProvider,
+            IFlightControllerHandler flightControllerHandler)
         {
             _logger = logger;
             _mapper = mapper;
             _backgroundJobClient = backgroundJobClient;
+            _serviceProvider = serviceProvider;
+            _flightControllerHandler = flightControllerHandler;
         }
 
         [HttpPost]
@@ -56,8 +65,14 @@ namespace FlightSimulator.Controllers
             {
                 var flight = _mapper.Map<Flight>(flightDto);
                 flight.IsDeparture = isDeparture;
-                _backgroundJobClient.Enqueue<IFlightControllerHandler>(task => task.AddFlightAsync(flight));
-
+                 _flightControllerHandler.AddFlight(flight);
+                await Task.Delay(25000);
+                // RecurringJob.AddOrUpdate<IFlightControllerHandler>($"AddFlight:{flight.Id}", (handler) => handler.AddFlight(flight), Cron.Hourly(0));
+                //_backgroundJobClient.Enqueue<IFlightControllerHandler>(handler => handler.AddFlight(flight));
+                //using (var scope = _serviceProvider.CreateScope())
+                //{
+                //_backgroundJobClient.Enqueue<IFlightControllerHandler>(handler => handler.AddFlight(flight));
+                //}
                 return Ok();
             }
 

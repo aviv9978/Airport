@@ -8,6 +8,8 @@
     using Core.EventHandlers.Interfaces.FlightInterfaces;
     using Core.Interfaces;
     using Core.Interfaces.Subject;
+    using global::Airport.Infrastracture;
+    using Hangfire;
 
     namespace Airport.Handlers
     {
@@ -17,13 +19,17 @@
             private readonly ILegDalEventHandler _legDalEventHandler;
             private readonly IFlightLegDalEventHandler _flightLegDalEventHandler;
             private readonly IFlightBasicEventHandler _flightBasicEventHandler;
+            private readonly IBackgroundJobClient _backgroundJobClient;
             private readonly IISUbject _subject;
+            private readonly IServiceProvider _serviceProvider;
 
             public FlightControllerHandler(IISUbject subject,
                 IEnumerable<IFlightDalEventHandler> flightDalEventHandlers,
                 IFlightLegDalEventHandler flightLegDalEventHandler,
                 ILegDalEventHandler legDalEventHandler,
-                IFlightBasicEventHandler flightBasicEventHandler)
+                IFlightBasicEventHandler flightBasicEventHandler,
+                IBackgroundJobClient backgroundJobClient,
+                IServiceProvider serviceProvider)
             {
                 _flightDalEventHandlers = flightDalEventHandlers;
                 _legDalEventHandler = legDalEventHandler;
@@ -32,10 +38,18 @@
                 _subject = subject;
                 SubscribeToBasicDalHandler();
                 SubscribeToFlightBasicEventHandler();
+                _backgroundJobClient = backgroundJobClient;
+                _serviceProvider = serviceProvider;
             }
 
-            public async Task AddFlightAsync(Flight flight) => await _subject.NotifyFlightToDalAsync(DalTopic.AddFlight, flight);
+            public async Task AddFlight(Flight flight)
+            {
+                //using (IServiceScope scope = _serviceProvider.CreateScope())
+                //{
+                     await _subject.NotifyFlightToDalAsync(DalTopic.AddFlight, flight);
+                //}
 
+            }
 
             private void SubscribeToBasicDalHandler()
             {

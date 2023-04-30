@@ -4,6 +4,7 @@ using Core.Entities.ForFlight;
 using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 
@@ -13,21 +14,24 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly ILogger<UnitOfWork> _logger;
         private readonly AirportDataContext _dbContext;
-
+        private readonly IServiceProvider _services;
         public IFlightRepository Flight { get; private set; }
-        public ILegRepostiroy Leg{ get; private set; }
+        public ILegRepostiroy Leg { get; private set; }
         public IProcLogRepository ProcessLog { get; private set; }
         public IPilotRepository Pilot { get; private set; }
-        private bool _disposed = false;
+
         public UnitOfWork(AirportDataContext dbContext,
-            ILogger<UnitOfWork> logger)
+            ILogger<UnitOfWork> logger, IServiceProvider services,
+            IFlightRepository flightRepos, ILegRepostiroy legRepos,
+            IProcLogRepository procLogRepos, IPilotRepository pilotRepos)
         {
             _dbContext = dbContext;
             _logger = logger;
-            Flight = new FlightRepository(dbContext);
-            Leg = new LegRepository(dbContext);
-            ProcessLog = new ProcLogRepository(dbContext);
-            Pilot = new PilotRepository(dbContext);
+            Flight = flightRepos;
+            Leg = legRepos;
+            ProcessLog = procLogRepos;
+            Pilot = pilotRepos;
+            _services = services;
         }
         public AirportDataContext DatabaseContext() => _dbContext;
 
@@ -35,8 +39,9 @@ namespace Airport.Infrastracture.Repositories
         {
             try
             {
-                int res = await _dbContext.SaveChangesAsync().ConfigureAwait(false);
-                _logger.LogInformation("Added pilot");
+                    _logger.LogInformation("Added pilot");
+                    await _dbContext.SaveChangesAsync();
+                
             }
             catch (Exception e)
             {
@@ -56,10 +61,10 @@ namespace Airport.Infrastracture.Repositories
                 }
             }
         }
-        public IGenericRepository<T> GenericRepository<T>() where T : BaseEntity
-        {
-            return new GenericRepository<T>(_dbContext);
-        }
+        //public IGenericRepository<T> GenericRepository<T>() where T : BaseEntity
+        //{
+        //    return new GenericRepository<T>(_dbContext);
+        //}
         //public void Dispose()
         //{
         //    Dispose(true);

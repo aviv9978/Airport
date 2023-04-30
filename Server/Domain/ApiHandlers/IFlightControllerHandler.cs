@@ -13,6 +13,6 @@ namespace Core.ApiHandlers
 {
     public interface IFlightControllerHandler
     {
-        Task AddFlightAsync(Flight flight);
+        Task AddFlight(Flight flight);
     }
 }
