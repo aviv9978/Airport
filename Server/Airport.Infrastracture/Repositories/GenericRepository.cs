@@ -5,6 +5,8 @@ using Core.Interfaces;
 using Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq.Expressions;
 
 namespace Airport.Infrastracture.Repositories
@@ -13,21 +15,26 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly AirportDataContext _dbContext;
         private readonly DbSet<T> _dbSet;
-        public GenericRepository(AirportDataContext dbContext)
+        private readonly IServiceProvider _services;
+        public GenericRepository(AirportDataContext dbContext, IServiceProvider services)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
+            _services = services;
         }
-        public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
+        public async Task<T> GetByIdAsync(int id)
+        {
+
+            return await _dbSet.FindAsync(id);
+
+        }
 
         public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
         public async Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression)
         {
-            List<T> entities;
             try
             {
-                entities = await _dbSet.Where(expression).AsNoTracking().ToListAsync();
-                return entities;
+                return await _dbContext.Set<T>().Where(expression).AsNoTracking().ToListAsync();
             }
             catch (Exception)
             {
@@ -40,20 +47,26 @@ namespace Airport.Infrastracture.Repositories
             //}
         }
 
-        public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+        public async Task AddAsync(T entity)
+        {
 
-        public void Remove(T entity) => _dbSet.Remove(entity);
+
+            await _dbContext.Set<T>().AddAsync(entity);
+
+        }
+
+        public void Remove(T entity) => _dbContext.Set<T>().Remove(entity);
 
 
-        public async Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
             try
             {
                 //_dbSet.Attach(entity);
-                //var entry = _dbContext.Entry(entity);
+                //var entry = _dbContext.Entry(entity);  
+                _dbContext.Set<T>().Update(entity);
 
                 //entry.State = EntityState.Modified;
-                _dbSet.Update(entity);
             }
             catch (Exception)
             {

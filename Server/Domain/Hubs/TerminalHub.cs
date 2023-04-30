@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Hubs
 {
-    public class TerminalHub : Hub, ITerminalHub
+    public class TerminalHub : Hub, IHUB
     {
         private readonly IHubContext<TerminalHub> _terminalHubContext;
 

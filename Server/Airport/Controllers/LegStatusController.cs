@@ -20,7 +20,7 @@ namespace Airport.Controllers
 
         [HttpGet]
         [Route("GetLegStatus")]
-        public async Task<IActionResult> GetLegsStatus()
+        public async Task<IActionResult> GetLegsStatusAsync()
         {
             try
             {

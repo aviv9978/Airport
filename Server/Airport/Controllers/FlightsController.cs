@@ -1,8 +1,15 @@
 ﻿using Airport.Application.ILogicServices;
+using Airport.Handlers;
 using AutoMapper;
+using Core.ApiHandlers;
 using Core.DTOs.Incoming;
 using Core.Entities.Terminal;
+using Core.Interfaces.Subject;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting.Internal;
+using System.Linq.Expressions;
 
 namespace FlightSimulator.Controllers
 {
@@ -10,16 +17,22 @@ namespace FlightSimulator.Controllers
     [ApiController]
     public class FlightsController : ControllerBase
     {
-
         private readonly ILogger<FlightsController> _logger;
-        private readonly ITerminalService _terminalService;
         private readonly IMapper _mapper;
-        public FlightsController(ITerminalService terminal, ILogger<FlightsController> logger,
-                 IMapper mapper)
+        private readonly IBackgroundJobClient _backgroundJobClient;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IFlightControllerHandler _flightControllerHandler;
+        public FlightsController(ILogger<FlightsController> logger,
+            IMapper mapper,
+            IBackgroundJobClient backgroundJobClient,
+            IServiceProvider serviceProvider,
+            IFlightControllerHandler flightControllerHandler)
         {
             _logger = logger;
-            _terminalService = terminal;
             _mapper = mapper;
+            _backgroundJobClient = backgroundJobClient;
+            _serviceProvider = serviceProvider;
+            _flightControllerHandler = flightControllerHandler;
         }
 
         [HttpPost]
@@ -36,7 +49,7 @@ namespace FlightSimulator.Controllers
         {
             try
             {
-                await _terminalService.ResetLegsAsync();
+                // await _terminalService.ResetLegsAsync();
                 return Ok();
 
             }
@@ -51,8 +64,15 @@ namespace FlightSimulator.Controllers
             try
             {
                 var flight = _mapper.Map<Flight>(flightDto);
-                flight.IsDeparture= isDeparture;
-                await _terminalService.StartFlightAsync(flight, isDeparture);
+                flight.IsDeparture = isDeparture;
+                 _flightControllerHandler.AddFlight(flight);
+                await Task.Delay(25000);
+                // RecurringJob.AddOrUpdate<IFlightControllerHandler>($"AddFlight:{flight.Id}", (handler) => handler.AddFlight(flight), Cron.Hourly(0));
+                //_backgroundJobClient.Enqueue<IFlightControllerHandler>(handler => handler.AddFlight(flight));
+                //using (var scope = _serviceProvider.CreateScope())
+                //{
+                //_backgroundJobClient.Enqueue<IFlightControllerHandler>(handler => handler.AddFlight(flight));
+                //}
                 return Ok();
             }
 

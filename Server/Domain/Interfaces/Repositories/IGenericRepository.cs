@@ -14,7 +14,7 @@ namespace Core.Interfaces.Repositories
         Task<IEnumerable<T>> GetAllAsync();
         Task AddAsync(T entity);
         void Remove(T entity);
-        Task UpdateAsync(T entity);
+        void Update(T entity);
         Task<IEnumerable<T>> FindListAsync(Expression<Func<T, bool>> expression);
 
     }

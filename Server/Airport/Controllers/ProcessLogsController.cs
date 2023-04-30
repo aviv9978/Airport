@@ -19,7 +19,7 @@ namespace Airport.Controllers
         // GET: api/<ProcessLogs>
         [HttpGet]
         [Route("GetAllProcessLogs")]
-        public async Task<IActionResult> GetProcessLogs()
+        public async Task<IActionResult> GetProcessLogsAsync()
         {
             try
             {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Core.Hubs
 {
-    public interface ITerminalHub
+    public interface IHUB
     {
         Task SendEnteringUpdateAsync(Flight flight, int legId);
         Task SendLogAsync(ProcessLogOutDTO procLogOutDTO);

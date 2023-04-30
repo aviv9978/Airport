@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork 
     {
         Task CommitAsync();
         void Rollback();

@@ -11,11 +11,12 @@ namespace Airport.Infrastracture.Repositories
         private readonly AirportDataContext _dbContext;
         private readonly ILogger<FlightRepository> _logger;
 
-        public FlightRepository(AirportDataContext dbContext)
-            : base(dbContext) 
+        public FlightRepository(AirportDataContext dbContext, IServiceProvider services)
+            : base(dbContext, services) 
         { 
             _dbContext = dbContext;
         }
+
         public IEnumerable<Flight> GetFlights(string Gender)
         {
             return _dbContext.Flights.ToList();

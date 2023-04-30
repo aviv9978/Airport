@@ -16,8 +16,8 @@ namespace Airport.Infrastracture.Repositories
     {
         private readonly AirportDataContext _dbContext;
       //  private readonly ILogger<LegRepository> _logger;
-        public LegRepository(AirportDataContext dbContext)
-            : base(dbContext)
+        public LegRepository(AirportDataContext dbContext, IServiceProvider services)
+            : base(dbContext, services)
         {
             _dbContext = dbContext;
             //_logger = logger;

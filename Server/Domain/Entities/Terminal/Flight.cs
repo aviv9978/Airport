@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Core.Entities.ForFlight;
-using Newtonsoft.Json;
 
 namespace Core.Entities.Terminal
 {

@@ -10,8 +10,8 @@ namespace Airport.Infrastracture.Repositories
         private readonly AirportDataContext _dBContext;
         //private readonly ILogger<PilotRepository> _logger;
 
-        public PilotRepository(AirportDataContext dbContext)
-            :base(dbContext)
+        public PilotRepository(AirportDataContext dbContext, IServiceProvider services)
+            :base(dbContext, services)
         {
             _dBContext = dbContext;
             //_logger = logger;
